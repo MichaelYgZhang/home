@@ -14,5 +14,5 @@ $(document).ready(function() {
     			intHours = today.getHours();  //得到小时 
     			intMinutes = today.getMinutes(); //得到分钟
     			intSeconds = today.getSeconds(); //得到秒钟
-    			currentTime.innerHTML = "今天是"+intYears+"年"+intMonths+"月"+intDays+"日，时间:"+intHours+":"+intMinutes+":"+intSeconds;
+    			currentTime.innerHTML = "今天是"+intYears+"年"+intMonths+"月"+intDays+"日,时间:"+intHours+":"+intMinutes+":"+intSeconds;
 		});
