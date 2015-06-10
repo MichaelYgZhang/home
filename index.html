@@ -5,7 +5,6 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Home</title>
-
 <link  rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/css/bootstrap.min.css">
 <link  rel="stylesheet" href="index.css">
 <!--[if lt IE 9]>
@@ -24,16 +23,17 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">现代浏览器博物馆</a>
+				<a class="navbar-brand" href="#">首页</a>
 			</div>
 
 			<div class="collapse navbar-collapse" id="demo-dropdown">
 				<ul class="nav navbar-nav">
-					<li><a href="#">综述</a></li>
-					<li><a href="#">简述</a></li>
-
-					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown">特点<span class="caret"></span> </a>
+					<li><a href="#">技术</a></li>
+					<li><a href="#">博客</a></li>
+					
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							特点<span class="caret"></span> </a>
 						<ul class="dropdown-menu" role="menu">
 							<li><a href="#tab-chrome">Chrome</a>
 							</li>
@@ -45,7 +45,7 @@
 					</li>
 					<li><a href="#" data-toggle="modal" data-target="#myModal">关于</a>
 					</li>
-
+					<!--
 					<form class="navbar-form navbar-left" role="search">
 						<div class="form-group">
 							<input type="text" class="form-control" placeholder="用户名">
@@ -53,7 +53,7 @@
 						</div>
 						<button type="submit" class="btn btn-default">登录</button>
 					</form>
-
+					-->
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
@@ -220,7 +220,7 @@
 			<p class="pull-right">
 				<a href="#top">回到顶部</a>
 			</p>
-			<p>20150508 IST</p>
+			<span id="currentTime"></span>
 		</footer>
 	</div>
 
@@ -237,10 +237,10 @@
 						aria-hidden="true">&times;</button>
 					<h4 class="modal-title" id="myModalLabel">关于</h4>
 				</div>
-				<div class="modal-body">关于现代浏览器博物馆，Chrome,Firefox,ie....</div>
+				<div class="modal-body">关于我的主页，记录技术博客，以及生活的点点滴滴。</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<!-- 					<button type="button" class="btn btn-primary">提交更改</button> -->
+					<!-- <button type="button" class="btn btn-primary">提交更改</button> -->
 				</div>
 			</div>
 			<!-- /.modal-content -->
