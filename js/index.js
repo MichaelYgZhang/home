@@ -4,6 +4,7 @@ $(document).ready(function() {
 });
 
 var app = angular.module('app',['ngAnimate']);
+/**
 app.directive('myTabs', function() {
 		return {
 			restrict: 'E',
@@ -44,9 +45,35 @@ app.directive('myTabs', function() {
 		};
 	});
 
-app.controller('ExampleController', ['$scope', function($scope) {
-		$scope.templates =
-			[ { name: 'template1.html', url: 'common/page1.html'},
-				{ name: 'template2.html', url: 'common/page2.html'} ];
-		$scope.template = $scope.templates[0];
+
+
+
+ <li class="dropdown">
+ <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+ JAVA
+ <span class="caret"></span></a>
+ <ul class="dropdown-menu" role="menu">
+ <li><a href="#tab-chrome">Java SE</a></li>
+ <li><a href="#tab-firefox">Java EE</a></li>
+ <li><a href="#tab-ie">Java WEB</a></li>
+ <li><a href="#tab-ie">Java API</a></li>
+ <li><a href="#tab-ie">Tools</a></li>
+ </ul>
+ </li>
+*/
+app.controller('indexController', ['$scope', function($scope) {
+		$scope.web =
+				[ { name: 'Flex-ActionScript', url: 'web/flex-as/flex_as_index.html'},
+				{ name: 'CSS3', url: 'web/css/css3_index.html'},
+				{ name: 'HTML5', url: 'web/html5/h5_index.html'},
+				{ name: 'Bootstrap', url: 'web/bootstrap/bootstrap_index.html'},
+				{ name: 'AngularJS', url: 'web/angularjs/angularjs_index.html'},
+				];
+		$scope.java =
+				[ { name: 'Java SE', url: 'java/java-se/javase_index.html'},
+				{ name: 'Java EE', url: 'java/java-ee/javaee_index.html'},
+				{ name: 'Java WEB', url: 'java/java-web/javaweb_index.html'},
+				{ name: 'Java API', url: 'java/java-api/javaapi_index.html'},
+				];
+		//$scope.template = $scope.web[0];
 }]);
