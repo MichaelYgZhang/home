@@ -1,3 +1,30 @@
+var obj = {
+	t: document.getElementById("layoutTarget"),
+	h: document.getElementById("layoutH"),
+	v: document.getElementById("layoutV")
+};
+obj.h.onclick = function(){
+	//判断当前布局
+	if(this.className === "cl on"){
+		//当前非此布局，进行切换
+		obj.t.className = "layout";
+		this.className = "cl";
+		obj.v.className = "cl on";
+	}
+	return false;
+};
+obj.v.onclick = function(){
+	//判断当前布局
+	if(this.className === "cl on"){
+		//当前非此布局，进行切换
+		obj.t.className = "layout newview";
+		this.className = "cl";
+		obj.h.className = "cl on";
+	}
+	return false;
+};
+
+
 
 $(document).ready(function() {
 	console.log("页面加载完成。。。");
@@ -77,3 +104,27 @@ app.controller('indexController', ['$scope', function($scope) {
 				];
 		//$scope.template = $scope.web[0];
 }]);
+
+
+/**
+ * backToTop
+ */
+$(document).ready(function(){
+	$(window).scroll( function() {               //滚动时触发
+		var top = $(document).scrollTop(),       //获取滚动条到顶部的垂直高度
+			height = $(window).height();         //获得可视浏览器的高度
+		if(top > 100){
+			$("#backToTop").show(200, function(){
+				$("#backToTop").css({
+					top: height + top - 100
+				})
+			});
+		}
+	});
+	/*点击回到顶部*/
+	$('#backToTop').click(function(){
+		$('html, body').animate({
+			scrollTop: 0
+		}, 500);
+	});
+});
