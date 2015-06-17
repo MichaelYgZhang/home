@@ -1,5 +1,5 @@
 @import url('http://fonts.googleapis.com/css?family=Open+Sans:400,700');
-
+@charset "utf-8";
 html{
 	/*background-color: #efefef;*/
 }
@@ -10,6 +10,14 @@ body{
 img{
 	width: 200px;
 	height: 150px;
+	mergin: 5px;
+	border: 1px solid #eee;
+	-webkit-box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
+	-moz-box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
+	box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
+	-webkit-transition: all 0.5s ease-out;
+	-moz-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
 }
 .navbarClass{
 	background-color:white;
@@ -22,7 +30,7 @@ img{
 	margin-bottom: 15px;
 }
 .contentClass{
-	padding-top: 130px;
+	padding-top: 94px;
 }
 
 .topContainerClass{
@@ -44,18 +52,6 @@ img{
 	-webkit-border-radius:15px;
 }
 
-@media (max-height:800px){
-}
-
-@media (max-width: 900px) {
-
-	.menu {
-		padding-top:40px;
-		margin-bottom: 80px;
-	}
-
-}
-
 .listContent{
 	float:none;
 	display: inline-block;
@@ -65,14 +61,23 @@ img{
 
 .layout li{margin:5px 5px 5px 0; padding:5px; border-bottom:1px dashed #dddddd; zoom:1;}
 .layout li img{padding:3px; background-color:white; border:1px solid #beceeb; float:left;}
-.layout li img:hover{background-color:#f0f3f9;}
+.layout li img:hover{
+	background-color:#f0f3f9;
+	-webkit-transform: rotate(-7deg);
+	-moz-transform: rotate(-7deg);
+	-o-transform: rotate(-7deg);
+}
 .layout li p{height:160px; margin:0 0 0 215px; color:#666666;}
 
 .newview li{width:210px; float:left;}
-.newview li img{float:none; display:block;}
+.newview li img{padding:3px; background-color:white; border:1px solid #beceeb;float:none; display:block;}
+.newview li img:hover{
+	-webkit-transform: rotate(-7deg);
+	-moz-transform: rotate(-7deg);
+	-o-transform: rotate(-7deg);
+}
 .newview li p{height:auto; margin:6px 0; text-align:center;}
 .newview li span{display:none;}
-
 
 /*backtoTop*/
 .backtoTop{
@@ -91,4 +96,28 @@ img{
 	/*background-color: lightseagreen;*/
 	cursor: pointer;
 	text-align: center;
+}
+
+/*screen øÌ∂»  ≈‰*/
+@media screen and (max-width: 1300px) {
+	.contentClass{
+		padding-top: 155px;
+	}
+}
+
+@media screen and (max-width:615px){
+	.contentClass{
+		padding-top: 215px;
+	}
+}
+
+@media screen and (max-width:472px){
+	.contentClass{
+		padding-top: 275px;
+	}
+}
+@media screen and (max-width:330px){
+	.contentClass{
+		padding-top: 515px;
+	}
 }

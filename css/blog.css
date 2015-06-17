@@ -1,0 +1,8 @@
+#blog a{
+    cursor: pointer;
+    color: #4cae4c;
+    font-weight: bold;
+}
+#blog  a:hover{
+    font-size: large;
+}

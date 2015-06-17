@@ -10,6 +10,7 @@
 <link rel="shortcut icon" href="images/favicon.ico" />
 <link rel="stylesheet" href="css/navigation-icons.css"/>
 <link rel="stylesheet" href="css/font-awesome-4.3.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="css/blog.css">
 </head>
 
 <body  ng-controller="indexController">
@@ -33,73 +34,79 @@
 	</nav>
 	<!-- nav end-->
 
-	<!-- content start -->
 	<div class="container contentClass">
 		<div class="jumbotron myjumbotron">
-			<h1 align="center">WE ARE THE WORLD!</h1>
-			<p align="center">This is my blog!</p>
-			<p align="center">WELCOME!</p>
+			<h4 align="center">WE ARE THE WORLD!</h4>
+			<h5 align="center">This is my blog!</h5>
+			<h5 align="center">WELCOME!</h5>
 		</div>
+
 
 		<form role="search" >
 			<div class="form-group" >
-				<input type="search" results="5" class="form-control search rounded" placeholder="search for ..."/>
+				<input ng-model="searchText" type="search" results="5" class="form-control search rounded" placeholder="search for ..."
+						ng-click="isShowContent = false"/>
 			</div>
 		</form>
 
+
 		<hr class="hrStyle">
-
-		<div class="row">
-			<div class="col-md-10">
+		<!-- show/hide ul start -->
+		<div ng-show="!isShowContent">
+			<div class="row">
+				<div class="col-md-10">
+				</div>
+				<div class="col-md-2 text-right">
+					<a href="javascript:void(0);" class="cl on" id="layoutV" title="平铺" ng-click="showV();">
+						<i class="fa fa-th fa-2x"></i><span class="h"></span>
+					</a>&nbsp;
+					<a href="javascript:void(0);" class="cl" id="layoutH" title="列表" ng-click="showH();">
+						<i class="fa fa-th-list fa-2x"></i>
+						<span class="h"></span>
+						<span class="v"></span>
+					</a>
+				</div>
 			</div>
-			<div class="col-md-2 text-right">
-				<a href="javascript:void(0);" class="cl on" id="layoutV" title="平铺">
-					<i class="fa fa-th fa-3x"></i><span class="h"></span>
-				</a>&nbsp;
-				<a href="javascript:void(0);" class="cl" id="layoutH" title="列表">
-					<i class="fa fa-th-list fa-3x"></i>
-					<span class="h"></span>
-					<span class="v"></span>
-				</a>
-			</div>
 
+			<hr class="hrStyle">
+
+			<div class="listContent">
+				<!-- 此处注意使用angularjs方式进行遍历展现时，样式失效，所以写在style中，原因可能是无法关联到css样式文件中的样式 -->
+				<ul id="layoutTarget"
+					ng-repeat="everyBlog in blogs | filter:searchText"
+					style="list-style-type:none;float: left"
+					ng-class="{layout:islayout,newview:isnewview}">
+					<li>
+						<a ng-click="showContent(everyBlog)"><img src="{{everyBlog.imgsrc}}"
+								style="padding:3px; background-color:white; border:1px solid #beceeb; float:left;"/></a>
+						<p>
+							<a ng-click="showContent(everyBlog)"><strong>{{everyBlog.titletext}}</strong><br/></a>
+							<span>{{everyBlog.spantext}}</span>
+						</p>
+					</li>
+				</ul>
+			</div>
 		</div>
-
-		<hr class="hrStyle">
-
-		<div class="listContent">
-			<ul id="layoutTarget" class="layout newview">
-				<li>
-					<a href=""><img src="images/001.jpeg"/></a>
-					<p>
-						<a href=""><strong>图片1</strong><br /></a>
-						<span>这里显示的是对此图片的描述，由于是测试页面，所以对于图片具体的描述内容省略，并且整个列表所有的描述都会显示同样的文字。</span>
-					</p>
-				</li>
-
-				<li>
-					<a href=""><img src="images/002.jpeg"/></a>
-					<p>
-						<a href=""><strong>图片2</strong><br /></a>
-						<span>这里显示的是对此图片的描述，由于是测试页面，所以对于图片具体的描述内容省略，并且整个列表所有的描述都会显示同样的文字。</span>
-					</p>
-				</li>
-			</ul>
+		<!-- show/hide ul end-->
+		<div ng-model="isShowContent" ng-show="isShowContent">
+			<hr class="hrStyle">
+			<input ng-model="template" ng-show="false">
+			<div class="container">
+				<div id="textContent" ng-include="template.url">
+				</div>
+			</div>
 		</div>
 
 		<hr class="hrStyle">
 		<footer>
 			<p class="pull-left">© 2015 <a href="#top">Home</a>, Inc.</p>
 		</footer>
-		<!--backtoTop1-->
-		<!--兼容所有现代浏览器同时包括 ie6/7/8/9 （ie6会有一点点抖动）-->
-		<div id="backToTop" class="backtoTop">
-			<i class="fa fa-hand-o-up fa-4x"></i>
-		</div>
-
 	</div>
-	<!-- content end -->
-
+	<!--backtoTop1-->
+	<!--兼容所有现代浏览器同时包括 ie6/7/8/9 （ie6会有一点点抖动）-->
+	<div id="backToTop" class="backtoTop">
+		<i class="fa fa-hand-o-up fa-2x"></i>
+	</div>
 	<!-- 模态框（Modal） start-->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
@@ -127,8 +134,8 @@
 				</div>
 				<div class="modal-body">
 										本人来自大西北-新疆，来京漂泊两年有余，技术方面:写过两年的flex,as,java。<br/>
-										如今正向html5,css3,js方向发展中.....<br/>
-										欢迎有共同话题的朋友一同努力进步!。<br/>
+										如今正在学习html5,css3,js中.....<br/>
+										欢迎有共同爱好的朋友一同努力进步!。<br/>
 										联系方式:<a href="mailto:g.zhangyg@gmail.com">g.zhangyg@gmail.com</a>
 				</div>
 				<div class="modal-footer">
@@ -144,7 +151,6 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.16/angular.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.16/angular-animate.min.js"></script>
 	<script src="js/index.js"></script>
-
 
 </body>
 </html>
