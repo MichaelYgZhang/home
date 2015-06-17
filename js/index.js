@@ -6,7 +6,7 @@ var app = angular.module('app',['ngAnimate']);
 app.controller('indexController', ['$scope', function($scope) {
 
 	$scope.blogs = [
-					{ahref:'WEB/HTML5/read-html5-cookbook.html',imgsrc:'http://www.w3.org/html/logo/img/mark-word-icon.png',titletext:'HTML5',spantext:'Reading HTML5 Cookbook Note.'}
+					{ahref:'web/html5/read-html5-cookbook.html',imgsrc:'http://www.w3.org/html/logo/img/mark-word-icon.png',titletext:'HTML5',spantext:'Reading HTML5 Cookbook Note.'}
 				   ];
 
 	$scope.islayout = false;
