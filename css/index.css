@@ -70,7 +70,6 @@ img{
 	cursor:pointer;
 }
 .layout li p{height:160px; margin:0 0 0 215px; color:#666666;}
-.layout li span:hover{cursor:pointer;}
 
 .newview li{width:210px; float:left;}
 .newview li img{padding:3px; background-color:white; border:1px solid #beceeb;float:none; display:block;}
