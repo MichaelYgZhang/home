@@ -3,7 +3,7 @@
 html{
 	/*background-color: #efefef;*/
 }
-
+a:hover{cursor:pointer;}
 body{
 	font:14px/1.5 Arial, Helvetica, sans-serif;
 }
@@ -81,7 +81,6 @@ img{
 }
 .newview li p{height:auto; margin:6px 0; text-align:center;}
 .newview li span{display:none;}
-.newview li span:hover{cursor:pointer;}
 
 /*backtoTop*/
 .backtoTop{
