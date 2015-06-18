@@ -66,8 +66,10 @@ img{
 	-webkit-transform: rotate(-7deg);
 	-moz-transform: rotate(-7deg);
 	-o-transform: rotate(-7deg);
+	cursor:pointer;
 }
 .layout li p{height:160px; margin:0 0 0 215px; color:#666666;}
+.layout li span:hover{cursor:pointer;}
 
 .newview li{width:210px; float:left;}
 .newview li img{padding:3px; background-color:white; border:1px solid #beceeb;float:none; display:block;}
@@ -75,30 +77,32 @@ img{
 	-webkit-transform: rotate(-7deg);
 	-moz-transform: rotate(-7deg);
 	-o-transform: rotate(-7deg);
+	cursor:pointer;
 }
 .newview li p{height:auto; margin:6px 0; text-align:center;}
 .newview li span{display:none;}
+.newview li span:hover{cursor:pointer;}
 
 /*backtoTop*/
 .backtoTop{
 	height: 40px;
 	width: 50px;
-	position: absolute; //¾ø¶Ô¶¨Î»
+	position: absolute; //ç»å¯¹å®šä½
 	padding-top: 8px;
 	right: 10px;
 	z-index: 9999;
-	/*±ÜÃâÉÁË¸*/
+	/*é¿å…é—ªçƒ*/
 	-moz-transition: all 1s ease;
 	-webkit-transition: all 1s ease;
 	-o-transition: all 1s ease;
 	transition: all 1s ease;
-	/*±ÜÃâÉÁË¸*/
+	/*é¿å…é—ªçƒ*/
 	/*background-color: lightseagreen;*/
 	cursor: pointer;
 	text-align: center;
 }
 
-/*screen ¿í¶ÈÊÊÅä*/
+/*screen å®½åº¦é€‚é…*/
 @media screen and (max-width: 1300px) {
 	.contentClass{
 		padding-top: 155px;
