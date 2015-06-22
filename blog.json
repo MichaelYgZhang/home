@@ -1,0 +1,26 @@
+[
+  {
+    "ahref":"web/html5/read-html5-cookbook.html",
+    "imgsrc":"images/html5-logo.png",
+    "titletext":"HTML5",
+    "spantext": "Reading html5 Cookbook Note."
+  },
+  {
+    "ahref":"web/css/css3_index.html",
+    "imgsrc":"images/css3-logo.jpg",
+    "titletext":"CSS3",
+    "spantext":"CSS3 blogs"
+  },
+  {
+    "ahref":"java/java-api/javaapi_index.html",
+    "imgsrc":"images/java-logo.jpg",
+    "titletext":"Java",
+    "spantext":"Java blogs"
+  },
+  {
+    "ahref":"tools/tools_index.html",
+    "imgsrc":"images/tools-logo.jpg",
+    "titletext":"Tools",
+    "spantext":"Tools blogs"
+  }
+]

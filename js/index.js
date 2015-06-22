@@ -3,11 +3,9 @@
 //}
 var app = angular.module('app',['ngAnimate']);
 
-app.controller('indexController', ['$scope', function($scope) {
+app.controller('indexController', function($scope,$http) {
 
-	$scope.blogs = [
-					{ahref:'web/html5/read-html5-cookbook.html',imgsrc:'http://www.w3.org/html/logo/img/mark-word-icon.png',titletext:'HTML5',spantext:'Reading HTML5 Cookbook Note.'}
-				   ];
+	$http.get('blog.json').success(function(data) {$scope.blogs = data;});
 
 	$scope.islayout = false;
 	$scope.isnewview = true;
@@ -30,7 +28,21 @@ app.controller('indexController', ['$scope', function($scope) {
 		$scope.template = {url:""+blog.ahref+""};
 	};
 
-}]);
+	$scope.html5_click = function(){
+			$scope.searchText = "HTML5";
+	};
+	$scope.css3_click = function(){
+		$scope.searchText = "CSS3";
+	};
+	$scope.java_click = function(){
+		$scope.searchText = "Java";
+	};
+	$scope.tools_click = function(){
+		$scope.searchText = "Tools";
+	};
+
+
+});
 
 /**
  * dom方式 操作横向布局还是列布局
