@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="zh-cn" ng-app="app">
+<html ng-app="app">
 <head>
-<meta charset="gbk">
+<meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MichaelZhang-Home</title>
@@ -57,10 +57,10 @@
 				<div class="col-md-10">
 				</div>
 				<div class="col-md-2 text-right">
-					<a href="javascript:void(0);" class="cl on" id="layoutV" title="骞抽摵" ng-click="showV();">
+					<a href="javascript:void(0);" class="cl on" id="layoutV" title="楠炴娊鎽�" ng-click="showV();">
 						<i class="fa fa-th fa-2x"></i><span class="h"></span>
 					</a>&nbsp;
-					<a href="javascript:void(0);" class="cl" id="layoutH" title="鍒楄〃" ng-click="showH();">
+					<a href="javascript:void(0);" class="cl" id="layoutH" title="閸掓銆�" ng-click="showH();">
 						<i class="fa fa-th-list fa-2x"></i>
 						<span class="h"></span>
 						<span class="v"></span>
@@ -71,7 +71,7 @@
 			<hr class="hrStyle">
 
 			<div class="listContent">
-				<!-- 姝ゅ娉ㄦ剰浣跨敤angularjs鏂瑰紡杩涜閬嶅巻灞曠幇鏃讹紝鏍峰紡澶辨晥锛屾墍浠ュ啓鍦╯tyle涓紝鍘熷洜鍙兘鏄棤娉曞叧鑱斿埌css鏍峰紡鏂囦欢涓殑鏍峰紡 -->
+				<!-- 濮濄倕顦╁▔銊﹀壈娴ｈ法鏁ngularjs閺傜懓绱℃潻娑滎攽闁秴宸荤仦鏇犲箛閺冭绱濋弽宄扮础婢惰鲸鏅ラ敍灞惧娴犮儱鍟撻崷鈺痶yle娑擃叏绱濋崢鐔锋礈閸欘垵鍏橀弰顖涙￥濞夋洖鍙ч懕鏂垮煂css閺嶅嘲绱￠弬鍥︽娑擃厾娈戦弽宄扮础 -->
 				<ul id="layoutTarget"
 					ng-repeat="everyBlog in blogs | filter:searchText"
 					style="list-style-type:none;float: left"
@@ -99,52 +99,52 @@
 
 		<hr class="hrStyle">
 		<footer>
-			<p class="pull-left">漏 2015 <a href="#top">Home</a>, Inc.</p>
+			<p class="pull-left">婕� 2015 <a href="#top">Home</a>, Inc.</p>
 		</footer>
 	</div>
 	<!--backtoTop1-->
-	<!--鍏煎鎵€鏈夌幇浠ｆ祻瑙堝櫒鍚屾椂鍖呮嫭 ie6/7/8/9 锛坕e6浼氭湁涓€鐐圭偣鎶栧姩锛�-->
+	<!--閸忕厧顔愰幍鈧張澶屽箛娴狅絾绁荤憴鍫濇珤閸氬本妞傞崠鍛 ie6/7/8/9 閿涘潟e6娴兼碍婀佹稉鈧悙鍦仯閹舵牕濮╅敍锟�-->
 	<div id="backToTop" class="backtoTop">
 		<i class="fa fa-hand-o-up fa-2x"></i>
 	</div>
-	<!-- 妯℃€佹锛圡odal锛� start-->
+	<!-- 濡剝鈧焦顢嬮敍鍦dal閿涳拷 start-->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="modal-title" id="myModalLabel">鍏充簬</h4>
+					<h4 class="modal-title" id="myModalLabel">閸忓厖绨�</h4>
 				</div>
-				<div class="modal-body">鍏充簬鎴戠殑涓婚〉锛岃褰曟妧鏈崥瀹紝浠ュ強鐢熸椿鐨勭偣鐐规淮婊淬€�</div>
+				<div class="modal-body">閸忓厖绨幋鎴犳畱娑撳銆夐敍宀冾唶瑜版洘濡ч張顖氬触鐎诡澁绱濇禒銉ュ挤閻㈢喐妞块惃鍕仯閻愯娣娣偓锟�</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-warning" data-dismiss="modal">鍏抽棴</button>
+					<button type="button" class="btn btn-warning" data-dismiss="modal">閸忔娊妫�</button>
 				</div>
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal -->
 	</div>
-	<!-- 妯℃€佹锛圡odal锛� end-->
+	<!-- 濡剝鈧焦顢嬮敍鍦dal閿涳拷 end-->
 
-	<!-- 妯℃€佹锛圡odal锛� myInfo start-->
+	<!-- 濡剝鈧焦顢嬮敍鍦dal閿涳拷 myInfo start-->
 	<div class="modal fade" id="myInfo" tabindex="-1" role="dialog"
 		 aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="modal-title">涓汉绠€浠�</h4>
+					<h4 class="modal-title">娑擃亙姹夌粻鈧禒锟�</h4>
 				</div>
 				<div class="modal-body">
-										鏈汉鏉ヨ嚜澶цタ鍖�-鏂扮枂锛屾潵浜紓娉婁袱骞存湁浣欙紝鎶€鏈柟闈�:鍐欒繃涓ゅ勾鐨刦lex,as,java銆�<br/>
-										濡備粖姝ｅ湪瀛︿範html5,css3,js涓�.....<br/>
-										娆㈣繋鏈夊叡鍚岀埍濂界殑鏈嬪弸涓€鍚屽姫鍔涜繘姝�!銆�<br/>
-										鑱旂郴鏂瑰紡:<a href="mailto:g.zhangyg@gmail.com">g.zhangyg@gmail.com</a>
+										閺堫兛姹夐弶銉ㄥ殰婢堆嗐偪閸栵拷-閺傛壆鏋傞敍灞炬降娴滎剚绱撳▔濠佽⒈楠炲瓨婀佹担娆欑礉閹垛偓閺堫垱鏌熼棃锟�:閸愭瑨绻冩稉銈呭嬀閻ㄥ垿lex,as,java閵嗭拷<br/>
+										婵″倷绮栧锝呮躬鐎涳缚绡刪tml5,css3,js娑擄拷.....<br/>
+										濞嗐垼绻嬮張澶婂彙閸氬瞼鍩嶆總鐣屾畱閺堝寮告稉鈧崥灞藉Й閸旀稖绻樺锟�!閵嗭拷<br/>
+										閼辨梻閮撮弬鐟扮础:<a href="mailto:g.zhangyg@gmail.com">g.zhangyg@gmail.com</a>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-info" data-dismiss="modal">璋㈣阿</button>
+					<button type="button" class="btn btn-info" data-dismiss="modal">鐠嬨垼闃�</button>
 				</div>
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal -->
 	</div>
-	<!-- 妯℃€佹锛圡odal锛� myInfo end-->
+	<!-- 濡剝鈧焦顢嬮敍鍦dal閿涳拷 myInfo end-->
 
 	<script src="js/jquery-2.1.4.min.js"></script>
 	<script src="css/bootstrap-3.3.4-dist/js/bootstrap.min.js"></script>
