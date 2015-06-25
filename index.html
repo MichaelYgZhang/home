@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-cn" ng-app="app">
 <head>
-<meta charset="utf-8">
+<meta charset="gbk">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MichaelZhang-Home</title>
@@ -57,10 +57,10 @@
 				<div class="col-md-10">
 				</div>
 				<div class="col-md-2 text-right">
-					<a href="javascript:void(0);" class="cl on" id="layoutV" title="平铺" ng-click="showV();">
+					<a href="javascript:void(0);" class="cl on" id="layoutV" title="骞抽摵" ng-click="showV();">
 						<i class="fa fa-th fa-2x"></i><span class="h"></span>
 					</a>&nbsp;
-					<a href="javascript:void(0);" class="cl" id="layoutH" title="列表" ng-click="showH();">
+					<a href="javascript:void(0);" class="cl" id="layoutH" title="鍒楄〃" ng-click="showH();">
 						<i class="fa fa-th-list fa-2x"></i>
 						<span class="h"></span>
 						<span class="v"></span>
@@ -71,7 +71,7 @@
 			<hr class="hrStyle">
 
 			<div class="listContent">
-				<!-- 此处注意使用angularjs方式进行遍历展现时，样式失效，所以写在style中，原因可能是无法关联到css样式文件中的样式 -->
+				<!-- 姝ゅ娉ㄦ剰浣跨敤angularjs鏂瑰紡杩涜閬嶅巻灞曠幇鏃讹紝鏍峰紡澶辨晥锛屾墍浠ュ啓鍦╯tyle涓紝鍘熷洜鍙兘鏄棤娉曞叧鑱斿埌css鏍峰紡鏂囦欢涓殑鏍峰紡 -->
 				<ul id="layoutTarget"
 					ng-repeat="everyBlog in blogs | filter:searchText"
 					style="list-style-type:none;float: left"
@@ -99,52 +99,52 @@
 
 		<hr class="hrStyle">
 		<footer>
-			<p class="pull-left">© 2015 <a href="#top">Home</a>, Inc.</p>
+			<p class="pull-left">漏 2015 <a href="#top">Home</a>, Inc.</p>
 		</footer>
 	</div>
 	<!--backtoTop1-->
-	<!--兼容所有现代浏览器同时包括 ie6/7/8/9 （ie6会有一点点抖动）-->
+	<!--鍏煎鎵€鏈夌幇浠ｆ祻瑙堝櫒鍚屾椂鍖呮嫭 ie6/7/8/9 锛坕e6浼氭湁涓€鐐圭偣鎶栧姩锛�-->
 	<div id="backToTop" class="backtoTop">
 		<i class="fa fa-hand-o-up fa-2x"></i>
 	</div>
-	<!-- 模态框（Modal） start-->
+	<!-- 妯℃€佹锛圡odal锛� start-->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="modal-title" id="myModalLabel">关于</h4>
+					<h4 class="modal-title" id="myModalLabel">鍏充簬</h4>
 				</div>
-				<div class="modal-body">关于我的主页，记录技术博客，以及生活的点点滴滴。</div>
+				<div class="modal-body">鍏充簬鎴戠殑涓婚〉锛岃褰曟妧鏈崥瀹紝浠ュ強鐢熸椿鐨勭偣鐐规淮婊淬€�</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-warning" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-warning" data-dismiss="modal">鍏抽棴</button>
 				</div>
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal -->
 	</div>
-	<!-- 模态框（Modal） end-->
+	<!-- 妯℃€佹锛圡odal锛� end-->
 
-	<!-- 模态框（Modal） myInfo start-->
+	<!-- 妯℃€佹锛圡odal锛� myInfo start-->
 	<div class="modal fade" id="myInfo" tabindex="-1" role="dialog"
 		 aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="modal-title">个人简介</h4>
+					<h4 class="modal-title">涓汉绠€浠�</h4>
 				</div>
 				<div class="modal-body">
-										本人来自大西北-新疆，来京漂泊两年有余，技术方面:写过两年的flex,as,java。<br/>
-										如今正在学习html5,css3,js中.....<br/>
-										欢迎有共同爱好的朋友一同努力进步!。<br/>
-										联系方式:<a href="mailto:g.zhangyg@gmail.com">g.zhangyg@gmail.com</a>
+										鏈汉鏉ヨ嚜澶цタ鍖�-鏂扮枂锛屾潵浜紓娉婁袱骞存湁浣欙紝鎶€鏈柟闈�:鍐欒繃涓ゅ勾鐨刦lex,as,java銆�<br/>
+										濡備粖姝ｅ湪瀛︿範html5,css3,js涓�.....<br/>
+										娆㈣繋鏈夊叡鍚岀埍濂界殑鏈嬪弸涓€鍚屽姫鍔涜繘姝�!銆�<br/>
+										鑱旂郴鏂瑰紡:<a href="mailto:g.zhangyg@gmail.com">g.zhangyg@gmail.com</a>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-info" data-dismiss="modal">谢谢</button>
+					<button type="button" class="btn btn-info" data-dismiss="modal">璋㈣阿</button>
 				</div>
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal -->
 	</div>
-	<!-- 模态框（Modal） myInfo end-->
+	<!-- 妯℃€佹锛圡odal锛� myInfo end-->
 
 	<script src="js/jquery-2.1.4.min.js"></script>
 	<script src="css/bootstrap-3.3.4-dist/js/bootstrap.min.js"></script>
