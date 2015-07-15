@@ -28,5 +28,11 @@
     "imgsrc":"images/js-logo.jpg",
     "titletext":"Table-Tree-Check",
     "spantext":"js:easyui,angularjs,jquery;css:bootstrap."
+  },
+  {
+    "ahref":"web/angularjs/angularjs_index.html",
+    "imgsrc":"images/angularjs-logo.jpg",
+    "titletext":"AngularJS-Controller-Communication",
+    "spantext":"AngularJS-Controller"
   }
 ]

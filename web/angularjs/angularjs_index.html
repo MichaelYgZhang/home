@@ -1,1 +1,32 @@
-<p>angularjs...</p>
+<div id="blog" style="text-indent:2em">
+
+<h3>Angularjs不同Controller之间是如何通信的？</h3>
+<p>
+    问题：如果不同Controller之间需要有参数的传递，应该如何处理？
+    其中一种方式是：使用AngularJS的事件机制。
+</p>
+<p>
+    Angularjs为在scope中为我们提供了冒泡和隧道机制，<span>$broadcast会把事件广播给所有子controller，
+    而$emit则会将事件冒泡传递给父controller，$on则是angularjs的事件注册函数</span>，有了这一些我们就能很快的以angularjs的方式去解决
+    angularjs controller之间的通信。
+</p>
+<p>
+    <h4>DEMO效果:通过controller事件机制，input1输入框联动input2的值。</h4>
+    <div ng-app="app" ng-controller="parentCtr">
+        <div ng-controller="childCtr1">input1:
+            <input ng-model="name" type="text" ng-change="change(name);" />
+        </div>
+        <div ng-controller="childCtr2">input2:
+            <input ng-model="ctr1Name" />
+        </div>
+    </div>
+</p>
+    <a href="web/angularjs/code.txt">核心代码</a>
+<p>
+    这里childCtr1的name改变会以冒泡传递给父controller，而父controller会对事件包装在广播给所有子controller，
+    而childCtr2则注册了change事件，并改变自己。注意父controller在广播时候一定要改变事件name。
+</p>
+<h3>
+    总结:用$broadcast赋的值，只能子级得到值；$emit赋的值，只能父级得到；而平级的什么都不能得到。
+</h3>
+</div>

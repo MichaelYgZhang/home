@@ -6,3 +6,8 @@
 #blog  a:hover{
     font-size: large;
 }
+#blog span{
+    color:orange;
+    font-family: "Helvetica Neue";
+    font-weight: bold;
+}
