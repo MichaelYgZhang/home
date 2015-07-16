@@ -32,11 +32,21 @@
 
     <img src="" alt="" data-echo="https://raw.githubusercontent.com/MichaelYgZhang/home/gh-pages/images/angularjs-logo.jpg">
     <img src="" alt="" data-echo="https://raw.githubusercontent.com/MichaelYgZhang/home/gh-pages/images/css3-logo.jpg">
-        <img src="" alt="" data-echo="https://raw.githubusercontent.com/MichaelYgZhang/home/gh-pages/images/html5-logo.jpg">
-            <img src="" alt="" data-echo="https://raw.githubusercontent.com/MichaelYgZhang/home/gh-pages/images/java-logo.jpg">
-                <img src="" alt="" data-echo="https://raw.githubusercontent.com/MichaelYgZhang/home/gh-pages/images/jquery-logo.jpg">
-                    <img src="" alt="" data-echo="https://raw.githubusercontent.com/MichaelYgZhang/home/gh-pages/images/js-logo.jpg">
-                        <img src="" alt="" data-echo="https://raw.githubusercontent.com/MichaelYgZhang/home/gh-pages/images/tools-logo.jpg">
+    <img src="" alt="" data-echo="https://raw.githubusercontent.com/MichaelYgZhang/home/gh-pages/images/html5-logo.jpg">
+    <img src="" alt="" data-echo="https://raw.githubusercontent.com/MichaelYgZhang/home/gh-pages/images/java-logo.jpg">
+    <img src="" alt="" data-echo="https://raw.githubusercontent.com/MichaelYgZhang/home/gh-pages/images/jquery-logo.jpg">
+    <img src="" alt="" data-echo="https://raw.githubusercontent.com/MichaelYgZhang/home/gh-pages/images/js-logo.jpg">
+    <img src="" alt="" data-echo="https://raw.githubusercontent.com/MichaelYgZhang/home/gh-pages/images/tools-logo.jpg">
    
 </div>
 </html>
+<script>
+    echo.init({
+    	offset: 100,
+    	throttle: 250,
+    	unload: false,
+    	callback: function (element, op) {
+    		console.log(element, 'has been', op + 'ed')
+    	}
+    });
+</script>
