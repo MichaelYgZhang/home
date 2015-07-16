@@ -1,0 +1,29 @@
+    //test data
+    var oldObj ={id:'1',name:{first:'z',last:'yg'},age:'25'};
+    var newObj = {};
+    var oldAry = ['1','2','3',['a','b','c'],'4'];
+    var newAry = [];
+
+    //对象深层copy,复制后修改新的对象(数组)，不会对旧对象(数组)产生影响
+    var deepCopy = function(source){
+        var result;
+        return result = source instanceof Array?deepCopyArray(source):deepCopyObject(source);
+    };
+
+    var deepCopyObject= function(source) {
+        var resultObject={};
+        for (var prop in source) {
+            resultObject[prop] = source[prop] instanceof Object?deepCopyObject(source[prop]) : source[prop];
+        }
+        return resultObject;
+    };
+
+    var deepCopyArray = function(source){
+        var i = 0,
+            len = source.length,
+            resultArray = [];
+        for(;i<len;i++){
+            resultArray[i] = source[i] instanceof Array? deepCopyArray(source[i]):source[i];
+        }
+        return resultArray;
+    };

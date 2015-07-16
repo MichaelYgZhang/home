@@ -38,7 +38,13 @@
   {
     "ahref":"web/js/lazyload-images.html",
     "imgsrc":"images/js-logo.jpg",
-    "titletext":"lazy load images",
+    "titletext":"Lazy load images",
     "spantext":"lazy load images demo  echo.js"
+  },
+  {
+    "ahref":"web/js/deep-copy.html",
+    "imgsrc":"images/js-logo.jpg",
+    "titletext":"JS中数组深层拷贝",
+    "spantext":"JS中的深层拷贝对象或者数组，以及Array.prototype.slice();Array.prototype.concat();的用法"
   }
 ]
