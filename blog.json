@@ -34,5 +34,11 @@
     "imgsrc":"images/angularjs-logo.jpg",
     "titletext":"AngularJS-Controller-Communication",
     "spantext":"AngularJS-Controller"
+  },
+  {
+    "ahref":"web/js/lazyload-image-echo/index.html",
+    "imgsrc":"images/js-logo.jpg",
+    "titletext":"lazy load images",
+    "spantext":"lazy load images demo  echo.js"
   }
 ]

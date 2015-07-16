@@ -7,8 +7,8 @@ app.controller('indexController', function($scope,$http) {
 
 	$http.get('blog.json').success(function(data) {$scope.blogs = data;});
 
-	$scope.islayout = false;
-	$scope.isnewview = true;
+	$scope.islayout = true;
+	$scope.isnewview = false;
 	$scope.islayout.className = "c1 on";
 
 	$scope.showV = function(){
@@ -119,4 +119,13 @@ $(document).ready(function(){
 			scrollTop: 0
 		}, 500);
 	});
+});
+//延迟加载图片  插件为 echo.js
+echo.init({
+	offset: 100,
+	throttle: 250,
+	unload: false,
+	callback: function (element, op) {
+		console.log(element, 'has been', op + 'ed')
+	}
 });

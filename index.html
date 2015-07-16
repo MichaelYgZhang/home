@@ -71,15 +71,21 @@
 			<hr class="hrStyle">
 
 			<div class="listContent">
-				
+
 				<!-- 此处注意使用angularjs方式进行遍历展现时，样式失效，所以写在style中，原因可能是无法关联到css样式文件中的样式 -->
 				<ul id="layoutTarget"
 					ng-repeat="everyBlog in blogs | filter:searchText"
 					style="list-style-type:none;float: left"
 					ng-class="{layout:islayout,newview:isnewview}">
 					<li>
-						<a ng-click="showContent(everyBlog)"><img src="{{everyBlog.imgsrc}}"
-								style="padding:3px; background-color:white; border:1px solid #beceeb; float:left;"/></a>
+						<a ng-click="showContent(everyBlog)">
+
+							<!--<img src="{{everyBlog.imgsrc}}"-->
+								<!--style="padding:3px; background-color:white; border:1px solid #beceeb; float:left;"/>-->
+
+							<img src="images/ajax.gif" alt="" data-echo="{{everyBlog.imgsrc}}"
+								 style="padding:3px; background-color:white; border:1px solid #beceeb; float:left;">
+						</a>
 						<p>
 							<a ng-click="showContent(everyBlog)"><strong>{{everyBlog.titletext}}</strong><br/></a>
 							<span>{{everyBlog.spantext}}</span>
@@ -108,7 +114,7 @@
 	<div id="backToTop" class="backtoTop">
 		<i class="fa fa-hand-o-up fa-2x"></i>
 	</div>
-	
+
 	<!-- 模态框（Modal） start-->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
@@ -154,6 +160,7 @@
 	<script src="css/bootstrap-3.3.4-dist/js/bootstrap.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.16/angular.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.16/angular-animate.min.js"></script>
+	<script src="js/echo.min.js"></script>
 	<script src="js/index.js"></script>
 
 </body>
