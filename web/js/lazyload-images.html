@@ -18,7 +18,7 @@
         margin:25px 0;
         height:450px;
         width:450px;
-        background:#FFF url(http://localhost:63342/home/images/ajax.gif) no-repeat center center;
+        background:#FFF url(https://raw.githubusercontent.com/MichaelYgZhang/home/gh-pages/images/ajax.gif) no-repeat center center;
         border:1px solid #AAA;
     }
 
@@ -30,35 +30,25 @@
 
     <pre class="title__code">&lt;img src="img/blank.gif" alt="" data-echo="img/album-1.jpg"&gt;</pre>
 
-    <img src="" alt="" data-echo="http://c.o0bg.com/rf/image_1200w/Boston/2011-2020/2015/03/07/BostonGlobe.com/Metro/Images/Selma05.jpg">
-
-    <img src="" alt="" data-echo="http://c.o0bg.com/rf/image_1200w/Boston/2011-2020/2015/03/11/BostonGlobe.com/BigPicture/Images/2015-03-10T210930Z_365939273_GM1EB3B0E0701_RTRMADP_3_AUSTRIA-WEATHER.jpg">
-
-    <img src="" alt="" data-echo="http://c.o0bg.com/rf/image_1200w/Boston/2011-2020/2015/03/13/BostonGlobe.com/BigPicture/Images/Nic6426306.jpg">
-
-    <img src="" alt="" data-echo="http://c.o0bg.com/rf/image_1200w/Boston/2011-2020/2015/03/18/BostonGlobe.com/Foreign/Images/04667088.jpg">
-
-    <img src="" alt="" data-echo="http://c.o0bg.com/rf/image_1200w/Boston/2011-2020/2015/03/20/BostonGlobe.com/BigPicture/Images/04671363-1660.jpg">
-
-    <img src="" alt="" data-echo="http://c.o0bg.com/rf/image_1200w/Boston/2011-2020/2015/03/23/BostonGlobe.com/BigPicture/Images/2015-03-19T160407Z_84227317_LM1EB3J18LY01_RTRMADP_3_BRITAIN-KING-RICHARDIII.jpg">
-
-    <img src="" alt="" data-echo="http://c.o0bg.com/rf/image_1200w/Boston/2011-2020/2015/03/25/BostonGlobe.com/BigPicture/Images/467265852-1777.jpg">
-
-
-    <img src="" alt="" data-echo="http://c.o0bg.com/rf/image_1200w/Boston/2011-2020/2015/03/07/BostonGlobe.com/Metro/Images/Selma05.jpg">
-
-    <img src="" alt="" data-echo="http://c.o0bg.com/rf/image_1200w/Boston/2011-2020/2015/03/11/BostonGlobe.com/BigPicture/Images/2015-03-10T210930Z_365939273_GM1EB3B0E0701_RTRMADP_3_AUSTRIA-WEATHER.jpg">
-
-    <img src="" alt="" data-echo="http://c.o0bg.com/rf/image_1200w/Boston/2011-2020/2015/03/13/BostonGlobe.com/BigPicture/Images/Nic6426306.jpg">
-
-    <img src="" alt="" data-echo="http://c.o0bg.com/rf/image_1200w/Boston/2011-2020/2015/03/18/BostonGlobe.com/Foreign/Images/04667088.jpg">
-
-    <img src="" alt="" data-echo="http://c.o0bg.com/rf/image_1200w/Boston/2011-2020/2015/03/20/BostonGlobe.com/BigPicture/Images/04671363-1660.jpg">
-
-    <img src="" alt="" data-echo="http://c.o0bg.com/rf/image_1200w/Boston/2011-2020/2015/03/23/BostonGlobe.com/BigPicture/Images/2015-03-19T160407Z_84227317_LM1EB3J18LY01_RTRMADP_3_BRITAIN-KING-RICHARDIII.jpg">
-
-    <img src="" alt="" data-echo="http://c.o0bg.com/rf/image_1200w/Boston/2011-2020/2015/03/25/BostonGlobe.com/BigPicture/Images/467265852-1777.jpg">
-
-
+    <img src="" alt="" data-echo="https://raw.githubusercontent.com/MichaelYgZhang/home/gh-pages/images/angularjs-logo.jpg">
+    <img src="" alt="" data-echo="https://raw.githubusercontent.com/MichaelYgZhang/home/gh-pages/images/css3-logo.jpg">
+    <img src="" alt="" data-echo="https://raw.githubusercontent.com/MichaelYgZhang/home/gh-pages/images/html5-logo.png">
+    <img src="" alt="" data-echo="https://raw.githubusercontent.com/MichaelYgZhang/home/gh-pages/images/java-logo.jpg">
+    <img src="" alt="" data-echo="https://raw.githubusercontent.com/MichaelYgZhang/home/gh-pages/images/jquery-logo.jpg">
+    <img src="" alt="" data-echo="https://raw.githubusercontent.com/MichaelYgZhang/home/gh-pages/images/js-logo.jpg">
+    <img src="" alt="" data-echo="https://raw.githubusercontent.com/MichaelYgZhang/home/gh-pages/images/tools-logo.jpg">
+   
 </div>
 </html>
+<script src="../../js/echo.js"></script>
+
+<script>
+    echo.init({
+    	offset: 100,
+    	throttle: 250,
+    	unload: false,
+    	callback: function (element, op) {
+    		console.log(element, 'has been', op + 'ed')
+    	}
+    });
+</script>
