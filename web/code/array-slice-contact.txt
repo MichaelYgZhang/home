@@ -4,7 +4,7 @@
     var oldAry = ['1','2','3',['a','b','c'],'4'];
     var newAry = [];
 
-    //å¯¹è±¡æ·±å±‚copy,å¤åˆ¶åä¿®æ”¹æ–°çš„å¯¹è±¡(æ•°ç»„)ï¼Œä¸ä¼šå¯¹æ—§å¯¹è±¡(æ•°ç»„)äº§ç”Ÿå½±å“
+    //¶ÔÏóÉî²ãcopy,¸´ÖÆºóĞŞ¸ÄĞÂµÄ¶ÔÏó(Êı×é)£¬²»»á¶Ô¾É¶ÔÏó(Êı×é)²úÉúÓ°Ïì
     var deepCopy = function(source){
         var result;
         return result = source instanceof Array?deepCopyArray(source):deepCopyObject(source);

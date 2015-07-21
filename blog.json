@@ -44,7 +44,7 @@
   {
     "ahref":"web/js/deep-copy.html",
     "imgsrc":"images/js-logo.jpg",
-    "titletext":"JS-DeepCopy-Array/Object",
+    "titletext":"JSDeepCopy Array/Object",
     "spantext":"JS中的深层拷贝对象或者数组，以及Array.prototype.slice();Array.prototype.concat();的用法"
   }
 ]

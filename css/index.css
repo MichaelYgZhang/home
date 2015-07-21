@@ -14,9 +14,7 @@ img{
 	height: 120px;
 	mergin: 5px;
 	border: 1px solid #eee;
-	-webkit-box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
-	-moz-box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
-	box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
+
 	-webkit-transition: all 0.5s ease-out;
 	-moz-transition: all 0.5s ease;
 	-o-transition: all 0.5s ease;
@@ -71,6 +69,8 @@ img{
 	cursor:pointer;
 }
 .layout li p{height:160px; margin:0 0 0 215px; color:#666666;}
+.layout li #readMore{visibility: visible;width: 100px;}
+
 
 .newview li{width:210px; float:left;}
 .newview li img{padding:3px; background-color:white; border:1px solid #beceeb;float:none; display:block;}
@@ -82,7 +82,7 @@ img{
 }
 .newview li p{height:auto; margin:6px 0; text-align:center;}
 .newview li span{display:none;}
-
+.newview li #readMore{display: none;}
 /*backtoTop*/
 .backtoTop{
 	height: 40px;

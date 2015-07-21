@@ -1,14 +1,31 @@
-#blog{text-indent:2em}
+#blog{
+    word-spacing: 8px;
+    letter-spacing: 2px;
+    line-height: 23px;
+    font-size: 16px;
+    font-family: sans-serif;
+}
+#blog p{
+    text-indent:2em;
+}
+#blog h1,h2,h3,h4,h5{
+    color: #66afe9;
+}
 #blog a{
     cursor: pointer;
-    color: #4cae4c;
+    color: #5bc0de;
     font-weight: bold;
 }
 #blog  a:hover{
-    font-size: large;
+    color: #4cae4c;
+    text-decoration: underline;
 }
 #blog span{
     color:orange;
     font-family: "Helvetica Neue";
     font-weight: bold;
+}
+#blog ol{
+    background-color: #f7f7f7;
+    color: #d9534f;
 }

@@ -126,6 +126,6 @@ echo.init({
 	throttle: 250,
 	unload: false,
 	callback: function (element, op) {
-		console.log(element, 'has been', op + 'ed')
+		//console.log(element, 'has been', op + 'ed')
 	}
 });
