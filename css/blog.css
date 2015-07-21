@@ -25,7 +25,7 @@
     font-family: "Helvetica Neue";
     font-weight: bold;
 }
-#blog ol{
+#blog ol,code{
     background-color: #f7f7f7;
     color: #d9534f;
 }

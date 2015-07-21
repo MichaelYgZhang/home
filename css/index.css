@@ -60,9 +60,8 @@ img{
 .layout{width:100%; margin:0; padding:0 0 0; list-style-type:none;}
 
 .layout li{margin:5px 5px 5px 0; padding:5px; border-bottom:1px dashed #dddddd; zoom:1;}
-.layout li img{padding:3px; background-color:white; border:1px solid #beceeb; float:left;}
+.layout li img{padding:0px; border:1px solid #beceeb; float:left;}
 .layout li img:hover{
-	background-color:#f0f3f9;
 	-webkit-transform: rotate(-7deg);
 	-moz-transform: rotate(-7deg);
 	-o-transform: rotate(-7deg);
@@ -73,7 +72,7 @@ img{
 
 
 .newview li{width:210px; float:left;}
-.newview li img{padding:3px; background-color:white; border:1px solid #beceeb;float:none; display:block;}
+.newview li img{float:none; display:block;}
 .newview li img:hover{
 	-webkit-transform: rotate(-7deg);
 	-moz-transform: rotate(-7deg);

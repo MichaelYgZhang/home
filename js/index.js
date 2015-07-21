@@ -1,6 +1,4 @@
-//window.onbeforeunload = function(event) {
-//	(event || window.event).returnValue = "感谢来到小站,期待下次交流,谢谢！";
-//}
+
 var app = angular.module('app',['ngAnimate']);
 
 app.controller('indexController', function($scope,$http) {
