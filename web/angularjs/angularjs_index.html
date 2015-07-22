@@ -11,7 +11,7 @@
     angularjs controller之间的通信。
 </p>
 <p>
-    <h4>DEMO效果:通过controller事件机制，input1输入框联动input2的值。</h4>
+    DEMO效果:通过controller事件机制，input1输入框联动input2的值。
     <div ng-app="app" ng-controller="parentCtr">
         <div ng-controller="childCtr1">input1:
             <input ng-model="name" type="text" ng-change="change(name);" />
@@ -21,12 +21,45 @@
         </div>
     </div>
 </p>
-    <a href="web/angularjs/code.txt">核心代码</a>
+核心代码：
+    <pre>
+        <code>
+            //HTML5 CODE
+            &lt;div ng-app="app" ng-controller="parentCtr"&gt;
+                &lt;div ng-controller="childCtr1">input1:
+                    &lt;input ng-model="name" type="text" ng-change="change(name);" /&gt;
+                &lt;/div&gt;
+                &lt;div ng-controller="childCtr2"&gt;input2:
+                    &lt;input ng-model="ctr1Name" /&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            //Angular js CODE
+            app.controller("parentCtr",
+                function ($scope) {
+                    $scope.$on("Ctr1NameChange",
+                        function (event, msg) {
+                            console.log("parent", msg);
+                            $scope.$broadcast("Ctr1NameChangeFromParrent", msg);
+                    });
+                }).controller("childCtr1", function ($scope) {
+                    $scope.change = function (name) {
+                        console.log("childCtr1", name);
+                        $scope.$emit("Ctr1NameChange", name);
+                    };
+                }).controller("childCtr2", function ($scope) {
+                    $scope.$on("Ctr1NameChangeFromParrent",
+                        function (event, msg) {
+                            console.log("childCtr2", msg);
+                            $scope.ctr1Name = msg;
+                    });
+            });
+        </code>
+    </pre>
 <p>
     这里childCtr1的name改变会以冒泡传递给父controller，而父controller会对事件包装在广播给所有子controller，
     而childCtr2则注册了change事件，并改变自己。注意父controller在广播时候一定要改变事件name。
 </p>
-<h3>
+<p>
     总结:用$broadcast赋的值，只能子级得到值；$emit赋的值，只能父级得到；而平级的什么都不能得到。
-</h3>
+</p>
 </div>
