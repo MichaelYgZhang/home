@@ -2,49 +2,49 @@
   {
     "ahref":"web/html5/read-html5-cookbook.html",
     "imgsrc":"images/html5-logo.png",
-    "titletext":"HTML5",
+    "titletext":"HTML5Cookbook笔记",
     "spantext": "Reading html5 Cookbook Note."
   },
   {
     "ahref":"web/css/css3_index.html",
     "imgsrc":"images/css3-logo.jpg",
-    "titletext":"CSS3",
+    "titletext":"CSS3技能博客",
     "spantext":"CSS3 blogs"
   },
   {
     "ahref":"java/java-api/javaapi_index.html",
     "imgsrc":"images/java-logo.jpg",
-    "titletext":"Java",
+    "titletext":"Java技能博客",
     "spantext":"Java blogs"
   },
   {
     "ahref":"tools/tools_index.html",
     "imgsrc":"images/tools-logo.jpg",
-    "titletext":"Tools",
+    "titletext":"Tools使用",
     "spantext":"Tools blogs"
   },
   {
     "ahref":"web/js/table-tree-check/index.html",
     "imgsrc":"images/js-logo.jpg",
-    "titletext":"Table-Tree-Check",
-    "spantext":"js:easyui,angularjs,jquery;css:bootstrap."
+    "titletext":"Table-tree-check",
+    "spantext":"简介:使用js:easyui,angularjs,jquery;css:bootstrap.来进行实现。"
   },
   {
     "ahref":"web/angularjs/angularjs_index.html",
     "imgsrc":"images/angularjs-logo.jpg",
     "titletext":"AngularJS-Controller-Communication",
-    "spantext":"AngularJS-Controller"
+    "spantext":"简介:AngularJS-Controller之间的通信机制。"
   },
   {
     "ahref":"web/js/lazyload-images.html",
     "imgsrc":"images/js-logo.jpg",
-    "titletext":"Lazy load images",
-    "spantext":"lazy load images demo  echo.js"
+    "titletext":"Images lazyload （Echo.js）",
+    "spantext":"简介:图片延迟加载案例，使用Echo.js第三方js库实现。"
   },
   {
     "ahref":"web/js/deep-copy.html",
     "imgsrc":"images/js-logo.jpg",
-    "titletext":"JSDeepCopy Array/Object",
-    "spantext":"JS中的深层拷贝对象或者数组，以及Array.prototype.slice();Array.prototype.concat();的用法"
+    "titletext":"JavaScript深层拷贝",
+    "spantext":"简介:JS中的深层拷贝对象或数组，以及Array.prototype.slice();Array.prototype.concat();的使用。"
   }
 ]

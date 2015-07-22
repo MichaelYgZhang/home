@@ -5,9 +5,6 @@
     <title>Echo, lazy-loading images with HTML5 data-* attributes by @toddmotto | toddmotto.com</title>
 <style>
 
-    body {
-        background:#F0F0F0;
-    }
     .main {
         min-height:1500px;
         max-width:550px;
@@ -16,8 +13,8 @@
     }
     .main img {
         margin:25px 0;
-        height:450px;
-        width:450px;
+        height:350px;
+        width:350px;
         background:#FFF url(https://raw.githubusercontent.com/MichaelYgZhang/home/gh-pages/images/ajax.gif) no-repeat center center;
         border:1px solid #AAA;
     }
@@ -27,8 +24,10 @@
 
 <!-- main -->
 <div class="main">
+    利用第三方 延迟加载js文件 Echo.js实现,Echo.js的用法非常简单，并且很小2kB。详情
+    <a href="https://github.com/toddmotto/echo">Echo</a>
 
-    <pre class="title__code">&lt;img src="img/blank.gif" alt="" data-echo="img/album-1.jpg"&gt;</pre>
+    <pre class="title__code">用法:&lt;img src="img/blank.gif" alt="" data-echo="img/album-1.jpg"&gt;</pre>
 
     <img src="" alt="" data-echo="https://raw.githubusercontent.com/MichaelYgZhang/home/gh-pages/images/angularjs-logo.jpg">
     <img src="" alt="" data-echo="https://raw.githubusercontent.com/MichaelYgZhang/home/gh-pages/images/css3-logo.jpg">

@@ -1,6 +1,6 @@
 #blog{
-    word-spacing: 8px;
-    letter-spacing: 2px;
+    //word-spacing: 8px;
+    //letter-spacing: 2px;
     line-height: 23px;
     font-size: 16px;
     font-family: sans-serif;
@@ -25,7 +25,4 @@
     font-family: "Helvetica Neue";
     font-weight: bold;
 }
-#blog ol,code{
-    background-color: #f7f7f7;
-    color: #d9534f;
-}
+
