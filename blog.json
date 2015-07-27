@@ -46,5 +46,11 @@
     "imgsrc":"images/js-logo.jpg",
     "titletext":"JavaScript深层拷贝",
     "spantext":"简介:JS中的深层拷贝对象或数组，以及Array.prototype.slice();Array.prototype.concat();的使用。"
+  },
+  {
+    "ahref":"web/js/read-book-note/JS001.html",
+    "imgsrc":"images/js-logo.jpg",
+    "titletext":"JavaScript代码基本要素",
+    "spantext":"简介:根据'汤姆大叔的博客'编写读书此读书笔记。1:深入理解JavaScript系列（1）：编写高质量JavaScript代码的基本要点."
   }
 ]
