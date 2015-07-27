@@ -1,0 +1,31 @@
+<div id="blog">
+    <h3>笔记:深入理解JavaScript系列（1）：编写高质量JavaScript代码的基本要点</h3>
+    第一:书写可维护的代码(Writing Maintainable Code )
+    <p>
+        可维护的代码意味着：1.可读的 2.一致的 3.可预测的,可扩展的
+    </p>
+    第二:最小全局变量(Minimizing Globals)
+    <p>
+        JavaScript通过函数管理作用域。在函数内部声明的变量只在这个函数内部，函数外面不可用。每个JavaScript
+        环境都有一个全局对象，当你在任意的函数外面使用this的时候就可以访问到。
+        例如:
+        <pre>
+            <code>
+                myglobal = "hello"; // 不推荐写法
+                console.log(myglobal); // "hello"
+                console.log(window.myglobal); // "hello"
+                console.log(window["myglobal"]); // "hello"
+                console.log(this.myglobal); // "hello"
+            </code>
+        </pre>
+    </p>
+    全局变量的问题:命名冲突。
+    <p>
+        常见问题如下:1.第三方的JavaScript库 2.广告方的脚本代码 3.第三方用户跟踪和分析脚本代码 等。
+        因此，要想和其他脚本成为好邻居的话，尽可能少的使用全局变量是很重要的。在书中后面提到的一些减少全局变量的策略，
+        例如命名空间模式或是函数立即自动执行，但是要想让全局变量少最重要的还是始终使用var来声明变量。
+
+        由于JavaScript的两个特征，不自觉地创建出全局变量是出乎意料的容易。首先，你可以甚至不需要声明就可以使用变量；
+        第二，JavaScript有隐含的全局概念，意味着你不声明的任何变量都会成为一个全局对象属性
+    </p>
+</div>
