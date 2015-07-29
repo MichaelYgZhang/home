@@ -8,8 +8,12 @@
 #blog p{
     text-indent:2em;
 }
-#blog h1,h2,h3,h4,h5{
+#blog h1,h2,h3{
     color: #66afe9;
+}
+#blog h4{
+    color: navy;
+    font-weight: bold;
 }
 #blog a{
     cursor: pointer;
@@ -28,4 +32,8 @@
 #blog .tableCheckImage{
     width:487px;
     height:601px;
+}
+#blog .hashimg{
+    width:486px;
+    height:240px;
 }

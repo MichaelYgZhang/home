@@ -12,10 +12,10 @@
     "spantext":"CSS3 blogs"
   },
   {
-    "ahref":"java/java-api/javaapi_index.html",
+    "ahref":"java/java-api/javaapi_hashmap.html",
     "imgsrc":"images/java-logo.jpg",
-    "titletext":"Java技能博客",
-    "spantext":"Java blogs"
+    "titletext":"JavaJDK1.7-HashMap",
+    "spantext":"简介:JavaJDK学习,通过分析JDK源代码研究 Hash （HashMap）存储机制。"
   },
   {
     "ahref":"tools/tools_index.html",
