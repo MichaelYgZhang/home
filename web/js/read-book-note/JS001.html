@@ -9,15 +9,15 @@
         JavaScript通过函数管理作用域。在函数内部声明的变量只在这个函数内部，函数外面不可用。每个JavaScript
         环境都有一个全局对象，当你在任意的函数外面使用this的时候就可以访问到。
         例如:
-        <pre>
-            <code>
-myglobal = "hello"; // 不推荐写法
-console.log(myglobal); // "hello"
-console.log(window.myglobal); // "hello"
-console.log(window["myglobal"]); // "hello"
-console.log(this.myglobal); // "hello"
-            </code>
-        </pre>
+<pre>
+<code>
+    myglobal = "hello"; // 不推荐写法
+    console.log(myglobal); // "hello"
+    console.log(window.myglobal); // "hello"
+    console.log(window["myglobal"]); // "hello"
+    console.log(this.myglobal); // "hello"
+</code>
+</pre>
     </p>
     全局变量的问题:命名冲突。
     <p>
