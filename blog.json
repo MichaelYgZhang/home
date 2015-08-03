@@ -52,5 +52,11 @@
     "imgsrc":"images/js-logo.jpg",
     "titletext":"JavaScript代码基本要素",
     "spantext":"简介:根据'汤姆大叔的博客'编写读书此读书笔记。1:深入理解JavaScript系列（1）：编写高质量JavaScript代码的基本要点."
+  },
+  {
+    "ahref":"web/js/read-book-note/javaScript_basics.html",
+    "imgsrc":"images/js-logo.jpg",
+    "titletext":"MDN之JavaScript-Basics ",
+    "spantext":"简介:根据阅读 MDN 的 JavaScript 内容，写下该读书笔记。"
   }
 ]
