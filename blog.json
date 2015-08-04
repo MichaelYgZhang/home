@@ -6,10 +6,10 @@
     "spantext": "Reading html5 Cookbook Note."
   },
   {
-    "ahref":"web/css/css3_index.html",
+    "ahref":"web/css/css3_note.html",
     "imgsrc":"images/css3-logo.jpg",
-    "titletext":"CSS3技能博客",
-    "spantext":"CSS3 blogs"
+    "titletext":"CSS3工作笔记",
+    "spantext":"简介:CSS3 工作笔记,内容比较杂。"
   },
   {
     "ahref":"java/java-api/javaapi_hashmap.html",

@@ -1,0 +1,51 @@
+<div id="blog">
+<h3>CSS工作笔记</h3>
+    1:2015-08-04,DIV的显示与隐藏
+    <p>
+        CSS中经常会用到div的现实与隐藏，然而有两个选择。1,display:none|block;2,visibility：hidden|visible;
+    </p>
+    <p>
+        区别:1,display:none:表示隐藏该元素,并且不在DOM树中,浏览器会将其消除。若该元素下面有元素,则进行上浮。
+        display:block:显示隐藏的元素,如果位置被占用,则会将那个元素移走。
+        2,visibility：hidden：表示隐藏该元素，并且占用当前DOM树中的位置。其他元素位置保持不变。
+        visibility：visible：表示显示隐藏的元素。
+    </p>
+    <p>
+        总结:所以display和visibility控制的分别是html元素是否存在和是否显示，
+        display的属性定义该元素存在或不存在，而visibility的属性只是控制该元素是否显示出来，实际上还是存在的。
+        详细的其他属性可以查看
+        <a href="https://developer.mozilla.org/zh-CN/docs/CSS/display">MDN display/visibility</a>
+    </p>
+<pre>
+<code>
+    &lt;!doctype&gt;
+    &lt;html&gt;
+    &lt;head&gt;
+    &lt;script type="text/javascript"&gt;
+    function testDisplay()
+    {
+        var divD = document.getElementById("testD");
+        divD.style.display = divD.style.display == "none" ? "block" : "none";
+    }
+
+    function testVisibility()
+    {
+        var divV = document.getElementById("testV");
+        divV.style.visibility = divV.style.visibility == "hidden" ? "visible" : "hidden";
+    }
+    &lt;/script&gt;
+    &lt;/head&gt;
+    &lt;/body&gt;
+    &lt;div id="testD" style="border:red 1px solid"&gt;
+         Display
+    &lt;/div&gt;
+    &lt;div id="testV" style="border:green 1px solid"&gt;
+        Visibility
+    &lt;/div&gt;
+    &lt;input type="button" value="TestDisplay" onclick="testDisplay()"/&gt;
+    &lt;input type="button" value="TestVisibility" onclick="testVisibility()"/&gt;
+    &lt;/body&gt;
+    &lt;/html&gt;
+</code>
+</pre>
+</div>
