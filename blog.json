@@ -58,5 +58,11 @@
     "imgsrc":"images/js-logo.jpg",
     "titletext":"MDN之JavaScript-Basics ",
     "spantext":"简介:根据阅读 MDN 的 JavaScript 内容，写下该读书笔记。"
+  },
+  {
+    "ahref":"web/angularjs/angularjs_directive.html",
+    "imgsrc":"images/angularjs-logo.jpg",
+    "titletext":"AngularJS-directive",
+    "spantext":"简介:分析了解AngularJS-directive指令的用法。"
   }
 ]
