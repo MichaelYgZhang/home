@@ -23,7 +23,6 @@
 </p>
 核心代码：
     <pre>
-        <code>
             //HTML5 CODE
             &lt;div ng-app="app" ng-controller="parentCtr"&gt;
                 &lt;div ng-controller="childCtr1">input1:
@@ -53,7 +52,6 @@
                             $scope.ctr1Name = msg;
                     });
             });
-        </code>
     </pre>
 <p>
     这里childCtr1的name改变会以冒泡传递给父controller，而父controller会对事件包装在广播给所有子controller，
