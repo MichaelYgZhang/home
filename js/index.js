@@ -42,16 +42,6 @@ app.controller('indexController', function($scope,$http) {
 
 });
 
-
-	app.directive('myDirective',function(){
-		return{
-			restrict: "AECM",
-			transclude: true,//true,表示在页面中嵌套的元素将显示出来,不进行覆盖.false(默认):表示覆盖
-			template: "<span>Hello, Directive, <span ng-transclude></span></span>"
-		}
-	});
-
-
 /**
  * dom方式 操作横向布局还是列布局
  */
