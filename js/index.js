@@ -41,37 +41,6 @@ app.controller('indexController', function($scope,$http) {
 
 
 });
-app.controller("parentCtr",
-	function ($scope) {
-		$scope.$on("Ctr1NameChange",
-
-			function (event, msg) {
-				console.log("parent", msg);
-				$scope.$broadcast("Ctr1NameChangeFromParrent", msg);
-			});
-	}).controller("childCtr1", function ($scope) {
-		$scope.change = function (name) {
-			console.log("childCtr1", name);
-			$scope.$emit("Ctr1NameChange", name);
-		};
-	}).controller("childCtr2", function ($scope) {
-		$scope.$on("Ctr1NameChangeFromParrent",
-
-			function (event, msg) {
-				console.log("childCtr2", msg);
-				$scope.ctr1Name = msg;
-			});
-	});
-
-
-	app.directive('myDirective',function(){
-		return{
-			restrict: "AECM",
-			transclude: true,//true,表示在页面中嵌套的元素将显示出来,不进行覆盖.false(默认):表示覆盖
-			template: "<span>Hello, Directive, <span ng-transclude></span></span>"
-		}
-	});
-
 
 /**
  * dom方式 操作横向布局还是列布局

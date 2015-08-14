@@ -144,37 +144,13 @@
     <h4>controller和link的区别</h4>
     <p>
         编译前使用 - Controller。
-        编译后使用 - Link
+        编译后使用 - Link。
     </p>
-    <h4>参数transclude的用法</h4>
-    <p>
-<pre>
-    angular.module('app',[])
-        .directive('myDirective',function($scope){
-            return{
-                restrict: "AECM",
-                transclude: true,//true,表示在页面中嵌套的元素将显示出来,不进行覆盖.false(默认):表示覆盖
-                template: "&lt;span&gt;Hello, Directive, &lt;span ng-transclude&gt;&lt;/span&gt;&lt;/span&gt;"
-
-            }
-        });
-    &lt;my-directive&gt;my name is directive!&lt;/my-directive&gt;
-    以上代码将会输出:Hello,Directive,my name is directive!
-    注意这里必须套一个ng-transclude标签.
-</pre>
-    代码运行结果如下所示:
-    <my-directive>my name is directive!</my-directive>
-
-    </p>
+    <iframe width="100%" height="300" src="//jsfiddle.net/MichaelYgZhang/z596vpwh/embedded/result,js,html" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
 
-
-
-
-
-
-
-
+    <h4>参数transclude的用法:</h4>
+    <iframe width="100%" height="300" src="//jsfiddle.net/MichaelYgZhang/88e9b6qo/5/embedded/result,js,html" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
     <h4>相关阅读:</h4>
     <ul>
