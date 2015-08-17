@@ -26,4 +26,113 @@
         由于JavaScript的两个特征，不自觉地创建出全局变量是出乎意料的容易。首先，你可以甚至不需要声明就可以使用变量；
         第二，JavaScript有隐含的全局概念，意味着你不声明的任何变量都会成为一个全局对象属性
     </p>
+    <p>
+        所以基于以上问题，代码编写时最好使用var 来进行变量的声明。注:2015-08-16更新
+<pre>
+    function foo() {
+        var a = b = 0;//此时a为本地变量，b为全局变量。原因:赋值表达式运算顺序是从右到左，首先是b=0,而此时b没有进行声明。
+        var a = (b = 0);//同上作用
+        var a,b;//正确做法
+        a = b = 0;//正确做法
+        // ...
+    }
+</pre>
+    </p>
+    隐式全局变量和明确定义的全局变量间有些小的差异，就是通过 delete 操作符来判断是隐式全局变量还是明确定义全局变量。<br>
+    1，通过var创建的全局变量（任何函数之外的程序中创建）是不能被删除的。<br>
+    2,无var创建的隐式全局变量（无视是否在函数中创建）是能被删除的。原因:，隐式全局变量并不是真正的全局变量，但它们是全局对象的属性。
+    属性是可以通过 delete 操作符删除的，而变量是不能的。
+    <p>
+<pre>
+    var global_var = 1;//delete global_var;结果false。 typeof global_var; 类型为number
+    global_novar = 2;//delete global_novar;结果true。typeof global_novar; 类型为undefined
+    (function(){
+        global_novar_fun = 3;//delete global_novar_fun;结果true。typeof global_novar_fun; 类型为undefined
+    });
+</pre>
+        在ES5严格模式("use strict")下，未声明的变量工作时会抛出一个错误。
+    </p>
+    <p>
+        编码时使用单var形式:var a,b,myobject = {},sum = a+b,....;
+    </p>
+    预解析：var散布的问题(Hoisting: A Problem with Scattered vars)
+    <p>
+        javascript中，可以在函数任何位置声明多个var变量，它们就好像是在函数顶部一样发挥作用，这种行为称之为:hoisting（悬置/置顶解析/预解析）。
+
+  <pre>
+    myname = 'zhangyg';
+    function foo(){
+        alert(myname);
+        //undefined 原因:hoisting行为,myname 是局部变量，在函数顶部声明，但是还未赋值，
+        //相当于在函数顶部执行了这样的代码:var myname; 等同于 -> var myname = undefined;
+        var myname = 'local';//此处相当于:myname = 'local';
+        alert(myname);//local
+    }
+    foo();
+</pre>
+    总结:代码处理分两个阶段：第一阶段是变量，函数声明，以及正常格式的参数创建，这是一个解析和进入上下文的阶段。
+    第二个阶段是代码执行，函数表达式和不合格的标识符（为声明的变量）被创建。但是，出于实用的目的，我们就采用
+    了”hoisting”这个概念， 这种ECMAScript标准中并未定义，通常用来描述行为。
+    </p>
+
+    <h4>
+        for循环(for Loops)
+    </h4>
+    <p>
+        代码编写建议:推荐遍历对象为数组。
+<pre>
+    function looper(){
+        //方法一
+        var i, max, myarray = [];
+        //.....
+        for(i = 0,max = myarray.length; i+=1){
+            //myarray[i]
+        }
+
+        //方法二
+        var i,myarray = [];
+        for(i = myarray.length;i-=1;){//注意此处最后有个分号
+            //myarray[i]
+        }
+
+        //方法三
+        var myarray = [],i = myarray.length;
+        while(i--){
+           //myarray[i]
+        }
+    }
+
+</pre>
+    </p>
+
+    <h4>for-in循环(for-in Loops)</h4>
+    <p>
+        for-in 循环应该用在非数组对象的遍历上，使用 for-in 进行循环也被称为“枚举”。
+        你可以使用 for-in 循环数组（因为JavaScript中数组也是对象），但这是不推荐的。因为如果
+        数组对象已被自定义的功能增强，就可能发生逻辑错误。另外，在for-in中，属性列表的顺序（序列）是不
+        能保证的。所以最好数组使用正常的for循环，对象使用for-in循环。
+        注意:有个很重要的 hasOwnProperty() 方法，当遍历对象属性的时候可以过滤掉从原型链上下来的属性。
+<pre>
+    // 一个方法添加给了所有对象
+    if (typeof Object.prototype.clone === "undefined") {
+        Object.prototype.clone = function () {};
+    }
+    var man = {hands:2,legs:2};
+    for (var i in man) {
+        //1 过滤
+        if (man.hasOwnProperty(i)) { // 过滤
+            console.log(i, ":", man[i]);
+            //hands:2
+            //legs:2
+        }
+        //2 直接输出
+        console.log(i, ":", man[i]);
+        //hands:2
+        //legs:2
+        //clone : function () {}
+    }
+
+</pre>
+    </p>
+
 </div>
