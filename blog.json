@@ -48,10 +48,10 @@
     "spantext":"简介:JS中的深层拷贝对象或数组，以及Array.prototype.slice();Array.prototype.concat();的使用。"
   },
   {
-    "ahref":"web/js/read-book-note/JS001.html",
+    "ahref":"web/js/read-book-note/js_patterns002.html",
     "imgsrc":"images/js-logo.jpg",
     "titletext":"JavaScript代码基本要素",
-    "spantext":"简介:根据《JavaScript 模式》此读书笔记.第二章:概要。"
+    "spantext":"简介:根据《JavaScript Patterns》编写此读书笔记.第二章:高质量JavaScript基本要点。"
   },
   {
     "ahref":"web/js/read-book-note/javaScript_basics.html",
@@ -72,9 +72,9 @@
     "spantext":"简介:JS中的内存分析,了解堆与栈在js语言中的分配原理"
   },
   {
-    "ahref":"web/js/read-book-note/js002.html",
+    "ahref":"web/js/read-book-note/js_patterns003.html",
     "imgsrc":"images/js-logo.jpg",
-    "titletext":"JavaScript代码基本要素---",
-    "spantext":"简介:根据《JavaScript 模式》此读书笔记.第二章:概要。"
+    "titletext":"JavaScript直接量和构造函数",
+    "spantext":"简介:根据《JavaScript Patterns》编写此读书笔记.读书笔记 第三章 直接量和构造函数。"
   }
 ]
