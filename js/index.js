@@ -1,9 +1,24 @@
 
-var app = angular.module('app',['ngAnimate']);
+var app = angular.module('app',['ngAnimate','ui.bootstrap']);
 
 app.controller('indexController', function($scope,$http) {
 
-	$http.get('blog.json').success(function(data) {$scope.blogs = data;});
+	$scope.temp = [], // 当前页显示 默认每页显示10个()
+	$scope.blogs = [], // 所有数据
+	$scope.currentPage = 1,
+	$scope.numPerPage = 4,//此处修改每页显示多少条数据，同时对应源码中要修改 itemsPerPage
+	$scope.maxSize = 5;
+
+
+	$http.get('blog.json').success(function(data) {
+		$scope.blogs = data;
+		console.log($scope.blogs.length);
+		$scope.$watch('currentPage + numPerPage', function() {
+			var begin = (($scope.currentPage - 1) * $scope.numPerPage),
+				end = begin + $scope.numPerPage;
+			$scope.temp = $scope.blogs.slice(begin, end);
+		});
+	});
 
 	$scope.islayout = true;
 	$scope.isnewview = false;
