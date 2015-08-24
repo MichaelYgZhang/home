@@ -2273,7 +2273,7 @@ angular.module('ui.bootstrap.pagination', [])
 }])
 
 .constant('paginationConfig', {
-  itemsPerPage: 4, //每页显示多少条数据
+  itemsPerPage: 10, //每页显示多少条数据
   boundaryLinks: false,
   directionLinks: true,
   firstText: 'First',
@@ -2291,7 +2291,8 @@ angular.module('ui.bootstrap.pagination', [])
       firstText: '@',
       previousText: '@',
       nextText: '@',
-      lastText: '@'
+      lastText: '@',
+      itemsPerPage:'@'//新增绑定
     },
     require: ['pagination', '?ngModel'],
     controller: 'PaginationController',

@@ -44,13 +44,13 @@
 
 		<form role="search" >
 			<div class="form-group" >
-				<input ng-model="searchText" type="search" results="5" class="form-control search rounded" placeholder="search for ..."
-						ng-click="isShowContent = false"/>
+				<input  ng-model="searchText" type="search" results="5" class="form-control search rounded" placeholder="search for ..."
+						ng-click="searchClick()" ng-change="filter()" />
 			</div>
 		</form>
 
 
-		<hr class="hrStyle">
+		<hr class="hrStyle" ng-show="!isShowContent">
 		<!-- show/hide ul start -->
 		<div ng-show="!isShowContent">
 			<div class="row">
@@ -74,7 +74,7 @@
 
 				<!-- 此处注意使用angularjs方式进行遍历展现时，样式失效，所以写在style中，原因可能是无法关联到css样式文件中的样式 -->
 				<ul id="layoutTarget"
-					ng-repeat="everyBlog in temp | filter:searchText"
+					ng-repeat="everyBlog in filtered = (blogs | filter:searchText) | startFrom:(currentPage-1)*numPerPage | limitTo:numPerPage"
 					style="list-style-type:none;float: left"
 					ng-class="{layout:islayout,newview:isnewview}">
 					<li>
@@ -95,12 +95,17 @@
 
 			</div>
 		</div>
-		<pagination
+		<pagination ng-show = "paginationIsShow"
 				ng-model="currentPage"
-				total-items="blogs.length"
-				itemsPerPage = "numPerPage"
+				total-items="tempPages"
+				items-per-page = "numPerPage"
 				max-size="maxSize"
-				boundary-links="true">
+				boundary-links="true"
+				first-text = "首页"
+				previous-text="上一页"
+				next-text="下一页"
+				last-text="尾页"
+				>
 		</pagination>
 		<!-- show/hide ul end-->
 		<div ng-model="isShowContent" ng-show="isShowContent">

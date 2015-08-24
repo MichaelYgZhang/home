@@ -1,7 +1,7 @@
 
 var app = angular.module('app',['ngAnimate','ui.bootstrap']);
 
-app.controller('indexController', function($scope,$http) {
+app.controller('indexController', function($scope,$http,$timeout) {
 
 	$scope.temp = [], // 当前页显示 默认每页显示10个()
 	$scope.blogs = [], // 所有数据
@@ -12,14 +12,22 @@ app.controller('indexController', function($scope,$http) {
 
 	$http.get('blog.json').success(function(data) {
 		$scope.blogs = data;
-		console.log($scope.blogs.length);
 		$scope.$watch('currentPage + numPerPage', function() {
 			var begin = (($scope.currentPage - 1) * $scope.numPerPage),
 				end = begin + $scope.numPerPage;
 			$scope.temp = $scope.blogs.slice(begin, end);
 		});
+
+		$scope.tempPages = Math.ceil($scope.blogs.length);
+
+		$scope.filter = function () {
+			$timeout(function () {
+				$scope.tempPages = Math.ceil($scope.filtered.length);
+			}, 100);
+		};
 	});
 
+	$scope.paginationIsShow = true;
 	$scope.islayout = true;
 	$scope.isnewview = false;
 	$scope.islayout.className = "c1 on";
@@ -34,15 +42,20 @@ app.controller('indexController', function($scope,$http) {
 		$scope.isnewview = false;
 		$scope.islayout.className = "c1";
 	};
-
+	$scope.searchClick = function(){
+		$scope.isShowContent = false;
+		$scope.paginationIsShow = true;
+	};
 
 	$scope.showContent = function(blog){
+		$scope.paginationIsShow = false;
 		$scope.isShowContent = true;
 		$scope.template = {url:""+blog.ahref+""};
 	};
 
+
 	$scope.html5_click = function(){
-			$scope.searchText = "HTML5";
+		$scope.searchText = "HTML5";
 	};
 	$scope.css3_click = function(){
 		$scope.searchText = "CSS3";
@@ -54,9 +67,17 @@ app.controller('indexController', function($scope,$http) {
 		$scope.searchText = "Tools";
 	};
 
-
 });
 
+app.filter('startFrom', function() {
+	return function(input, start) {
+		if(input) {
+			start = +start; //parse to int
+			return input.slice(start);
+		}
+		return [];
+	}
+});
 /**
  * dom方式 操作横向布局还是列布局
  */

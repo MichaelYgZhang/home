@@ -39,7 +39,10 @@ HTML5的技术内容尽量不要出现css，java，tools字眼，以免搜索功
  * `在使用pre编写代码时，<>这种符号要进行转换,比如<div>:写成 &lt;div&gt ;`
  * 写代码时，前面总是空了很多，比较大。原因是，在写页面的时候，前面空的空白就比较多，如果紧邻起始位置写就不会出现大的空白区域。
 
-
+#### 分页注意事项
+> 使用 [ui-bootstrap-tpls-0.12.1.js](http://angular-ui.github.io/bootstrap/)库进行页面分页设置，其中源码设置中默认每页显示10条数据，
+要修改时，需要修改源码中指令(pagination)中scope的绑定,新增了itemsPerPage:'@',对应页面的写法为:items-per-page='number',
+这样就能控制每页显示多少条数据了。
 
 
 ####[博客地址](http://michaelygzhang.github.io/home/)
