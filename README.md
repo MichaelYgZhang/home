@@ -45,6 +45,10 @@ HTML5的技术内容尽量不要出现css，java，tools字眼，以免搜索功
 这样就能控制每页显示多少条数据了。
 
 
+### 目前存在问题
+*  1 页面加载时图片暂时找不到，在console中会有404。未解决。
+*  2 页面加载太慢，未进行SEO优化。
+
 ####[博客地址](http://michaelygzhang.github.io/home/)
 
 
