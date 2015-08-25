@@ -1,0 +1,11 @@
+### Spring 学习
+* 当出现多个*.properties文件时,xml文件应该这样写。
+    applicationContext.xml
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">  
+      <property name="locations">  
+          <list>  
+              <value>classpath*:*.properties</value>  
+          </list>  
+      </property>  
+      <property name="ignoreUnresolvablePlaceholders" value="true" />   
+    </bean>  
