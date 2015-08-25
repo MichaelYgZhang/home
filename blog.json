@@ -76,5 +76,11 @@
     "imgsrc":"images/js-logo.jpg",
     "titletext":"JavaScript笔记-直接量&构造函数",
     "spantext":"简介:根据《JavaScript Patterns》编写此读书笔记.读书笔记 第三章 直接量和构造函数。"
+  },
+  {
+    "ahref":"java/spring-study/spring-note.html",
+    "imgsrc":"images/spring-logo.jpg",
+    "titletext":"Java-Spring学习笔记",
+    "spantext":"简介:日常工作学习中有关Spring笔记。"
   }
 ]
