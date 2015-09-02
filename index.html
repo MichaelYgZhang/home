@@ -34,20 +34,12 @@
 	<!-- nav end-->
 
 	<div class="container contentClass">
-		<!--<div class="jumbotron myjumbotron">-->
-			<!--<h4 align="center">WE ARE THE WORLD!</h4>-->
-			<!--<h5 align="center">This is my blog!</h5>-->
-			<!--<h5 align="center">WELCOME!</h5>-->
-		<!--</div>-->
-
 		<form role="search" >
 			<div class="form-group" >
 				<input  ng-model="searchText" type="search" results="5" class="form-control search rounded" placeholder="search for ..."
 						ng-click="searchClick()" ng-change="filter()" />
 			</div>
 		</form>
-
-
 		<hr class="hrStyle" ng-show="!isShowContent">
 		<!-- show/hide ul start -->
 		<div ng-show="!isShowContent">
@@ -93,6 +85,8 @@
 
 			</div>
 		</div>
+		<!-- show/hide ul end-->
+		
 		<pagination ng-show = "paginationIsShow"
 				ng-model="currentPage"
 				total-items="tempPages"
@@ -105,7 +99,7 @@
 				last-text="尾页"
 				>
 		</pagination>
-		<!-- show/hide ul end-->
+	
 		<div ng-model="isShowContent" ng-show="isShowContent">
 			<hr class="hrStyle">
 			<input ng-model="template" ng-show="false">
@@ -173,6 +167,5 @@
 	<script data-require="ui-bootstrap@*" data-semver="0.12.1" src="js/ui-bootstrap-tpls-0.12.1.js"></script>
 	<script src="js/echo.min.js"></script>
 	<script src="js/index.js"></script>
-
 </body>
 </html>
