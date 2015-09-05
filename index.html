@@ -7,7 +7,7 @@
 <title>MichaelYgZhang-Home</title>
 <link  rel="stylesheet" href="css/bootstrap-3.3.4-dist/css/bootstrap.css">
 <link  rel="stylesheet" href="css/index.css">
-<link rel="shortcut icon" href="https://raw.githubusercontent.com/MichaelYgZhang/home/gh-pages/images/favicon%20.ico" />
+<link rel="shortcut icon" href="//raw.githubusercontent.com/MichaelYgZhang/home/gh-pages/images/favicon%20.ico" />
 <link rel="stylesheet" href="css/navigation-icons.css"/>
 <link rel="stylesheet" href="css/font-awesome-4.3.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="css/blog.css">
@@ -29,27 +29,17 @@
 					<i class="fa fa-heartbeat"></i><span>About</span>
 				</a>
 			</nav>
-			<!-- /.navbar-collapse -->
 		</div>
 	</nav>
 	<!-- nav end-->
 
 	<div class="container contentClass">
-		<!--<div class="jumbotron myjumbotron">-->
-			<!--<h4 align="center">WE ARE THE WORLD!</h4>-->
-			<!--<h5 align="center">This is my blog!</h5>-->
-			<!--<h5 align="center">WELCOME!</h5>-->
-		<!--</div>-->
-
-
 		<form role="search" >
 			<div class="form-group" >
 				<input  ng-model="searchText" type="search" results="5" class="form-control search rounded" placeholder="search for ..."
 						ng-click="searchClick()" ng-change="filter()" />
 			</div>
 		</form>
-
-
 		<hr class="hrStyle" ng-show="!isShowContent">
 		<!-- show/hide ul start -->
 		<div ng-show="!isShowContent">
@@ -95,6 +85,8 @@
 
 			</div>
 		</div>
+		<!-- show/hide ul end-->
+		
 		<pagination ng-show = "paginationIsShow"
 				ng-model="currentPage"
 				total-items="tempPages"
@@ -107,7 +99,7 @@
 				last-text="尾页"
 				>
 		</pagination>
-		<!-- show/hide ul end-->
+	
 		<div ng-model="isShowContent" ng-show="isShowContent">
 			<hr class="hrStyle">
 			<input ng-model="template" ng-show="false">
@@ -140,10 +132,9 @@
 				<div class="modal-footer">
 					<button type="button" class="btn btn-warning" data-dismiss="modal">关闭</button>
 				</div>
-			</div><!-- /.modal-content -->
-		</div><!-- /.modal -->
+			</div>
+		</div>
 	</div>
-
 	<!-- 模态框（Modal） end-->
 
 	<!-- 模态框（Modal） myInfo start-->
@@ -163,8 +154,8 @@
 				<div class="modal-footer">
 					<button type="button" class="btn btn-info" data-dismiss="modal">谢谢</button>
 				</div>
-			</div><!-- /.modal-content -->
-		</div><!-- /.modal -->
+			</div>
+		</div>
 	</div>
 	<!-- 模态框（Modal） myInfo end-->
 
@@ -176,6 +167,5 @@
 	<script data-require="ui-bootstrap@*" data-semver="0.12.1" src="js/ui-bootstrap-tpls-0.12.1.js"></script>
 	<script src="js/echo.min.js"></script>
 	<script src="js/index.js"></script>
-
 </body>
 </html>

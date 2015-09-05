@@ -6,11 +6,11 @@
 
 .menu-navigation-icons a {
     display: inline-block;
-    color: #ffffff;
+    color: #3e8fb1;
     /*background-color: #ac2925;*/
     font-size: 20px;
     font-weight: bold;
-    box-shadow: 0px 0px 0px 0 rgba(0, 0, 0, 0.1);
+    /*box-shadow: 0px 0px 0px 0 rgba(0, 0, 0, 0.1);*/
     text-transform: uppercase;
     text-decoration: none;
     white-space: nowrap;
@@ -23,6 +23,7 @@
     -moz-opacity:0.7;
     -khtml-opacity: 0.7;
     opacity: 0.7;
+    color:brown;
 }
 
 .menu-navigation-icons a i {
@@ -35,7 +36,7 @@
     font-size: 11px;
     font-weight: bold;
     line-height: 0;
-    text-shadow: 1px 2px 2px black;
+    /*text-shadow: 1px 2px 2px black;*/
 }
 
 /* Menu colors */
