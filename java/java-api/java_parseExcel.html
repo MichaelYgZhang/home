@@ -1,0 +1,19 @@
+<div class="blog">
+    <h3>Java解析Excel文件(解决异常：Package should contain a content type part [M1.13])</h3>
+    <p>
+        Excel解析有HSSF(.xls文件)和XSSF(.xlsx文件)两种方式,其中使用XSSF方式解析后缀为.xlsx文件时，注意如果出现
+        Package should contain a content type part [M1.13]的错误时,可以使用以下方式进行解析即可解决问题。
+    </p>
+    <pre>
+    //poi使用核心接口以及实现类
+    a）Workbook、Sheet、Row、Cell等为接口；
+    b）HSSFWorkbook、HSSFSheet、HSSFRow、HSSFCell(xls)为97-2003版本对应的处理实现类；
+    c）XSSFWorkbook、XSSFSheet、XSSFRow、XSSFCell(xlsx)为2007+版本对应的处理实现类；
+
+    InputStream ins = new FileInputStream(new File(file));
+    Workbook wb = WorkbookFactory.create(ins);
+    ins.close();
+    Sheet sheet = wb.getSheetAt(0);//获取地一个表单
+    // TODO iterator row and cell
+    </pre>
+</div>
