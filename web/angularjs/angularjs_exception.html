@@ -4,8 +4,7 @@
   <h4>1:向后台传参太多会出现Exception:HTTP 413error!</h4>
 <pre>
   //angularjs 方式，参数实体比较多时，会出现HTTP 413错误
-  $resource(roleRes.saveJsonUrl,{paramData:parameterData},
-  	actions).save(function(retData){
+  $resource(roleRes.saveJsonUrl,{paramData:parameterData},actions).save(function(retData){
 	  alert(retData.message);   
 	});
   //解决方案：ajax 方式  
