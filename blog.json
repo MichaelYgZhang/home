@@ -32,7 +32,7 @@
   {
     "ahref":"web/angularjs/angularjs_controller_communication.html",
     "imgsrc":"images/angularjs-logo.jpg",
-    "titletext":"AngularJS-Controller-Communication",
+    "titletext":"AngularJS-Controller通信",
     "spantext":"简介:AngularJS-Controller之间的通信机制。"
   },
   {
@@ -74,7 +74,25 @@
   {
     "ahref":"web/js/read-book-note/js_patterns003.html",
     "imgsrc":"images/js-logo.jpg",
-    "titletext":"JavaScript笔记-直接量&构造函数",
+    "titletext":"JavaScript-直接量&构造函数",
     "spantext":"简介:根据《JavaScript Patterns》编写此读书笔记.读书笔记 第三章 直接量和构造函数。"
+  },
+  {
+    "ahref":"java/spring-study/spring-note.html",
+    "imgsrc":"images/spring-logo.jpg",
+    "titletext":"Java-Spring学习笔记",
+    "spantext":"简介:日常工作学习中有关 Spring 笔记。"
+  },
+  {
+    "ahref":"java/java-api/java_parseExcel.html",
+    "imgsrc":"images/java-logo.jpg",
+    "titletext":"Java_parseExcel_.xlsx",
+    "spantext":"简介:使用 poi.jar 解析后缀为.xlsx的Excel文件时,会出现异常,提供解决方案"
+  },
+  {
+    "ahref":"web/angularjs/angularjs_exception.html",
+    "imgsrc":"images/angularjs-logo.jpg",
+    "titletext":"AngularJS-Exception",
+    "spantext":"简介:AngularJS-使用过程中的问题。"
   }
 ]
