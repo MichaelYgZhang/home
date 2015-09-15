@@ -98,7 +98,7 @@
   {
     "ahref":"java/java-utils/ExcelUtils.html",
     "imgsrc":"images/java-logo.jpg",
-    "titletext":"Java_ExcelImportUtils",
+    "titletext":"Java_ExcelUtils",
     "spantext":"简介:使用 poi.jar 解析.xls,.xlsx文件并且入库。使用jxl.jar导出数据到excel文件中。"
   }
 ]
