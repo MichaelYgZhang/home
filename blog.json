@@ -96,7 +96,7 @@
     "spantext":"简介:AngularJS-使用过程中的问题。"
   },
   {
-    "ahref":"java/java-utils/ExcelImportUtils.html",
+    "ahref":"java/java-utils/ExcelUtils.html",
     "imgsrc":"images/java-logo.jpg",
     "titletext":"Java_ExcelImportUtils",
     "spantext":"简介:使用 poi.jar 解析.xls,.xlsx文件并且入库。"
