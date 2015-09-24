@@ -59,6 +59,7 @@ HTML5的技术内容尽量不要出现css，java，tools字眼，以免搜索功
 * TODO 记录万能excel导入数据库中过程，mybatis动态执行sql
 * 2015-9-12 已完成。
 * TODO 2015-9-17 更新,添加根据数据库表字段属性进行对xml文件模板对象以及excel数据进行校验。
+* TODO 添加页面简历2015-9-25
 
 
 ####[博客地址](http://michaelygzhang.github.io/home/)
