@@ -61,6 +61,7 @@ HTML5的技术内容尽量不要出现css，java，tools字眼，以免搜索功
 * TODO 2015-9-17 更新,添加根据数据库表字段属性进行对xml文件模板对象以及excel数据进行校验。
 * TODO 添加页面简历2015-9-25  
 * 2015-9-27  word版简历完成 
+* 2015-9-29  十一计划制定完成
 
 
 ####[博客地址](http://michaelygzhang.github.io/home/)
