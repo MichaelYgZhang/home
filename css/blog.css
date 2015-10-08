@@ -15,6 +15,10 @@
     color: navy;
     font-weight: bold;
 }
+.blog h5{
+    color:darkred;
+    font-weight: bold;
+}
 .blog a{
     cursor: pointer;
     color: #5bc0de;

@@ -100,5 +100,11 @@
     "imgsrc":"images/java-logo.jpg",
     "titletext":"Java_ExcelUtils",
     "spantext":"简介:使用 poi.jar 解析.xls,.xlsx文件并且入库。使用jxl.jar导出数据到excel文件中。"
+  },
+  {
+    "ahref":"java/java-se/class_life.html",
+    "imgsrc":"images/java-logo.jpg",
+    "titletext":"Java类生命周期",
+    "spantext":"简介:介绍类加载过程(加载，验证，准备，解析，初始化)，以及类加载器的工作原理。"
   }
 ]
