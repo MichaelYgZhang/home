@@ -14,21 +14,19 @@
 
     <h4>(2015-10-11)SpringMVC学习笔记</h4>
 <pre>
-Spring：
-IOC(Inversion of control):
-	DI依赖注入实现了IOC的动态注入机制，Spring容器来管理java bean对象，让一个对象创建不用自己
-	new创建，而是利用反射，动态创建，调用对象。
-AOP(Aspect-Oriented Programming):面向切面编程，
+    Spring：
+    IOC(Inversion of control):
+        DI依赖注入实现了IOC的动态注入机制，Spring容器来管理java bean对象，让一个对象创建不用自己
+        new创建，而是利用反射，动态创建，调用对象。
+    AOP(Aspect-Oriented Programming):面向切面编程，
 
-Spring的目的:让对象之间的关系没有通过代码来关联，都是通过配置类说明管理的(Spring根据这些配置
-	内部通过反射机制去动态组装对象)
-Spring是一个容器，凡是在容器里的对象才会用Spring所提供的服务和功能。
-
-
+    Spring的目的:让对象之间的关系没有通过代码来关联，都是通过配置类说明管理的(Spring根据这些配置
+            内部通过反射机制去动态组装对象)
+    Spring是一个容器，凡是在容器里的对象才会用Spring所提供的服务和功能。
 
 如何使用注解:
 applicationContext.xml中进行配置
-<context:component-scan base-package="cn.gacl.dao.impl,cn.gacl.service.impl,cn.gacl.action"/> //此处多个包，用逗号分隔
+&lt;context:component-scan base-package="cn.gacl.dao.impl,cn.gacl.service.impl,cn.gacl.action"/&gt; //此处多个包，用逗号分隔
 =============================常用注解
 @Controller对应表现层的Bean，也就是Action，如下所示
 @Controller
@@ -69,7 +67,7 @@ private UserService userService;
 
 @Repository对应数据访问层Bean
 @Repository(value="userDao")
-public class UserDaoImpl extends BaseDaoImpl<User> {
+public class UserDaoImpl extends BaseDaoImpl&lt;User&gt; {
     ………
     }
     注入userDao时方法与service类似。
@@ -122,19 +120,19 @@ public class UserDaoImpl extends BaseDaoImpl<User> {
     一：配置web.xml
     1)问题：spring项目中有多个配置文件mvc.xml   dao.xml
     2）解决：在web.xml中
-    <init-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>/WEB-INF/xxx/*.xml</param-value>
+    &lt;init-param>
+    &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+    &lt;param-value&gt;/WEB-INF/xxx/*.xml&lt;/param-value&gt;
         xxx表示xml文件路径    *.xml表示后缀名为xml的任意文件
-    </init-param>
+    &lt;/init-param&gt;
     3）可以使用  逗号分隔
     二：Spring MVC中配置视图解析器
-    <bean class="org.s...f....web.servlet.view.InternalResourceViewResolver">
-        <property  name="prefix" value="/WEB-INF/views"/>                     //前缀
-        <property  name="suffix"   value=".jsp"/>                              //后缀
-    </bean>
+    &lt;bean class="org.s...f....web.servlet.view.InternalResourceViewResolver"&gt;
+        &lt;property  name="prefix" value="/WEB-INF/views"/&gt;                    //前缀
+        &lt;property  name="suffix"   value=".jsp"/&gt;                              //后缀
+    &lt;/bean>
 
-    <annotaion-driven/>标签：
+    &lt;annotaion-driven/&gt;标签：
     这个标签对应的实现类是org.springframework.web.servlet.config.AnnotationDrivenBeanDefinitionParser
     仔细阅读它的注释文档可以很明显的看到这个类的作用。解析这个文档：
     这个类主要注册8个类的实例：
@@ -152,17 +150,16 @@ public class UserDaoImpl extends BaseDaoImpl<User> {
     具体点说就是确定调用哪个controller的哪个方法来处理当前请求。
     6,7,8全部继承AbstractHandlerExceptionResolver，这个类实现HandlerExceptionResolver，
     该接口定义：接口实现的对象可以解决处理器映射、执行期间抛出的异常，还有错误的视图。
-    所以<annotaion-driven/>标签主要是用来帮助我们处理请求映射，决定是哪个controller的哪个方法来处理当前请求，异常处理。
+    所以&lt;annotaion-driven/&gt;标签主要是用来帮助我们处理请求映射，决定是哪个controller的哪个方法来处理当前请求，异常处理。
 
 
-    其中静态文件可以使用<mvc:default-servlet-handler/> 使用默认的Servlet来响应静态文件。
+    其中静态文件可以使用&lt;mvc:default-servlet-handler/&gt; 使用默认的Servlet来响应静态文件。
 
-    <context:component-scan/>标签：
+    &lt;context:component-scan/&gt;标签：
     它的实现类是org.springframework.context.annotation.ComponentScanBeanDefinitionParser.
     把鼠标放在context:component-scan上就可以知道有什么作用的，用来扫描该包内被@Repository @Service @Controller的注解类，
     然后注册到工厂中。并且context:component-scan激活@ required。@ resource,@ autowired、@PostConstruct @PreDestroy
     @PersistenceContext @PersistenceUnit。使得在适用该bean的时候用@Autowired就行了
-
 
 </pre>
 </div>
