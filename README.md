@@ -64,6 +64,7 @@ HTML5的技术内容尽量不要出现css，java，tools字眼，以免搜索功
 * 2015-9-29  十一计划制定完成
 * 2015-10-14 算法学习开始
 * 2015-10-19 制作详细计划  数据结构(1m),算法(3+m),jvm(1m),spring(1m),linux(1m).--offer(3月19日)
+* 2015-10-20 THING IN JAVA (4m)
 
 
 ####[博客地址](http://michaelygzhang.github.io/home/)
