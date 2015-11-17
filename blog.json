@@ -112,5 +112,11 @@
     "imgsrc":"images/spring-logo.jpg",
     "titletext":"SpirngMVC知识点的积累",
     "spantext":"简介:SpringMVC的原理以及相关xml文件的配置，还有相关注解的详解。"
+  },
+  {
+    "ahref":"web/angularjs/angularjs_validate.html",
+    "imgsrc":"images/angularjs-logo.jpg",
+    "titletext":"AngularJS-validate",
+    "spantext":"简介:AngularJS中表单校验的用法。"
   }
 ]
