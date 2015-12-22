@@ -120,9 +120,15 @@
     "spantext":"简介:AngularJS中表单校验的用法。"
   },
   {
-    "ahref":"java/think-in-java/java_container.html",
+    "ahref":"java/think-in-java/container_interface.html",
     "imgsrc":"images/java-logo.jpg",
     "titletext":"Java容器源码阅读(JDK1.8.0_66)----接口部分",
     "spantext":"简介:阅读最新JDK容器部分源码,包括接口部分:Iterator,Collection,List,Set,Queue,Map;实现类:ArrayList,LinkedList,HashSet,HashMap;以及Collections,Arrays工具类"
+  },
+  {
+    "ahref":"java/think-in-java/container_arraylist.html",
+    "imgsrc":"images/java-logo.jpg",
+    "titletext":"Java容器源码阅读(JDK1.8.0_66)----ArrayList",
+    "spantext":"简介:阅读最新JDK容器部分源码,ArrayList源码部分。"
   }
 ]
