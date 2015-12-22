@@ -1,3 +1,265 @@
 <div class="blog">
     <h3>JDK1.8.0_66源码阅读之ArrayList</h3>
+    <pre>
+    源码部分:说明,英文注释的更容易理解,所有copy过来,特殊的地方会用中文标识
+    public class ArrayList&lt;E&gt; extends AbstractList&lt;E&gt;
+        implements List&lt;E&gt;, RandomAccess, Cloneable, java.io.Serializable
+    {
+    private static final int DEFAULT_CAPACITY = 10;//Default initial capacity.
+    //Shared empty array instance used for empty instances.
+    private static final Object[] EMPTY_ELEMENTDATA = {};
+    /**
+     * Shared empty array instance used for default sized empty instances. We
+     * distinguish this from EMPTY_ELEMENTDATA to know how much to inflate when
+     * first element is added.
+     */
+    private static final Object[] DEFAULTCAPACITY_EMPTY_ELEMENTDATA = {};
+    /**
+     * The array buffer into which the elements of the ArrayList are stored.
+     * The capacity of the ArrayList is the length of this array buffer. Any
+     * empty ArrayList with elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA
+     * will be expanded to DEFAULT_CAPACITY when the first element is added.
+     ×是数组转为ArryList集合的一个缓冲数组,当有第一个元素添加时,则集合大小初始化为DEFAULT_CAPACITY
+     */
+    transient Object[] elementData; // non-private to simplify nested class access
+    /**
+     * The size of the ArrayList (the number of elements it contains).
+     ×此处是有数据的大小！
+     */
+    private int size;
+
+    /**
+     * Constructs an empty list with the specified initial capacity.
+     ×如果已知集合大小,最好先设置,避免扩容时的性能消耗
+     */
+    public ArrayList(int initialCapacity) {
+        if (initialCapacity > 0) {
+            this.elementData = new Object[initialCapacity];//要多大,给多大,对象初始化时为null
+        } else if (initialCapacity == 0) {
+            this.elementData = EMPTY_ELEMENTDATA;//先给个空对象数组
+        } else {
+            throw new IllegalArgumentException("Illegal Capacity: "+initialCapacity);
+        }
+    }
+    /**
+     * Constructs an empty list with an initial capacity of ten.
+×××默认初始化对象数组大小为10,分配内存,此处有问题！！！这样做初始化时,如果没有元素加入应该是个空数组[]？？？？
+     */
+    public ArrayList() {
+        this.elementData = DEFAULTCAPACITY_EMPTY_ELEMENTDATA;
+    }
+    /**
+     * Constructs a list containing the elements of the specified
+     * collection, in the order they are returned by the collection's
+     * iterator.
+     ×ArrayList初始化时,可以包含另一个集合,存入的顺序就是,原集合的顺序
+     ×一般可以用来做ArryList集合的Clone,新集合大小与原集合size相同。
+     */
+    public ArrayList(Collection&lt;? extends E&gt; c) {
+        elementData = c.toArray();
+        if ((size = elementData.length) != 0) {
+            // c.toArray might (incorrectly) not return Object[] (see 6260652)
+            if (elementData.getClass() != Object[].class)
+                //此处底层用的是:System.arraycopy(original, 0, copy, 0,Math.min(original.length, newLength));
+                elementData = Arrays.copyOf(elementData, size, Object[].class);
+        } else {
+            // replace with empty array.
+            this.elementData = EMPTY_ELEMENTDATA;
+        }
+    }
+    /**
+     * Trims the capacity of this ArrayList instance to be the
+     * list's current size.  An application can use this operation to minimize
+     * the storage of an ArrayList instance.
+     ×调整数组大小,用来得到最小存储的新集合,
+     ×比如一个新的空参的ArrayList,添加了一个数据后,其size为1,而elementData.length=10
+     ×所以可以通过这个函数来进行调整当前ArrayList的elementData大小也为1,从而达到节约内存的目的
+     */
+    public void trimToSize() {
+        modCount++;
+        if (size < elementData.length) {
+            elementData = (size == 0)
+              ? EMPTY_ELEMENTDATA
+              : Arrays.copyOf(elementData, size);
+        }
+    }
+    /**
+     * Increases the capacity of this ArrayList instance, if
+     * necessary, to ensure that it can hold at least the number of elements
+     * specified by the minimum capacity argument.
+     ×扩展当前ArrayList的最小集合,如果minCapacity>size值,则以minCapacity扩容,否则不进行扩容
+     */
+    public void ensureCapacity(int minCapacity) {
+        ///???????如果elementData不等于[],则说明已经添加值了
+        int minExpand = (elementData != DEFAULTCAPACITY_EMPTY_ELEMENTDATA)
+            // any size if not default element table
+            ? 0
+            // larger than default for default empty table. It's already
+            // supposed to be at default size.
+            : DEFAULT_CAPACITY;
+        if (minCapacity > minExpand) {
+            ensureExplicitCapacity(minCapacity);
+        }
+    }
+    private void ensureCapacityInternal(int minCapacity) {
+        if (elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA) {
+            minCapacity = Math.max(DEFAULT_CAPACITY, minCapacity);//用最大值扩容
+        }
+        ensureExplicitCapacity(minCapacity);
+    }
+    private void ensureExplicitCapacity(int minCapacity) {
+        modCount++;//记录修改次数
+        // overflow-conscious code
+        if (minCapacity - elementData.length > 0)//如果minCapacity比elementData数组的长度大,此时才需要扩容
+            grow(minCapacity);
+    }
+    private static final int MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8;//jvm允许分配的最大内存
+    /**
+     * Increases the capacity to ensure that it can hold at least the
+     * number of elements specified by the minimum capacity argument.
+    × 扩展最小的底层数组的大小
+     */
+    private void grow(int minCapacity) {
+        // overflow-conscious code
+        int oldCapacity = elementData.length;
+        int newCapacity = oldCapacity + (oldCapacity >> 1);//扩容为当前容量的1.5倍
+        if (newCapacity - minCapacity < 0)
+            newCapacity = minCapacity;
+        if (newCapacity - MAX_ARRAY_SIZE > 0)
+            newCapacity = hugeCapacity(minCapacity);
+        // minCapacity is usually close to size, so this is a win:
+        elementData = Arrays.copyOf(elementData, newCapacity);
+    }
+    //确保扩容数组的大小正确
+    private static int hugeCapacity(int minCapacity) {
+        if (minCapacity < 0) // overflow
+            throw new OutOfMemoryError();
+        return (minCapacity > MAX_ARRAY_SIZE) ?
+            Integer.MAX_VALUE :     //0x7fffffff
+            MAX_ARRAY_SIZE;         //0x7fffffff-8
+    }
+    /**
+     * Returns the number of elements in this list.
+     */
+    public int size() {
+        return size;
+    }
+    /**
+     * Returns true if this list contains no elements.
+     */
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    /**
+     * Returns true if this list contains the specified element.
+     * More formally, returns true if and only if this list contains
+     * at least one element e such that
+     * (o==null&nbsp;?&nbsp;e==null&nbsp;:&nbsp;o.equals(e)).
+     ×注意:此处查找时,默认是使用Object的equals(o)方法,所以如果当前集合中不是基本类型
+     ×就需要重写equals()方法,最好也将hashcode()方法也重写,方便使用一些tree集合/Map集合
+     */
+    public boolean contains(Object o) {
+        return indexOf(o) >= 0;
+    }
+    /**
+     * Returns the index of the first occurrence of the specified element
+     * in this list, or -1 if this list does not contain the element.
+     * More formally, returns the lowest index i such that
+     * (o==null&nbsp;?&nbsp;get(i)==null&nbsp;:&nbsp;o.equals(get(i))),
+     * or -1 if there is no such index.
+     */
+    public int indexOf(Object o) {
+        if (o == null) {
+            for (int i = 0; i < size; i++)
+                if (elementData[i]==null)
+                    return i;
+        } else {
+            for (int i = 0; i < size; i++)
+                if (o.equals(elementData[i]))//此处默认比较对象的引用地址,一般需重写equals(o)
+                    return i;
+        }
+        return -1;
+    }
+     //与indexOf类似,这里取的是反向第一个,从后往前遍历
+     public int lastIndexOf(Object o) {
+        if (o == null) {
+            for (int i = size-1; i >= 0; i--)
+                if (elementData[i]==null)
+                    return i;
+        } else {
+            for (int i = size-1; i >= 0; i--)
+                if (o.equals(elementData[i]))
+                    return i;
+        }
+        return -1;
+    }
+    /**
+     * Returns a shallow copy of this ArrayList instance.  (The
+     * elements themselves are not copied.)
+     ×ArrayList的浅层copy,返回当前集合的引用
+     */
+    public Object clone() {
+        try {
+            ArrayList<?> v = (ArrayList<?>) super.clone();
+            v.elementData = Arrays.copyOf(elementData, size);
+            v.modCount = 0;
+            return v;
+        } catch (CloneNotSupportedException e) {
+            // this shouldn't happen, since we are Cloneable
+            throw new InternalError(e);
+        }
+    }
+    /**
+    * Returns an array containing all of the elements in this list
+    * in proper sequence (from first to last element).
+    * -The returned array will be "safe" in that no references to it are
+    * maintained by this list.  (In other words, this method must allocate
+    * a new array).  The caller is thus free to modify the returned array.
+    * -This method acts as bridge between array-based and collection-based  APIs.
+    * @return an array containing all of the elements in this list in  proper sequence
+    ×返回一个原序列的对象数组,新数组的length与当前ArrayList的size相等
+    */
+    public Object[] toArray() {
+       return Arrays.copyOf(elementData, size);
+    }
+    //返回当前参数数组类型的数组集合,实现List接口中的转为泛型数组方法
+    @SuppressWarnings("unchecked")
+    public &lt;T&gt; T[] toArray(T[] a) {
+        if (a.length < size)
+            // Make a new array of a's runtime type, but my contents:
+            return (T[]) Arrays.copyOf(elementData, size, a.getClass());//调整数组大小,以大的为主
+        System.arraycopy(elementData, 0, a, 0, size);
+        if (a.length > size)
+            a[size] = null;//将a数组多出的下标元素初始化为null
+        return a;
+    }
+    // Positional Access Operations
+    //???不解注释,暂时理解为根据指定下标取数组元素
+    @SuppressWarnings("unchecked")
+    E elementData(int index) {
+        return (E) elementData[index];
+    }
+    /**
+     * Returns the element at the specified position in this list.
+     * @throws IndexOutOfBoundsException {@inheritDoc}
+     ×注:可能抛出下标越界异常
+     */
+    public E get(int index) {
+        rangeCheck(index);
+        return elementData(index);
+    }
+    /**
+     * Checks if the given index is in range.  If not, throws an appropriate
+     * runtime exception.  This method does *not* check if the index is
+     * negative: It is always used immediately prior to an array access,
+     * which throws an ArrayIndexOutOfBoundsException if index is negative.
+     ×注:不校验index为负数情况,因为负数情况有jdk自带异常抛出
+     */
+    private void rangeCheck(int index) {
+        if (index >= size)
+            throw new IndexOutOfBoundsException(outOfBoundsMsg(index));
+    }
+    }
+    </pre>
 </div>
