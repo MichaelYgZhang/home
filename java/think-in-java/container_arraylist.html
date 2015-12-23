@@ -128,7 +128,7 @@
         if (newCapacity - MAX_ARRAY_SIZE > 0)
             newCapacity = hugeCapacity(minCapacity);
         // minCapacity is usually close to size, so this is a win:
-        elementData = Arrays.copyOf(elementData, newCapacity);
+        elementData = Arrays.copyOf(elementData, newCapacity);//此处扩容了数组
     }
     //确保扩容数组的大小正确
     private static int hugeCapacity(int minCapacity) {
@@ -260,6 +260,230 @@
         if (index >= size)
             throw new IndexOutOfBoundsException(outOfBoundsMsg(index));
     }
+    /**
+     * Replaces the element at the specified position in this list with
+     * the specified element.
+     * @return the element previously at the specified position
+     ×替换指定位置的元素
+     */
+    public E set(int index, E element) {
+        rangeCheck(index);//校验index是否大于当前size的大小
+        E oldValue = elementData(index);
+        elementData[index] = element;
+        return oldValue;//返回index上的老元素,进行移动
+    }
+    /**
+     * Appends the specified element to the end of this list.
+     */
+    public boolean add(E e) {
+        ensureCapacityInternal(size + 1);  // Increments modCount!!
+        elementData[size++] = e;
+        return true;
+    }
+     /**
+     * Inserts the specified element at the specified position in this
+     * list. Shifts the element currently at that position (if any) and
+     * any subsequent elements to the right (adds one to their indices).
+     ×在指定数组下标位置插入对象,操作完成后当前集合size大小+1,
+     ×并且之前index以及其后面的元素将往后移动一位,所以经常做插入,对性能有消耗
+     */
+    public void add(int index, E element) {
+        rangeCheckForAdd(index);
+        ensureCapacityInternal(size + 1);  // Increments modCount!!,此处还扩容了数组
+        System.arraycopy(elementData, index, elementData, index + 1,size - index);//注:copy的是对象的引用地址,浅层copy
+        elementData[index] = element;
+        size++;
+    }
+    /**
+     * A version of rangeCheck used by add and addAll.
+     ×？？？set(e)/set(index,e)与add(e),add(index,e)..校验时是有区别的？？为何不用同一个下标检验方法
+     ×区别是:rangeCheck(index);不对负值进行校验,为何此处又对负值进行校验了呢？
+     */
+    private void rangeCheckForAdd(int index) {
+        if (index > size || index < 0)
+            throw new IndexOutOfBoundsException(outOfBoundsMsg(index));
+    }
+    /**
+     * Removes the element at the specified position in this list.
+     * Shifts any subsequent elements to the left (subtracts one from their indices).
+     */
+    public E remove(int index) {
+        rangeCheck(index);
+        modCount++;//修改次数+1,对应的size-1
+        E oldValue = elementData(index);//???此处不解,为何还要保存？？
+        int numMoved = size - index - 1;
+        if (numMoved > 0)
+            System.arraycopy(elementData, index+1, elementData, index,numMoved);
+        elementData[--size] = null; // clear to let GC do its work
+        return oldValue;//返回何用？
+    }
+    /**
+     * Removes the first occurrence of the specified element from this list,
+     * if it is present.  If the list does not contain the element, it is
+     * unchanged.  More formally, removes the element with the lowest index
+     */
+    public boolean remove(Object o) {
+        if (o == null) {
+            for (int index = 0; index < size; index++)
+                if (elementData[index] == null) {
+                    fastRemove(index);
+                    return true;
+                }
+        } else {
+            for (int index = 0; index < size; index++)
+                if (o.equals(elementData[index])) {//此处默认比较对象引用地址,所有需要重写比较对象的equals()
+                    fastRemove(index);
+                    return true;
+                }
+        }
+        return false;
+    }
+    /*
+     * Private remove method that skips bounds checking and does not
+     * return the value removed.
+     */
+    private void fastRemove(int index) {
+        modCount++;
+        int numMoved = size - index - 1;
+        if (numMoved > 0)
+            System.arraycopy(elementData, index+1, elementData, index,
+                             numMoved);
+        elementData[--size] = null; // clear to let GC do its work
+    }
+     /**
+     * Removes all of the elements from this list.  The list will
+     * be empty after this call returns.
+     */
+    public void clear() {
+        modCount++;
+        // clear to let GC do its work
+        for (int i = 0; i < size; i++)
+            elementData[i] = null;
+
+        size = 0;
+    }
+    /**
+     * Appends all of the elements in the specified collection to the end of
+     * this list, in the order that they are returned by the
+     * specified collection's Iterator.  The behavior of this operation is
+     * undefined if the specified collection is modified while the operation
+     * is in progress.  (This implies that the behavior of this call is
+     * undefined if the specified collection is this list, and this  list is nonempty.)
+     */
+    public boolean addAll(Collection&lt;? extends E&gt; c) {
+        Object[] a = c.toArray();
+        int numNew = a.length;
+        ensureCapacityInternal(size + numNew);  // Increments modCount
+        System.arraycopy(a, 0, elementData, size, numNew);
+        size += numNew;
+        return numNew != 0;
+    }
+     /**
+     * Inserts all of the elements in the specified collection into this
+     * list, starting at the specified position.  Shifts the element
+     * currently at that position (if any) and any subsequent elements to
+     * the right (increases their indices).  The new elements will appear
+     * in the list in the order that they are returned by the
+     * specified collection's iterator.
+     ×指定index位置插入集合对象,且index其后元素下标增加c集合的大小
+     */
+    public boolean addAll(int index, Collection&lt;? extends E&gt; c) {
+        rangeCheckForAdd(index);
+        Object[] a = c.toArray();
+        int numNew = a.length;
+        ensureCapacityInternal(size + numNew);  // Increments modCount
+        int numMoved = size - index;
+        if (numMoved > 0)
+            System.arraycopy(elementData, index, elementData, index + numNew,
+                             numMoved);
+
+        System.arraycopy(a, 0, elementData, index, numNew);
+        size += numNew;
+        return numNew != 0;
+    }
+    /**
+     * Removes from this list all of the elements whose index is between
+     * {@code fromIndex}, inclusive, and {@code toIndex}, exclusive.
+     * Shifts any succeeding elements to the left (reduces their index).
+     * This call shortens the list by {@code (toIndex - fromIndex)} elements.
+     * (If {@code toIndex==fromIndex}, this operation has no effect.)
+     * @throws IndexOutOfBoundsException if {@code fromIndex} or
+     *         {@code toIndex} is out of range
+     *         ({@code fromIndex < 0 ||
+     *          fromIndex >= size() ||
+     *          toIndex > size() ||
+     *          toIndex < fromIndex})
+     ×删除指定范围内的元素
+     */
+    protected void removeRange(int fromIndex, int toIndex) {
+        modCount++;
+        int numMoved = size - toIndex;
+        System.arraycopy(elementData, toIndex, elementData, fromIndex,
+                         numMoved);
+
+        // clear to let GC do its work
+        int newSize = size - (toIndex-fromIndex);
+        for (int i = newSize; i < size; i++) {
+            elementData[i] = null;
+        }
+        size = newSize;
+    }
+    /**
+     * Constructs an IndexOutOfBoundsException detail message.
+     * Of the many possible refactorings of the error handling code,
+     * this "outlining" performs best with both server and client VMs.
+     */
+    private String outOfBoundsMsg(int index) {
+        return "Index: "+index+", Size: "+size;
+    }
+    /**
+     * Removes from this list all of its elements that are contained in the specified collection.
+    × 删除两集合相等的元素集
+     */
+    public boolean removeAll(Collection&lt;?&gt; c) {
+        Objects.requireNonNull(c);
+        return batchRemove(c, false);
+    }
+    /**
+     * Retains only the elements in this list that are contained in the
+     * specified collection.  In other words, removes from this list all
+     * of its elements that are not contained in the specified collection.
+     ×两集合取交集
+     */
+    public boolean retainAll(Collection&lt;?&gt; c) {
+        Objects.requireNonNull(c);
+        return batchRemove(c, true);
+    }
+
+    private boolean batchRemove(Collection&lt;?&gt; c, boolean complement) {
+        final Object[] elementData = this.elementData;
+        int r = 0, w = 0;
+        boolean modified = false;
+        try {
+            for (; r < size; r++)
+                if (c.contains(elementData[r]) == complement)//此处两种情况,取差集/取交集
+                    elementData[w++] = elementData[r];
+        } finally {
+            // Preserve behavioral compatibility with AbstractCollection,
+            // even if c.contains() throws.
+            if (r != size) {
+                System.arraycopy(elementData, r,
+                                 elementData, w,
+                                 size - r);
+                w += size - r;
+            }
+            if (w != size) {
+                // clear to let GC do its work
+                for (int i = w; i < size; i++)
+                    elementData[i] = null;
+                modCount += size - w;
+                size = w;
+                modified = true;
+            }
+        }
+        return modified;
+    }
+
     }
     </pre>
 </div>
