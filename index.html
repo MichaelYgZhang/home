@@ -78,8 +78,8 @@
 								 style="padding:0px;border:1px solid #beceeb; float:left;">
 						</a>
 						<p>
-							<a ng-click="showContent(everyBlog)"><strong>{{everyBlog.titletext}}</strong><br/></a>
-							<span>{{everyBlog.spantext}}</span>
+							<a ng-click="showContent(everyBlog)"><strong ng-bind="everyBlog.titletext"></strong><br/></a>
+							<span ng-bind="everyBlog.spantext"></span>
 							<br><br><br>
 							<a id="readMore" class="btn btn-info btn-sm" ng-click="showContent(everyBlog)">Read More >></a>
 						</p>
