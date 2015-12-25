@@ -502,7 +502,7 @@
         // Write out array length
         s.writeInt(elementData.length);
         // Write out all elements in the proper order.
-        for (int i=0; i<size; i++)
+        for (int i=0; i < size; i++)
             s.writeObject(elementData[i]);
 
         if (modCount != expectedModCount) {
@@ -521,7 +521,7 @@
         int arrayLength = s.readInt();
         Object[] a = elementData = new Object[arrayLength];
         // Read in all elements in the proper order.
-        for (int i=0; i<size; i++)
+        for (int i=0; i < size; i++)
             a[i] = s.readObject();
     }
     /**
@@ -533,7 +533,7 @@
      * return the element with the specified index minus one.
      ×从指定位置返回当前集合的List迭代器,ListIterator接口继承子Iterator接口
      */
-    public ListIterator<E> listIterator(int index) {
+    public ListIterator&lt;E&gt; listIterator(int index) {
         if (index < 0 || index > size)
             throw new IndexOutOfBoundsException("Index: "+index);
         return new ListItr(index);
@@ -543,7 +543,7 @@
      *The returned list iterator is fail-fast.(快速失效机制,保证在遍历时,不能添加/删除集合元素)
      ×返回当前集合所有元素的List迭代器
      */
-    public ListIterator<E> listIterator() {
+    public ListIterator&lt;E&gt; listIterator() {
         return new ListItr(0);
     }
     /**
@@ -551,13 +551,13 @@
      *The returned iterator is fail-fast.
      × 返回的是实现了Iterator接口的集合
      */
-    public Iterator<E> iterator() {
+    public Iterator&lt;E&gt; iterator() {
         return new Itr();
     }
     /**
      * An optimized version of AbstractList.Itr
      */
-    private class Itr implements Iterator<E> {
+    private class Itr implements Iterator&lt;E&gt; {
         int cursor;       // index of next element to return;指当前Iterator的游标
         int lastRet = -1; // index of last element returned; -1 if no such;
         //将ArrayList集合的修改次数赋值给expectedModCount,每次执行next()时都会先进行校验
@@ -683,13 +683,13 @@
     /*
      * 内部类SubList,对子集的的操作
      */
-     private class SubList extends AbstractList<E> implements RandomAccess {
-        private final AbstractList<E> parent;
+     private class SubList extends AbstractList&lt;E&gt; implements RandomAccess {
+        private final AbstractList&lt;E&gt; parent;
         private final int parentOffset;
         private final int offset;
         int size;
 
-        SubList(AbstractList<E> parent,
+        SubList(AbstractList&lt;E&gt; parent,
                 int offset, int fromIndex, int toIndex) {
             this.parent = parent;
             this.parentOffset = fromIndex;
@@ -759,16 +759,16 @@
             return true;
         }
 
-        public Iterator<E> iterator() {
+        public Iterator&lt;E&gt; iterator() {
             return listIterator();
         }
 
-        public ListIterator<E> listIterator(final int index) {
+        public ListIterator&lt;E&gt; listIterator(final int index) {
             checkForComodification();
             rangeCheckForAdd(index);
             final int offset = this.offset;
 
-            return new ListIterator<E>() {
+            return new ListIterator&lt;E&gt;() {
                 int cursor = index;
                 int lastRet = -1;
                 int expectedModCount = ArrayList.this.modCount;
