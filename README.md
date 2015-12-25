@@ -1,5 +1,5 @@
 ### home
-my blog[0]
+[my blog][0]
 
 
 
