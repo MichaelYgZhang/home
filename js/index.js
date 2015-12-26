@@ -135,7 +135,7 @@ $(document).ready(function(){
 echo.init({
 	offset: 100,
 	throttle: 250,
-	unload: false,
+	unload: true,
 	callback: function (element, op) {
 		//console.log(element, 'has been', op + 'ed')
 	}
