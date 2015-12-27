@@ -6,8 +6,8 @@ app.controller('indexController', function($scope,$http,$timeout) {
 	$scope.temp = [], // 当前页显示 默认每页显示10个()
 	$scope.blogs = [], // 所有数据
 	$scope.currentPage = 1,
-	$scope.numPerPage = 10,//此处修改每页显示多少条数据，同时对应源码中要修改 itemsPerPage
-	$scope.maxSize = 7;
+	$scope.numPerPage = 8,//此处修改每页显示多少条数据，同时对应源码中要修改 itemsPerPage
+	$scope.maxSize = 5;
 
 
 	$http.get('blog.json').success(function(data) {
