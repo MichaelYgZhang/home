@@ -887,17 +887,102 @@
                 throw new ConcurrentModificationException();
         }
     }
-    
+
+    </pre>
+    <h5>JDK1.8-ArrayList新特性</h5>
+    <pre>
+    /*实现了Iterable接口的forEach()方法,用于lambda表达式
+     *  此方法的用法示例:
+     *  list.forEach(o->{System.out.println(o);});
+     */
+    @Override
+    public void forEach(Consumer&lt;? super E&gt; action) {
+        Objects.requireNonNull(action);
+        final int expectedModCount = modCount;
+        @SuppressWarnings("unchecked")
+        final E[] elementData = (E[]) this.elementData;
+        final int size = this.size;
+        for (int i=0; modCount == expectedModCount && i < size; i++) {
+            action.accept(elementData[i]);
+        }
+        if (modCount != expectedModCount) {
+            throw new ConcurrentModificationException();
+        }
+    }
+    /*lambda表达式,重写Collection中的方法
+     *用法:list.removeIf(listTemp -&gt; listTemp.contains("abc"));
+     *     如果集合list中包含有"abc",则返回true,并将list中所有"abc"移除,其后元素向前移动,修改modCount
+     */
+    @Override
+    public boolean removeIf(Predicate&lt;? super E&gt; filter) {
+        Objects.requireNonNull(filter);
+        // figure out which elements are to be removed
+        // any exception thrown from the filter predicate at this stage
+        // will leave the collection unmodified
+        int removeCount = 0;
+        final BitSet removeSet = new BitSet(size);
+        final int expectedModCount = modCount;
+        final int size = this.size;
+        for (int i=0; modCount == expectedModCount && i < size; i++) {
+            @SuppressWarnings("unchecked")
+            final E element = (E) elementData[i];
+            if (filter.test(element)) {
+                removeSet.set(i);
+                removeCount++;
+            }
+        }
+        if (modCount != expectedModCount) {
+            throw new ConcurrentModificationException();
+        }
+        // shift surviving elements left over the spaces left by removed elements
+        final boolean anyToRemove = removeCount > 0;
+        if (anyToRemove) {
+            final int newSize = size - removeCount;
+            for (int i=0, j=0; (i < size) && (j < newSize); i++, j++) {
+                i = removeSet.nextClearBit(i);
+                elementData[j] = elementData[i];
+            }
+            for (int k=newSize; k < size; k++) {
+                elementData[k] = null;  // Let gc do its work
+            }
+            this.size = newSize;
+            if (modCount != expectedModCount) {
+                throw new ConcurrentModificationException();
+            }
+            modCount++;
+        }
+
+        return anyToRemove;
+    }
+    /*  先编写一个实现java.util.Comparator的类,可以用此方法进行自定义的比较排序
+     *  MyComparator c = new MyComparator();;list.sort(c);
+     */
+    @Override
+    @SuppressWarnings("unchecked")
+    public void sort(Comparator&lt;? super E&gt; c) {
+        final int expectedModCount = modCount;
+        Arrays.sort((E[]) elementData, 0, size, c);
+        if (modCount != expectedModCount) {
+            throw new ConcurrentModificationException();
+        }
+        modCount++;
+    }
+    //后续将还会补充jdk1.8有关ArrayList操作的新特性
     }
     </pre>
     <h5>总结:</h5>
-    ArrayList不是线程安全的，只能用在单线程环境下，多线程环境下可以考虑用Collections.synchronizedList(List l)函数
-    返回一个线程安全的ArrayList类，也可以使用concurrent并发包下的CopyOnWriteArrayList类.
-    ArrayList实现了Serializable接口，因此它支持序列化，能够通过序列化传输，实现了RandomAccess接口，支持快速随机访问，
-    实际上就是通过下标序号进行快速访问，实现了Cloneable接口，能被克隆。每个ArrayList实例都有一个容量，
-    该容量是指用来存储列表元素的数组的大小。它总是至少等于列表的大小。随着向ArrayList中不断添加元素，其容量也自动增长。
-    自动增长会带来数据向新数组的重新拷贝，因此，如果可预知数据量的多少，可在构造ArrayList时指定其容量。
-    在添加大量元素前，应用程序也可以使用ensureCapacity操作来增加ArrayList实例的容量，这可以减少递增式再分配的数量。 
-    注意，此实现不是同步的。如果多个线程同时访问一个ArrayList实例，而其中至少一个线程从结构上修改了列表，那么它必须保持外部同步。
-    以及在对判断对象是否相等时,要重写equals()方法！
+    <pre>
+    1.ArrayList不是线程安全的，只能用在单线程环境下，多线程环境下可以考虑用Collections.synchronizedList(List l)函数
+        返回一个线程安全的ArrayList类，也可以使用concurrent并发包下的CopyOnWriteArrayList类.
+    2.ArrayList实现了Serializable接口，因此它支持序列化，能够通过序列化传输，实现了RandomAccess接口，支持快速随机访问，
+        实际上就是通过下标序号进行快速访问。
+    3.实现了Cloneable接口，能被克隆。
+    4.每个ArrayList实例都有一个容量，该容量是指用来存储列表元素的数组的大小。它总是至少等于列表的大小。
+        随着向ArrayList中不断添加元素，其容量也自动增长。自动增长会带来数据向新数组的重新拷贝，
+        因此，如果可预知数据量的多少，可在构造ArrayList时指定其容量。
+    5.在添加大量元素前，应用程序也可以使用ensureCapacity操作来增加ArrayList实例的容量，这可以减少递增式再分配的数量。
+    6.注意，此实现不是同步的。如果多个线程同时访问一个ArrayList实例，
+        而其中至少一个线程从结构上修改了列表，那么它必须保持外部同步。
+    7.在对判断对象是否相等时,要重写equals()方法,最好也将hashcode(),重写,在使用HashMap集合时,有用.
+   </pre>
 </div>

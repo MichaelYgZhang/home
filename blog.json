@@ -130,5 +130,23 @@
     "imgsrc":"images/java-logo.jpg",
     "titletext":"Java容器源码阅读(JDK1.8.0_66)----ArrayList",
     "spantext":"简介:阅读最新JDK容器部分源码,ArrayList源码部分。"
+  },
+  {
+    "ahref":"java/think-in-java/container_hashmap.html",
+    "imgsrc":"images/java-logo.jpg",
+    "titletext":"Java容器源码阅读(JDK1.8.0_66)----HashMap",
+    "spantext":"简介:阅读最新JDK容器部分源码,HashMap源码部分。"
+  },
+  {
+    "ahref":"java/whatIsHash.html",
+    "imgsrc":"images/java-logo.jpg",
+    "titletext":"Hash是什么？用它做什么?如何使用？",
+    "spantext":"简介:理解什么Hash,用它做什么,为什么选它作为HashMap/HashTable/HashSet的存储算法?。"
+  },
+  {
+    "ahref":"java/whatIsArray.html",
+    "imgsrc":"images/java-logo.jpg",
+    "titletext":"深入理解Array",
+    "spantext":"简介:了解Array的底层实现,以及基本的使用方法。"
   }
 ]
