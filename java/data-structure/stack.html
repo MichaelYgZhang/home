@@ -1,0 +1,149 @@
+<div class="blog">
+    <h3>Stack(<a href="https://www.cs.cmu.edu/~adamchik/15-121/lectures/Stacks%20and%20Queues/Stacks%20and%20Queues.html">参考</a>)</h3>
+    <h5>栈就是一种先进后出的数据结构。具体实现看以下代码,代码分为数组实现和链表实现针对数组进行了扩容。</h5>
+    <pre>
+    以下是栈简单功能的实现！
+    /**
+     * 栈的一个泛型接口
+     */
+    public interface IStack&lt;T&gt; {
+        public void push(T t) throws Exception;                     //入栈
+        public T pop() throws Exception;                            //出栈
+        public T peek() throws Exception;
+        public boolean isEmpty();
+    }
+    /**
+     * 数组实现
+     */
+    public class Stack_Array&lt;T&gt; implements IStack&lt;T&gt;{
+        private T[] item;                                           //存储元素的数组
+        private int CAPACITY_INIT = 2 << 2;                         //初始化数组大小8
+        private int capacity = 0;                                   //初始化以后数组的大小
+        private int size = 0;                                       //含有元素的个数
+        private int top = -1;                                       //首元素下标
+
+        public Stack_Array(){
+            item = (T[]) new Object[CAPACITY_INIT];
+            capacity = CAPACITY_INIT;
+        }
+
+        /**
+        * 扩容
+        * @param capacity
+        * @throws Exception
+        */
+        private void resize(int oldcapacity) throws Exception{
+            int newCapacity = oldcapacity + ( oldcapacity >> 1);    //1.5倍
+            if(newCapacity > Integer.MAX_VALUE)
+                newCapacity = Integer.MAX_VALUE;
+            if(newCapacity < 0 )
+                throw new Exception("capacity error!");
+            capacity = newCapacity;
+            item = Arrays.copyOf(item, newCapacity);                //使用新容量进行扩容
+        }
+        /**
+        * 是否要扩容
+        * @return
+        */
+        private boolean isOverflow(){
+            return capacity > size;
+        }
+        /**
+         * push 注意事项:1 容量是否已满,若满,则进行扩容
+         *              2 入栈时top要先+1,以及size+1
+         */
+        @Override
+        public void push(T t) throws Exception {
+            if(isOverflow()){
+                item[++top] = t;
+                size++;
+            }else{
+                resize(size);
+                push(t);
+            }
+        }
+        @Override
+        public T pop() throws Exception{
+            T t = peek();
+            item[top--] = null;
+            size--;
+            return t;
+        }
+        @Override
+        public T peek() throws Exception {
+            if(isEmpty()) throw new Exception("stack empty!");
+            return item[top];
+        }
+        @Override
+        public boolean isEmpty() {
+            return top == -1;
+        }
+        public int size(){
+            return size;
+        }
+    }
+    /**
+     * 栈的链表实现
+     */
+    public class Stack_LinkedList&lt;T&gt; implements IStack&lt;T&gt;{
+        private Node&lt;T&gt; top;          //栈头
+        private int size;
+        @Override
+        public void push(T t) throws Exception {
+            top = new Node&lt;T&gt;(t,top);
+            size++;
+        }
+        @Override
+        public T pop() throws Exception {
+            T data = peek();
+            top = top.next;
+            size--;
+            return data;
+        }
+
+        @Override
+        public T peek() throws Exception {
+            if(isEmpty()) throw new Exception("stack linkedlist is empty!");
+            return top.data;
+        }
+
+        @Override
+        public boolean isEmpty() {
+            return top == null;
+        }
+
+        public String toString() {
+            if (isEmpty())
+            return "[ ]";
+            StringBuffer out = new StringBuffer("[");
+            Node&lt;T&gt; tmp = top;
+            while (tmp != null) {
+                out.append(tmp.data + "  ");
+                tmp = tmp.next;
+            }
+            out.append("]");
+            return out.toString();
+        }
+        public int size(){
+            return size;
+        }
+        /**
+         * 链表节点对象,包含数据data,下一个node节点
+         * @param &lt;T&gt;
+         */
+        private static class Node&lt;T&gt;{
+            public T data;
+            public Node&lt;T&gt; next;
+            public Node(T data){
+                this(data,null);
+            }
+            public Node(T data,Node&lt;T&gt; next){
+                this.data = data;
+                this.next = next;
+            }
+        }
+    }
+
+
+    </pre>
+</div>

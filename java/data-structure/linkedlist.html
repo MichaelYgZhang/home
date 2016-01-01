@@ -1,0 +1,217 @@
+<div class="blog">
+    <h3>LinkedList的简单实现(<a href="https://www.cs.cmu.edu/~adamchik/15-121/lectures/Linked%20Lists/linked%20lists.html">参考</a>)</h3>
+    <h5>链表在做大量(插入/删除)时要比数组有更高的效率,也是基本的数据结构之一,有以下的简单实现。</h5>
+    <pre>
+    /**
+     * 单向链表的实现
+     * 1.添加首节点
+     * 2.添加末端节点
+     * 3.指定位置前插/后插
+     * 4.指定位置删除
+     * 5.遍历实现Iterator接口
+     * 6.深层cloning
+     * @param &lt;T&gt;
+     */
+    public class LinkedList&lt;T&gt;implements Iterable&lt;T&gt;{
+        private Node&lt;T&gt; head;                     //链表头节点
+        public LinkedList(){
+            head = null;
+        }
+        /**
+         * 添加首节点
+         */
+        public void addFirst(T t){
+            head = new Node&lt;T&gt;(t,head);
+        }
+        /**
+         * 添加末端节点
+         */
+        public void addLast(T t){
+            if(head == null)
+                addFirst(t);
+            else{
+                Node&lt;T&gt; temp = head;
+                while(temp.next != null ) temp = temp.next;
+                temp.next = new Node&lt;T&gt;(t,null);
+            }
+        }
+         /**
+         * 指定位置后插
+         */
+        public void insertAfter(T key,T toInsert){
+            Node&lt;T&gt; temp = head;
+            while(temp != null && !temp.data.equals(key))
+                temp = temp.next;
+            if(temp != null)
+                temp.next = new Node&lt;T&gt;(toInsert,temp.next);
+        }
+        /**
+         * 指定位置前插
+         */
+        public void insertBefore(T key,T toInert){
+            if(head == null )return;
+            if(head.data.equals(key)){
+                addFirst(toInert);
+                return;
+            }
+            Node&lt;T&gt; pre = null;
+            Node&lt;T&gt; cur = head;
+            while(cur!=null && !cur.data.equals(key)){
+                pre = cur;
+                cur = cur.next;
+            }
+            while(cur != null){
+                pre.next = new Node&lt;T&gt;(toInert,cur);
+            }
+        }
+        /**
+         * 删除指定位置元素
+         */
+        public void remove(T key){
+            if(head == null)throw new RuntimeException("LinkedList empty!"); //list empty
+            if(head.data.equals(key)){		                                 //del head
+                head = head.next;
+                return;
+            }
+
+            Node&lt;T&gt; pre = null;
+            Node&lt;T&gt; cur = head;
+            while(cur !=null && !cur.data.equals(key)){		                 //node is not in the list
+                pre = cur;
+                cur = cur.next;
+            }
+            if(cur == null) throw new RuntimeException("node is not in the list!");
+
+            pre.next = cur.next;                                             //delete cur node
+        }
+        public Iterator&lt;T&gt; iterator(){
+            return new LinkedListIterator();
+        }
+        /**
+         *  实现迭代器Iterator接口
+         */
+        private class LinkedListIterator implements Iterator&lt;T&gt;{
+            private Node&lt;T&gt; nextNode;
+            public LinkedListIterator(){
+                nextNode = head;
+            }
+            @Override
+            public boolean hasNext() {
+                return nextNode != null;
+            }
+            @Override
+            public T next() {
+                if(!hasNext()) throw new RuntimeException("NoSuchElementException!");
+                T res = nextNode.data;
+                nextNode = nextNode.next;
+                return res;
+            }
+
+            @Override
+            public void remove() {
+                throw new RuntimeException("unsupported this method!");
+            }
+        }
+        /**
+         * deepClone  deepCloneByAddList
+         * 实现:遍历将元素插入链表的末尾
+         */
+        public LinkedList&lt;T&gt; deepCloneByAddList(){
+            LinkedList&lt;T&gt; list = new LinkedList&lt;T&gt;();
+            Node&lt;T&gt; temp = head;
+            while(temp !=null ){
+                list.addLast(temp.data);
+                temp = temp.next;
+            }
+            return list;
+        }
+         /**
+          * deepClone  deepCloneByReverse
+          * 实现:每次插头,然后反转
+          */
+        public LinkedList&lt;T&gt; deepCloneByReverse(){
+            LinkedList&lt;T&gt; list = new LinkedList&lt;T&gt;();
+            Node&lt;T&gt; temp = head;
+                while(temp !=null ){
+                list.addFirst(temp.data);
+                temp = temp.next;
+            }
+            return list.reverse();
+        }
+        /**
+         * 反转链表元素
+         */
+        public LinkedList&lt;T&gt; reverse(){
+            LinkedList&lt;T&gt; list = new LinkedList&lt;T&gt;();
+            Node&lt;T&gt; temp = head;
+                while(temp !=null ){
+                list.addFirst(temp.data);
+                temp = temp.next;
+            }
+            return list;
+        }
+        /**
+         * 最高效深层拷贝链表方法
+         * 实现:1-声明返回链表,然后初始化head,然后遍历,每次插入最后一个新元素
+         */
+        public LinkedList&lt;T&gt; cloneFast(){
+            LinkedList&lt;T&gt; list = new LinkedList&lt;T&gt;();
+            Node&lt;T&gt; temp = head;
+            if(head==null) return null;
+            list.head = new Node&lt;T&gt;(head.data,null);
+            Node&lt;T&gt; tempList = list.head;
+            while(temp.next != null){
+                temp = temp.next;
+                tempList.next = new Node&lt;T&gt;(temp.data,null);
+                tempList = tempList.next;
+            }
+            return list;
+        }
+        public boolean isEmpty(){
+		    return head == null;
+	    }
+        public T getFirst(){
+            if(head != null)
+                return head.data;
+            return null;
+        }
+        public T getLast(){
+		    if(head == null )throw new RuntimeException("linkedlist is empty!");
+		    Node&lt;T&gt; temp = head;
+            while(temp.next != null)
+                temp = temp.next;
+            return temp.data;
+        }
+        public T get(int index){
+            if(index < 0)throw new IndexOutOfBoundsException();
+            Node&lt;T&gt; temp = head;
+            for(int i =0 ; i < index ; i++){
+                temp = temp.next;
+            }
+            if(temp == null)throw new IndexOutOfBoundsException();
+            return temp.data;
+        }
+        /**
+         * 链表节点:数据域 + 下一个节点Node
+         */
+        private static class Node&lt;T&gt;{
+            private T data;
+            private Node&lt;T&gt; next;
+            public Node(T data,Node&lt;T&gt; next){
+                this.data = data;
+                this.next = next;
+            }
+        }
+
+        public String toString() {
+            StringBuffer result = new StringBuffer();
+            for (Object x : this)
+                result.append(x + " ");
+
+            return result.toString();
+        }
+
+    }
+
+    </pre>
+</div>

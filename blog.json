@@ -154,5 +154,24 @@
     "imgsrc":"images/effective-java.jpg",
     "titletext":"Effective Java-第二章",
     "spantext":"简介:Effective Java 第二版,读书笔记--创建和销毁对象"
+  },
+  {
+    "ahref":"java/data-structure/stack.html",
+    "imgsrc":"images/java-logo.jpg",
+    "titletext":"Stack Java Implements",
+    "spantext":"简介:Stack Java实现方式,数组实现+链表实现"
+  },
+  {
+    "ahref":"java/data-structure/queue.html",
+    "imgsrc":"images/java-logo.jpg",
+    "titletext":"Queue Java Implements",
+    "spantext":"简介:Queue Java实现方式,环形队列+扩容"
+  },
+  {
+    "ahref":"java/data-structure/linkedlist.html",
+    "imgsrc":"images/java-logo.jpg",
+    "titletext":"LinkedList Java Implements",
+    "spantext":"简介:LinkedList Java 实现简单的链表数据结构"
   }
+
 ]
