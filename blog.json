@@ -150,7 +150,7 @@
     "spantext":"简介:了解Array的底层实现,以及基本的使用方法。"
   },
   {
-    "ahref":"java/effective-java/effective-1.html",
+    "ahref":"java/effective-java/effective-2.html",
     "imgsrc":"images/effective-java.jpg",
     "titletext":"Effective Java-第二章",
     "spantext":"简介:Effective Java 第二版,读书笔记--创建和销毁对象"
@@ -172,6 +172,18 @@
     "imgsrc":"images/java-logo.jpg",
     "titletext":"LinkedList Java Implements",
     "spantext":"简介:LinkedList Java 实现简单的链表数据结构"
+  },
+  {
+    "ahref":"java/effective-java/effective-3.html",
+    "imgsrc":"images/effective-java.jpg",
+    "titletext":"Effective Java-第三章",
+    "spantext":"简介:Effective Java 第二版,读书笔记--对于所有对象都通用的方法"
+  },
+  {
+    "ahref":"java/algorithms4/algorithms-1.html",
+    "imgsrc":"images/algorithms4.png",
+    "titletext":"Algorithms4--基础",
+    "spantext":"简介:Algorithms4---第一章:基础部分"
   }
 
 ]

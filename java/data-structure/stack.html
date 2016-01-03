@@ -65,7 +65,7 @@
         @Override
         public T pop() throws Exception{
             T t = peek();
-            item[top--] = null;
+            item[top--] = null;                     //释放内存
             size--;
             return t;
         }
@@ -96,7 +96,10 @@
         @Override
         public T pop() throws Exception {
             T data = peek();
-            top = top.next;
+            Node&lt;T&gt; temp = top.next;
+            top.data = null;
+            top.next = null;        //释放引用,交给垃圾回收器
+            top = temp;
             size--;
             return data;
         }
