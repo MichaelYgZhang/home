@@ -1,0 +1,84 @@
+<div class="blog">
+    <h3>Sort-Bubble Sort,Selection Sort,Insertion Sort</h3>
+    <h5>通用工具模板</h5>
+    <pre>
+	public static boolean less(Comparable v, Comparable w){
+		return v.compareTo(w) < 0;
+	}
+	public static void exch(Comparable[] a, int i, int j){
+		Comparable temp = a[i];
+		a[i] = a[j];
+		a[j] = temp;
+	}
+	public static void show(Comparable[] a){
+		for(int i = 0; i < a.length; i++)
+			System.out.print(a[i]+" ");
+		System.out.println();
+	}
+    /**
+     * 判断数组是否正常排序(升序)
+     */
+	public static boolean isSorted(Comparable[] a){
+		for(int i = 1; i < a.length; i++)
+			if(less(a[i], a[i-1])) return false;
+		return true;
+	}
+    </pre>
+    <h5>Bubble Sort</h5>
+    <pre>
+   /**
+    * 以下两种实现方式,可以选择其中一种即可！
+    */
+	public static void bubbleSort(Comparable[] a){
+		int N = a.length;
+		//大的往后走
+		for(int i = 0; i < N -1; i++){
+            //注意j的取值范围,外层每一遍的循环,数组将会得到一个这次遍历最大值放到最后
+			for(int j = 0; j < N -i-1; j++){
+				if(less(a[j+1],a[j]))       //j > j+1 则进行交换
+					exch(a, j, j+1);
+			}
+		}
+		//大的往上走
+		for(int i = 0; i < N; i++){
+			for(int j = i+1;j < N;j++){     // 注意j的范围为i+1
+				if(less(a[i], a[j]))        // j > i 则进行交换  大的往前走
+					exch(a, i, j);
+			}
+		}
+	}
+    </pre>
+    <h5>Selection Sort</h5>
+    <pre>
+    /**
+	 * 首先找到数组中最小的元素,其次,将它和数组的第一个元素交换位置,再次,在剩下的元素中找到最小的元素
+	 * ,将它与数组的第二个元素交换位置,如此往复,不断地选择剩余元素之中最小者。
+	 */
+	public static void selectionSort(Comparable[] a){
+		int N = a.length;
+		for(int i = 0; i < N; i++){
+			int min = i;
+			for(int j = i+1; j < N; j++)
+				if(less(a[j], a[min])) min = j;
+			exch(a, i, min);
+		}
+	}
+    </pre>
+    <h5>Inertion Sort</h5>
+    <pre>
+    /**
+	 * 插入排序,与整理桥牌类似,第一张牌不动,从第二张开始,依次与它之前的比较,找到合适的位置然后交换
+	 * 对于1到N-1之间的每个i,将a[i]与a[0]到a[i-1]中比它小的所有元素依次有序地交换,
+     * 在索引i由左向右变化的过程中,它的左侧元素总是有序的,所以当i到达数组的右端时排序就完成了！
+	 * 对于处理部分有序的数组效率较高！
+	 */
+	public static void insertionSort(Comparable[] a){
+		int N = a.length;
+		for(int i = 1; i < N; i++){
+            //第二个比较条件(less(a[j], a[j-1]))是说后面的是不是小于前面的其中一个,如果是则交换,如此反复向前
+			for(int j = i; j > 0 && less(a[j], a[j-1]); j--)
+				Utils.exch(a, j, j-1);
+		}
+	}
+    </pre>
+</div>
