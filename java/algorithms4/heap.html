@@ -23,10 +23,10 @@
         private static void sink(Comparable[] pq, int k, int N){
             while(2*k <= N){
                 int j = 2*k;
-                if(j < N && less(pq, j, j+1)) j++;		//ture:表示右结点更大,与大的交换
-                if(!less(pq, k, j)) break;				//子结点小于父结点则break
-                exch(pq, k, j);							//上面两个if都false,则与左子结点交换
-                k = j;									// 此时交换后的位置为 j
+                if(j < N && less(pq, j, j+1)) j++;		    //ture:表示右结点更大,与大的交换
+                if(!less(pq, k, j)) break;				    //子结点小于父结点则break
+                exch(pq, k, j);							    //上面两个if都false,则与左子结点交换
+                k = j;									    // 此时交换后的位置为 j
             }
         }
 
