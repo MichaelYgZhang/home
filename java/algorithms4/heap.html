@@ -11,10 +11,10 @@
         public static void sort(Comparable[] pq){
             int N = pq.length;
             for(int k = N/2; k>=1 ;k--)
-                sink(pq, k ,N);                     //堆的构造
+                sink(pq, k ,N);                         //堆的构造
             while(N > 1){
                 exch(pq, 1, N--);
-                sink(pq, 1, N);                     //下沉排序
+                sink(pq, 1, N);                         //下沉排序
             }
         }
          /**
