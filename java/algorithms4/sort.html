@@ -81,4 +81,39 @@
 		}
 	}
     </pre>
+	<h5>归并排序 Merge</h5>
+	<pre>
+	/**
+	  *	将一个数组排序,可以先将它分成两半分别排序,然后将结果归并起来。你将会看到,归并排序
+	  * 能够保证任意长度为N的数组排序所需时间和NlogN成正比,主要缺点:
+	  * 它所需的额外空间和N成正比
+	  */
+	public class Merge {
+		private static Comparable[] aux;				//辅助数组
+		public static void sort(Comparable[] a){
+			aux = new Comparable[a.length];
+			sort(a, 0, a.length-1);
+		}
+		private static void sort(Comparable[] a, int lo, int hi){
+			if(hi <= lo)return;
+			int mid = lo + (hi-lo)/2;
+			sort(a, lo, mid);							//左半边排序
+			sort(a, mid+1, hi);							//右半边排序
+			merge(a, lo, mid, hi);
+		}
+		//将a[lo..mid]和a[mid+1..hi]归并
+		public static void merge(Comparable[] a, int lo, int mid, int hi){
+			int i = lo, j = mid +1;
+			for(int k = lo; k <= hi; k++)
+				aux[k] = a[k];								//将a[lo..hi]复制到aux[lo..hi]
+
+			for(int k = lo; k <= hi; k++){
+				if		(i > mid)						a[k] = aux[j++];
+				else if (j > hi )					 	a[k] = aux[i++];
+				else if (Utils.less(aux[j], aux[i])) 	a[k] = aux[j++];
+				else									a[k] = aux[i++];
+			}
+		}
+	}
+	</pre>
 </div>
