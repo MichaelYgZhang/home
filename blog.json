@@ -140,7 +140,7 @@
   {
     "ahref":"java/whatIsHash.html",
     "imgsrc":"images/java-logo.jpg",
-    "titletext":"Hash是什么？用它做什么?如何使用？",
+    "titletext":"Hash是什么？",
     "spantext":"简介:理解什么Hash,用它做什么,为什么选它作为HashMap/HashTable/HashSet的存储算法?。"
   },
   {
