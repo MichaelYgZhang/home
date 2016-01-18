@@ -202,6 +202,12 @@
     "imgsrc":"images/java-logo.jpg",
     "titletext":"Java容器源码阅读(JDK1.8.0_66)----LinkedList",
     "spantext":"简介:阅读最新JDK容器部分源码,LinkedList源码部分。"
+  },
+  {
+    "ahref":"java/effective-java/effective-3.html",
+    "imgsrc":"images/effective-java.jpg",
+    "titletext":"Effective Java-第4章",
+    "spantext":"简介:Effective Java 第二版,读书笔记--第4章:类和接口"
   }
 
 ]
