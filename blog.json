@@ -12,10 +12,10 @@
     "spantext":"简介:CSS3 工作笔记,内容比较杂。"
   },
   {
-    "ahref":"java/java-api/javaapi_hashmap.html",
+    "ahref":"java/jdk-source-code/container_hashmap-1.7.html",
     "imgsrc":"images/java-logo.jpg",
     "titletext":"JavaJDK1.7-HashMap",
-    "spantext":"简介:JavaJDK学习,通过分析JDK源代码研究 Hash （HashMap）存储机制。"
+    "spantext":"简介:JavaJDK1.7学习,通过分析JDK源代码研究 Hash （HashMap）存储机制。"
   },
   {
     "ahref":"tools/tools_index.html",
@@ -120,19 +120,19 @@
     "spantext":"简介:AngularJS中表单校验的用法。"
   },
   {
-    "ahref":"java/think-in-java/container_interface.html",
+    "ahref":"java/jdk-source-code/container_interface.html",
     "imgsrc":"images/java-logo.jpg",
     "titletext":"Java容器源码阅读(JDK1.8.0_66)----接口部分",
     "spantext":"简介:阅读最新JDK容器部分源码,包括接口部分:Iterator,Collection,List,Set,Queue,Map;实现类:ArrayList,LinkedList,HashSet,HashMap;以及Collections,Arrays工具类"
   },
   {
-    "ahref":"java/think-in-java/container_arraylist.html",
+    "ahref":"java/jdk-source-code/container_arraylist.html",
     "imgsrc":"images/java-logo.jpg",
     "titletext":"Java容器源码阅读(JDK1.8.0_66)----ArrayList",
     "spantext":"简介:阅读最新JDK容器部分源码,ArrayList源码部分。"
   },
   {
-    "ahref":"java/think-in-java/container_hashmap.html",
+    "ahref":"java/jdk-source-code/container_hashmap.html",
     "imgsrc":"images/java-logo.jpg",
     "titletext":"Java容器源码阅读(JDK1.8.0_66)----HashMap",
     "spantext":"简介:阅读最新JDK容器部分源码,HashMap源码部分。"
@@ -196,6 +196,12 @@
     "imgsrc":"images/algorithms4.png",
     "titletext":"Algorithms4--Sort",
     "spantext":"简介:Algorithms4---排序部分-Bubble Sort,Selection sort,Insertion sort,Merge sort,Quick Sort"
+  },
+  {
+    "ahref":"java/jdk-source-code/container_linkedlist.html",
+    "imgsrc":"images/java-logo.jpg",
+    "titletext":"Java容器源码阅读(JDK1.8.0_66)----LinkedList",
+    "spantext":"简介:阅读最新JDK容器部分源码,LinkedList源码部分。"
   }
 
 ]
