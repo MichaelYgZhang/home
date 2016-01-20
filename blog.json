@@ -214,6 +214,12 @@
     "imgsrc":"images/java-logo.jpg",
     "titletext":"Java容器源码阅读(JDK1.8.0_66)----HashTable",
     "spantext":"简介:阅读最新JDK容器部分源码,HashTable源码部分。"
+  },
+  {
+    "ahref":"java/jdk-source-code/container_hashset.html",
+    "imgsrc":"images/java-logo.jpg",
+    "titletext":"Java容器源码阅读(JDK1.8.0_66)----HashSet",
+    "spantext":"简介:阅读最新JDK容器部分源码,HashSet源码部分。"
   }
 
 ]

@@ -260,6 +260,85 @@
         Iterator&lt;E&gt; descendingIterator();         //递减的迭代器
     }
     </pre>
+    <h5>Set 接口</h5>
+    <pre>
+    public interface Set< E> extends Collection< E> {
+        // Query Operations
+        int size();
+        boolean isEmpty();
+        boolean contains(Object o);
+        Iterator< E> iterator();
+        Object[] toArray();
+        < T> T[] toArray(T[] a);
+        // Modification Operations
+        boolean add(E e);
+        boolean remove(Object o);
+        // Bulk Operations
+        boolean containsAll(Collection< ?> c);
+        boolean addAll(Collection< ? extends E> c);
+        boolean retainAll(Collection< ?> c);
+        boolean removeAll(Collection< ?> c);
+        void clear();
+        // Comparison and hashing
+        boolean equals(Object o);
+        int hashCode();
+        @since 1.8
+        @Override
+        default Spliterator< E> spliterator() {
+            return Spliterators.spliterator(this, Spliterator.DISTINCT);
+        }
+    }
+    </pre>
+    <h5>AbstractSet 抽象类</h5>
+    <pre>
+    public abstract class AbstractSet< E> extends AbstractCollection< E> implements Set< E> {
+        protected AbstractSet() {
+        }
+        // Comparison and hashing
+        public boolean equals(Object o) {
+            if (o == this)
+                return true;
 
+            if (!(o instanceof Set))
+                return false;
+            Collection< ?> c = (Collection< ?>) o;
+            if (c.size() != size())
+                return false;
+            try {
+                return containsAll(c);
+            } catch (ClassCastException unused)   {
+                return false;
+            } catch (NullPointerException unused) {
+                return false;
+            }
+        }
+        public int hashCode() {
+            int h = 0;
+            Iterator< E> i = iterator();
+            while (i.hasNext()) {
+                E obj = i.next();
+                if (obj != null)
+                    h += obj.hashCode();
+            }
+            return h;
+        }
+        public boolean removeAll(Collection< ?> c) {
+            Objects.requireNonNull(c);
+            boolean modified = false;
 
+            if (size() > c.size()) {
+                for (Iterator< ?> i = c.iterator(); i.hasNext(); )
+                    modified |= remove(i.next());
+            } else {
+                for (Iterator< ?> i = iterator(); i.hasNext(); ) {
+                    if (c.contains(i.next())) {
+                        i.remove();
+                        modified = true;
+                    }
+                }
+            }
+            return modified;
+        }
+    }
+    </pre>
 </div>
