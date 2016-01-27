@@ -238,6 +238,12 @@
     "imgsrc":"images/algorithms4.png",
     "titletext":"Algorithms4--图",
     "spantext":"简介:Algorithms4---第4章:图"
+  },
+  {
+    "ahref":"java/design-patterns/singleton.html",
+    "imgsrc":"images/dp.jpg",
+    "titletext":"Singleton DP",
+    "spantext":"简介:设计模式之单例模式"
   }
 
 ]
