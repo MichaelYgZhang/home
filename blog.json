@@ -244,6 +244,12 @@
     "imgsrc":"images/dp.jpg",
     "titletext":"Singleton DP",
     "spantext":"简介:设计模式之单例模式"
+  },
+  {
+    "ahref":"java/design-patterns/simple-factory.html",
+    "imgsrc":"images/dp.jpg",
+    "titletext":"Simple Factory DP",
+    "spantext":"简介:设计模式之简单工厂模式"
   }
 
 ]
