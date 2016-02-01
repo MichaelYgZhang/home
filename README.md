@@ -70,6 +70,30 @@ HTML5的技术内容尽量不要出现css，java，tools字眼，以免搜索功
 * 2015-10-30 简易工作日历制作,对公/对私。 
 * 2015-11-20 从做系统,因为我win10更新时，删掉了系统。
 
+### 博客评论功能(只需要注册一个多说账号然后->安装->创建站点->获取代码->通用代码)将代码框中的js(如下所示)放到页面的body标签中即可。
+<pre>
+<code>
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="Michael-Simple-Factory" data-title="simple-factory" data-url="http://michaelygzhang.github.io"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+        var duoshuoQuery = {short_name:"michaelygzhang"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0]
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+     <!-- 多说公共JS代码 end -->
+</code>
+</pre>
+####TODO
+博客评论功能存在的问题:每个需要评论功能的页面都要添加如上的相同的代码块，怎么能把它提取出来而且在评论时能对应到每个页面？？
+
 
 ####[博客地址](http://michaelygzhang.github.io/home/)
 

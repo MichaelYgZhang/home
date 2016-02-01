@@ -250,6 +250,18 @@
     "imgsrc":"images/dp.jpg",
     "titletext":"Simple Factory DP",
     "spantext":"简介:设计模式之简单工厂模式"
+  },
+  {
+    "ahref":"java/design-patterns/oodpp.html",
+    "imgsrc":"images/dp.jpg",
+    "titletext":"OODP 面向对象设计原则",
+    "spantext":"简介:面向对象设计的7条原则。"
+  },
+  {
+    "ahref":"java/design-patterns/abstract-factory.html",
+    "imgsrc":"images/dp.jpg",
+    "titletext":"abstract-factory 抽象工厂",
+    "spantext":"简介:面向对象设计之抽象工厂模式。"
   }
 
 ]
