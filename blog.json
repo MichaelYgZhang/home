@@ -268,6 +268,18 @@
     "imgsrc":"images/dp.jpg",
     "titletext":"abstract-factory DP",
     "spantext":"简介:面向对象设计之抽象工厂模式。"
+  },
+  {
+    "ahref":"java/design-patterns/builder.html",
+    "imgsrc":"images/dp.jpg",
+    "titletext":"Builder DP",
+    "spantext":"简介:面向对象设计之建造者模式。"
+  },
+  {
+    "ahref":"java/design-patterns/prototype.html",
+    "imgsrc":"images/dp.jpg",
+    "titletext":"Prototype DP",
+    "spantext":"简介:面向对象设计之原型链模式。"
   }
 
 ]

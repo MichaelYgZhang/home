@@ -63,3 +63,7 @@
     word-wrap: break-word!important;    /*连续字符换行*/
     /*white-space:normal!important;*/    /*忽略空白，进行换行*/
 }
+.blog img{
+    width: 1140px;
+    height: 300px;
+}
