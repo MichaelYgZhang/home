@@ -1,3 +1,48 @@
 <div class="blog">
     <h3>Singleton 单例设计模式</h3>
+    <pre>
+    /**
+     *	1 	饿汉
+     *  2	懒汉
+     *  3	IoDH-Initialization on Demand Holder
+     *  4   枚举 	最佳
+     *
+     */
+    public class Singleton {
+        //1 饿汉
+        private final static Singleton INSTANCE = new Singleton();
+        private Singleton(){}
+        public static Singleton getInstance(){
+            return INSTANCE;
+        }
+
+        //2 懒汉	注意此处多线程的控制
+        private static volatile Singleton INSTANCE1 = null;
+        public static Singleton getInstance1(){
+            if(INSTANCE1 == null){
+                synchronized (Singleton.class) {
+                    if(INSTANCE1 == null){
+                        INSTANCE1 = new Singleton();
+                    }
+                }
+            }
+            return INSTANCE1;
+        }
+
+        //3 IoDH 内部类方式
+        private static class Inner{
+            private final static Singleton INSTANCE2 = new Singleton();
+        }
+        public static Singleton getInstance2(){
+            return Inner.INSTANCE2;
+        }
+    }
+    //4 enum	最佳方式
+    enum SingletonEnum{
+        INSTANCE;
+        public static SingletonEnum getInstance(){
+            return INSTANCE;
+        }
+    }
+    </pre>
 </div>
