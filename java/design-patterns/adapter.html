@@ -1,0 +1,170 @@
+<div class="blog">
+    <h3>结构型模式(Structural Pattern)之 适配器模式(Adapter DP)</h3>
+    <p>
+        结构型模式概述:
+        结构型模式(Structural Pattern)描述如何将类或者对象结合在一起形成更大的结构，就像搭积木，
+        可以通过简单积木的组合形成复杂的、功能更为强大的结构。
+    </p>
+    <p>
+        结构型模式可以分为类结构型模式和对象结构型模式：类结构型模式关心类的组合，
+        由多个类可以组合成一个更大的系统，在类结构型模式中一般只存在继承关系和实现关系。
+        对象结构型模式关心类与对象的组合，通过关联关系使得在一个类中定义另一个类的实例对象，
+        然后通过该对象调用其方法。根据“合成复用原则”，在系统中尽量使用关联关系来替代继承关系，因此大部分结构型模式都是对象结构型模式。
+    </p>
+    <h5>结构型模式简介</h5>
+    <table class="table table-bordered">
+        <tr>
+            <th>模式名称</th>
+            <th>使用频率</th>
+        </tr>
+        <tr>
+            <td>适配器模式(Adapter)</td>
+            <td>****</td>
+        </tr>
+        <tr>
+            <td>桥接模式(Bridge)</td>
+            <td>***</td>
+        </tr>
+        <tr>
+            <td>组合模式(Composite)</td>
+            <td>****</td>
+        </tr>
+        <tr>
+            <td>装饰模式(Decorator)</td>
+            <td>***</td>
+        </tr>
+        <tr>
+            <td>外观模式(Facade)</td>
+            <td>*****</td>
+        </tr>
+        <tr>
+            <td>享元模式(Flyweight)</td>
+            <td>*</td>
+        </tr>
+        <tr>
+            <td>代理模式(Proxy)</td>
+            <td>****</td>
+        </tr>
+    </table>
+    <pre>
+    适配器模式定义(Adapter Pattern):将一个接口转换成客户希望的另一个接口，适配器模式使接口不兼容的那些类可以一起工作，
+                                  其别名为包装器(Wrapper)。适配器模式既可以作为类结构型模式，也可以作为对象结构型模式。
+
+    适配器模式包含如下角色：
+                        Target：目标抽象类
+                        Adapter：适配器类
+                        Adaptee：适配者类
+                        Client：客户类
+        
+    </pre>
+    <img src="http://imgs.g4estatic.com/designpattern/gof/Adapter.png">
+    <h5>举例:使用适配器模式来重用算法库中的算法</h5>
+    <pre>
+    public interface CollectionOperation {
+        public void sort();
+        public void search();
+    }
+
+    public class QuickSort {
+        public void sort(){
+            System.out.println("QuickSort!!");
+        }
+    }
+    public class SelectionSort {
+        public void sort(){
+            System.out.println("SelectionSort!");
+        }
+    }
+    public class BinarySearch {
+        public void search(){
+            System.out.println("BinarySearch!");
+        }
+    }
+
+    public class SelectionBinaryAdapter implements CollectionOperation{
+        private SelectionSort ss;
+        private BinarySearch bs;
+        public SelectionBinaryAdapter(){
+            ss = new SelectionSort();
+            bs = new BinarySearch();
+        }
+        @Override
+        public void sort() {
+            ss.sort();
+        }
+        @Override
+        public void search() {
+            bs.search();
+        }
+    }
+    public class QuickBinaryAdapter implements CollectionOperation{
+        private QuickSort qs;
+        private BinarySearch bs;
+        public QuickBinaryAdapter(){
+            qs = new QuickSort();
+            bs = new BinarySearch();
+        }
+        @Override
+        public void sort() {
+            qs.sort();
+        }
+
+        @Override
+        public void search() {
+            bs.search();
+        }
+
+    }
+
+//		CollectionOperation co = new QuickBinaryAdapter();
+		CollectionOperation co = new SelectionBinaryAdapter();
+		co.sort();
+		co.search();
+    注:实际开发时采用XML配置文件方式+Java反射创建对象，如果需要使用其他排序算法类和查找算法类，可以增加一个新的适配器类，
+        使用新的适配器来适配新的算法，原有代码无须修改。通过引入配置文件和反射机制，可以在不修改客户端代码的情况下使用新的适配器，
+        无须修改源代码，符合“开闭原则”。
+    </pre>
+    <h5>总结:</h5>
+    <pre>
+    优点:
+        (1) 将目标类和适配者类解耦，通过引入一个适配器类来重用现有的适配者类，无须修改原有结构。
+        (2) 增加了类的透明性和复用性，将具体的业务实现过程封装在适配者类中，对于客户端类而言是透明的，而且提高了适配者的复用性，同一个适配者类可以在多个不同的系统中复用。
+        (3) 灵活性和扩展性都非常好，通过使用配置文件，可以很方便地更换适配器，也可以在不修改原有代码的基础上增加新的适配器类，完全符合“开闭原则”。
+        具体来说，类适配器模式还有如下优点：
+        由于适配器类是适配者类的子类，因此可以在适配器类中置换一些适配者的方法，使得适配器的灵活性更强。
+        对象适配器模式还有如下优点：
+        (1) 一个对象适配器可以把多个不同的适配者适配到同一个目标；
+        (2) 可以适配一个适配者的子类，由于适配器和适配者之间是关联关系，根据“里氏代换原则”，适配者的子类也可通过该适配器进行适配。
+
+    缺点:
+        类适配器模式的缺点如下：
+      (1) 对于Java、C#等不支持多重类继承的语言，一次最多只能适配一个适配者类，不能同时适配多个适配者；
+      (2) 适配者类不能为最终类，如在Java中不能为final类，C#中不能为sealed类；
+      (3) 在Java、C#等语言中，类适配器模式中的目标抽象类只能为接口，不能为类，其使用有一定的局限性。
+      对象适配器模式的缺点如下：
+      与类适配器模式相比，要在适配器中置换适配者类的某些方法比较麻烦。如果一定要置换掉适配者类的一个或多个方法，
+      可以先做一个适配者类的子类，将适配者类的方法置换掉，然后再把适配者类的子类当做真正的适配者进行适配，实现过程较为复杂。
+
+    适用场景:
+        (1) 系统需要使用一些现有的类，而这些类的接口（如方法名）不符合系统的需要，甚至没有这些类的源代码。
+        (2) 想创建一个可以重复使用的类，用于与一些彼此之间没有太大关联的一些类，包括一些可能在将来引进的类一起工作。
+    </pre>
+    <a href="http://blog.csdn.net/lovelion/article/details/17517213">参考</a>
+
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="Michael-Adapter" data-title="Adapter" data-url="http://michaelygzhang.github.io/home/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+        var duoshuoQuery = {short_name:"michaelygzhang"};
+        (function() {
+            var ds = document.createElement('script');
+            ds.type = 'text/javascript';ds.async = true;
+            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            ds.charset = 'UTF-8';
+            (document.getElementsByTagName('head')[0]
+            || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>

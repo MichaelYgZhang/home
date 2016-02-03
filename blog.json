@@ -242,19 +242,19 @@
   {
     "ahref":"java/design-patterns/singleton.html",
     "imgsrc":"images/dp.jpg",
-    "titletext":"Singleton DP",
+    "titletext":"Singleton DP(CreateDP)",
     "spantext":"简介:设计模式之单例模式"
   },
   {
     "ahref":"java/design-patterns/simple-factory.html",
     "imgsrc":"images/dp.jpg",
-    "titletext":"Simple Factory DP",
+    "titletext":"Simple Factory DP(CreateDP)",
     "spantext":"简介:设计模式之简单工厂模式"
   },
   {
     "ahref":"java/design-patterns/factory.html",
     "imgsrc":"images/dp.jpg",
-    "titletext":"Factory DP",
+    "titletext":"Factory DP(CreateDP)",
     "spantext":"简介:设计模式之工厂模式"
   },
   {
@@ -266,20 +266,32 @@
   {
     "ahref":"java/design-patterns/abstract-factory.html",
     "imgsrc":"images/dp.jpg",
-    "titletext":"abstract-factory DP",
+    "titletext":"abstract-factory DP(CreateDP)",
     "spantext":"简介:面向对象设计之抽象工厂模式。"
   },
   {
     "ahref":"java/design-patterns/builder.html",
     "imgsrc":"images/dp.jpg",
-    "titletext":"Builder DP",
+    "titletext":"Builder DP(CreateDP)",
     "spantext":"简介:面向对象设计之建造者模式。"
   },
   {
     "ahref":"java/design-patterns/prototype.html",
     "imgsrc":"images/dp.jpg",
-    "titletext":"Prototype DP",
+    "titletext":"Prototype DP(CreateDP)",
     "spantext":"简介:面向对象设计之原型链模式。"
+  },
+  {
+    "ahref":"java/design-patterns/adapter.html",
+    "imgsrc":"images/dp.jpg",
+    "titletext":"Adapter DP(StructureDP)",
+    "spantext":"简介:面向对象设计之适配器模式。"
+  },
+  {
+    "ahref":"java/design-patterns/bridge.html",
+    "imgsrc":"images/dp.jpg",
+    "titletext":"Bridge DP(StructureDP)",
+    "spantext":"简介:面向对象设计之桥接模式。"
   }
 
 ]
