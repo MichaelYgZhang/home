@@ -292,6 +292,18 @@
     "imgsrc":"images/dp.jpg",
     "titletext":"Bridge DP(StructureDP)",
     "spantext":"简介:面向对象设计之桥接模式。"
+  },
+  {
+    "ahref":"java/design-patterns/composite.html",
+    "imgsrc":"images/dp.jpg",
+    "titletext":"Composite DP(StructureDP)",
+    "spantext":"简介:面向对象设计之组合模式。"
+  },
+  {
+    "ahref":"java/design-patterns/decorator.html",
+    "imgsrc":"images/dp.jpg",
+    "titletext":"Decorator DP(StructureDP)",
+    "spantext":"简介:面向对象设计之装饰模式。"
   }
 
 ]
