@@ -98,6 +98,32 @@ HTML5的技术内容尽量不要出现css，java，tools字眼，以免搜索功
 原因是评论框的内容需要动态显示需要重新加载，而是用ng-repeat的方式加载的都是静态内容，导致评论框无法显示。
 
 
+###博客评论功能添加DISQUS，这是国外的第三方评论插件，目前将多说替换为disqus，但是还是存在相同的问题 TODO
+<script id="dsq-count-scr" src="//michaelzhangblog.disqus.com/count.js" async></script>
+	<div id="disqus_thread"></div>
+	<script>
+		/**
+		 * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+		 * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+		 */
+		var disqus_config = function () {
+			this.page.url = 'http://michaelygzhang.github.io/home/'; // Replace PAGE_URL with your page's canonical URL variable
+			this.page.identifier = 'singleton'; //注意这里要修改 Replace PAGE_IDENTIFIER with your page's unique identifier variable
+		};
+
+		(function() { // DON'T EDIT BELOW THIS LINE
+			var d = document, s = d.createElement('script');
+
+			s.src = '//michaelzhangblog.disqus.com/embed.js';
+
+			s.setAttribute('data-timestamp', +new Date());
+			(d.head || d.body).appendChild(s);
+		})();
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
 ####[博客地址](http://michaelygzhang.github.io/home/)
 
 
