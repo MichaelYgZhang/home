@@ -72,8 +72,6 @@ HTML5的技术内容尽量不要出现css，java，tools字眼，以免搜索功
 
 ### 博客评论功能(只需要注册一个多说账号然后->安装->创建站点->获取代码->通用代码)将代码框中的js(如下所示)放到页面的body标签中即可。注意修改data-thread-key,data-title,data-url
 
-<pre>
-<code>
     <!-- 多说评论框 start -->
     <div class="ds-thread" data-thread-key="Michael-Simple-Factory" data-title="simple-factory" data-url="http://michaelygzhang.github.io"></div>
     <!-- 多说评论框 end -->
@@ -90,8 +88,7 @@ HTML5的技术内容尽量不要出现css，java，tools字眼，以免搜索功
 	})();
 	</script>
      <!-- 多说公共JS代码 end -->
-</code>
-</pre>
+
 ####TODO
 博客评论功能存在的问题:每个需要评论功能的页面都要添加如上的相同的代码块，怎么能把它提取出来而且在评论时能对应到每个页面？？
 第二个问题:先点开第一个有评论功能的页面，能正常显示评论框，而再次点击不同的有评论功能的页面，评论框消失！
