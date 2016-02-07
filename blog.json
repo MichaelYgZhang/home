@@ -304,6 +304,24 @@
     "imgsrc":"images/dp.jpg",
     "titletext":"Decorator DP(StructureDP)",
     "spantext":"简介:面向对象设计之装饰模式。"
+  },
+  {
+    "ahref":"java/design-patterns/facade.html",
+    "imgsrc":"images/dp.jpg",
+    "titletext":"Facade DP(StructureDP)",
+    "spantext":"简介:面向对象设计之外观模式。"
+  },
+  {
+    "ahref":"java/design-patterns/flyweight.html",
+    "imgsrc":"images/dp.jpg",
+    "titletext":"Flyweight DP(StructureDP)",
+    "spantext":"简介:面向对象设计之享元模式。"
+  },
+  {
+    "ahref":"java/design-patterns/proxy.html",
+    "imgsrc":"images/dp.jpg",
+    "titletext":"Proxy DP(StructureDP)",
+    "spantext":"简介:面向对象设计之代理模式。"
   }
 
 ]
