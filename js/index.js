@@ -11,7 +11,7 @@ app.controller('indexController', function($scope,$http,$timeout) {
 
 
 	$http.get('blog.json').success(function(data) {
-		$scope.blogs = data;
+		$scope.blogs = data.reverse();//json 内容反转
 		$scope.$watch('currentPage + numPerPage', function() {
 			var begin = (($scope.currentPage - 1) * $scope.numPerPage),
 				end = begin + $scope.numPerPage;
