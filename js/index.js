@@ -51,7 +51,7 @@ app.controller('indexController', function($scope,$http,$timeout) {
 		$scope.paginationIsShow = false;
 		$scope.isShowContent = true;
 		$scope.template = {url:""+blog.ahref+""};
-		window.location.href = blog.ahref;
+		//window.location.href = blog.ahref;
 	};
 
 
