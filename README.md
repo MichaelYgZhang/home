@@ -95,7 +95,7 @@ HTML5的技术内容尽量不要出现css，java，tools字眼，以免搜索功
 原因是评论框的内容需要动态显示需要重新加载，而是用ng-repeat的方式加载的都是静态内容，导致评论框无法显示。
 
 
-###博客评论功能添加DISQUS，这是国外的第三方评论插件，目前将多说替换为disqus，但是还是存在相同的问题 TODO
+###博客评论功能添加DISQUS，这是国外的第三方评论插件，目前将多说替换为disqus，问题不同:现在的问题是添加disqus的每个页面都会 有评论功能但是无法区分评论的到底是哪个blog，需要用地址栏的方式区分开来 目前未做 TODO
 <script id="dsq-count-scr" src="//michaelzhangblog.disqus.com/count.js" async></script>
 	<div id="disqus_thread"></div>
 	<script>
