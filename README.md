@@ -121,7 +121,7 @@ HTML5的技术内容尽量不要出现css，java，tools字眼，以免搜索功
 
 ###TODO
 * 2016-2-10 下午开始HeadFirst Servlet&JSP read 200pages  yes?no   yes
-* 2016-2-11 201-400 yes?no ??
+* 2016-2-11 HeadFirst Servlet&JSP 201-400 yes?no ??
 
 ####[博客地址](http://michaelygzhang.github.io/home/)
 
