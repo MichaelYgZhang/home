@@ -125,6 +125,9 @@ HTML5的技术内容尽量不要出现css，java，tools字眼，以免搜索功
 * 2016-2-13 finished headfirst servlet&jsp! total=4days! pre=200pages/day!
 * 2016-2-16 HeadFirst DesignPattern 
 * 2016-2-24 HeadFirst DesignPattern unfinished! Spring start!
+* 2016-2-27 Spring in action 1-4 finished!
+
+
 ####[博客地址](http://michaelygzhang.github.io/home/)
 
  
