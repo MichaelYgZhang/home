@@ -123,7 +123,7 @@
     "ahref":"java/jdk-source-code/container_interface.html",
     "imgsrc":"images/java-logo.jpg",
     "titletext":"Java容器源码阅读(JDK1.8.0_66)----接口部分",
-    "spantext":"简介:阅读最新JDK容器部分源码,包括接口部分:Iterator,Collection,List,Set,Queue,Map;实现类:ArrayList,LinkedList,HashSet,HashMap;以及Collections,Arrays工具类"
+    "spantext":"简介:阅读最新JDK容器部分源码,各个容器接口"
   },
   {
     "ahref":"java/jdk-source-code/container_arraylist.html",
