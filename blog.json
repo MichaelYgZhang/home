@@ -105,7 +105,7 @@
     "ahref":"java/java-se/class_life.html",
     "imgsrc":"images/java-logo.jpg",
     "titletext":"Java类生命周期",
-    "spantext":"简介:介绍类加载过程(加载，验证，准备，解析，初始化)，以及类加载器的工作原理。"
+    "spantext":"简介:介绍类加载过程，以及类加载器的工作原理。"
   },
   {
     "ahref":"java/spring-study/springmvc.html",
