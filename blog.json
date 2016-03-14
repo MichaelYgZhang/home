@@ -122,19 +122,19 @@
   {
     "ahref":"java/jdk-source-code/container_interface.html",
     "imgsrc":"images/java-logo.jpg",
-    "titletext":"Java容器源码阅读(JDK1.8.0_66)----接口部分",
+    "titletext":"JDK1.8.0_66--接口部分",
     "spantext":"简介:阅读最新JDK容器部分源码,各个容器接口"
   },
   {
     "ahref":"java/jdk-source-code/container_arraylist.html",
     "imgsrc":"images/java-logo.jpg",
-    "titletext":"Java容器源码阅读(JDK1.8.0_66)----ArrayList",
+    "titletext":"JDK1.8.0_66--ArrayList",
     "spantext":"简介:阅读最新JDK容器部分源码,ArrayList源码部分。"
   },
   {
     "ahref":"java/jdk-source-code/container_hashmap.html",
     "imgsrc":"images/java-logo.jpg",
-    "titletext":"Java容器源码阅读(JDK1.8.0_66)----HashMap",
+    "titletext":"JDK1.8.0_66--HashMap",
     "spantext":"简介:阅读最新JDK容器部分源码,HashMap源码部分。"
   },
   {
