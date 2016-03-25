@@ -318,7 +318,7 @@
     "spantext":"简介:面向对象设计之享元模式。"
   },
   {
-    "ahref":"http://michaelygzhang.github.io/home/java/design-patterns/proxy.html",
+    "ahref":"java/design-patterns/proxy.html",
     "imgsrc":"images/dp.jpg",
     "titletext":"Proxy DP(StructureDP)",
     "spantext":"简介:面向对象设计之代理模式。"
