@@ -6,4 +6,4 @@
 
 ![标题][1]
 
-[1]:https://github.com/github/octicons/blob/master/svg/star.svg
+[1]:https://raw.githubusercontent.com/github/octicons/master/svg/star.svg
