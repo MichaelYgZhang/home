@@ -322,6 +322,12 @@
     "imgsrc":"images/dp.jpg",
     "titletext":"Proxy DP(StructureDP)",
     "spantext":"简介:面向对象设计之代理模式。"
+  },
+  {
+    "ahref":"java/clojure/index.html",
+    "imgsrc":"https://clojure.org/images/clojure-logo-120b.png",
+    "titletext":"Clojure ",
+    "spantext":"简介:clojure 学习笔记。"
   }
 
 ]
