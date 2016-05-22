@@ -129,7 +129,7 @@ HTML5的技术内容尽量不要出现css，java，tools字眼，以免搜索功
 * 2016 -3-3 页面在排版时都个bug 中间会空一些内容。已解决!原因:json对象的titletext太长，不换行就行！dy 
 * 2016-3-19 study spring3 in action!
 * 2016-5-9  zrcf clojure emacs mac ring ....studing!
-
+* 2016-5-22 喝完德威治北太平桥开的药以后运动出汗后有皮肤大片瘙痒的情况！此刻想起wzx，在当今的中国的大环境下只能努力提升自己的实力，才会             有机会抵抗，才有更多的可选择的机会。⛽️！
 
 ####[博客地址](http://michaelygzhang.github.io/home/)
 
