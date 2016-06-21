@@ -45,24 +45,24 @@
     width:493px;
     height:474px;
 }
-.blog pre{
-    /*pre强制换行*/
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #f5f5f5;
+/*.blog pre{*/
+    /*!*pre强制换行*!*/
+    /*border: 1px solid #ccc;*/
+    /*border-radius: 4px;*/
+    /*background-color: #f5f5f5;*/
 
-    color: #333;
-    font-size:18px;
-    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
-    line-height: 1.42857143;
+    /*color: #333;*/
+    /*font-size:18px;*/
+    /*font-family: Menlo, Monaco, Consolas, "Courier New", monospace;*/
+    /*line-height: 1.42857143;*/
 
-    margin-top: 0;
-    margin-bottom: 0;
+    /*margin-top: 0;*/
+    /*margin-bottom: 0;*/
 
-    white-space: pre-wrap!important;    /*保留空白，进行换行*/
-    word-wrap: break-word!important;    /*连续字符换行*/
-    /*white-space:normal!important;*/    /*忽略空白，进行换行*/
-}
+    /*white-space: pre-wrap!important;    !*保留空白，进行换行*!*/
+    /*word-wrap: break-word!important;    !*连续字符换行*!*/
+    /*!*white-space:normal!important;*!    !*忽略空白，进行换行*!*/
+/*}*/
 .blog img{
     width: 1140px;
     height: 300px;
