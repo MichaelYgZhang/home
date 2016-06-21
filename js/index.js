@@ -51,7 +51,15 @@ app.controller('indexController', function($scope,$http,$timeout) {
 		$scope.paginationIsShow = false;
 		$scope.isShowContent = true;
 		$scope.template = {url:""+blog.ahref+""};
+		//TODO 完善留言功能
 		//window.location.href = blog.ahref;
+		// var state = {
+		// 	title: blog.titletext,
+		// 	url: blog.ahref
+		// };
+
+		//window.history.pushState(state, document.title,'https://'+window.location.host+'/'+blog.ahref);
+		// history.pushState(state, "page123", 'https://'+window.location.host+'/'+blog.ahref);
 	};
 
 
