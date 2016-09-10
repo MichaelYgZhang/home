@@ -48,9 +48,14 @@ app.controller('indexController', function($scope,$http,$timeout) {
 	};
 
 	$scope.showContent = function(blog){
-		$scope.paginationIsShow = false;
-		$scope.isShowContent = true;
-		$scope.template = {url:""+blog.ahref+""};
+		if(blog.ahref.indexOf('.md') > 0){
+			window.location.href = blog.ahref;
+			return;
+		}else{
+			$scope.paginationIsShow = false;
+			$scope.isShowContent = true;
+			$scope.template = {url:""+blog.ahref+""};
+		}
 		//TODO 完善留言功能
 		//window.location.href = blog.ahref;
 		// var state = {
@@ -149,5 +154,3 @@ echo.init({
 		//console.log(element, 'has been', op + 'ed')
 	}
 });
-
-
