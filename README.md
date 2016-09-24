@@ -131,6 +131,7 @@ HTML5的技术内容尽量不要出现css，java，tools字眼，以免搜索功
 * 2016-5-9  zrcf clojure emacs mac ring ....studing!
 * 2016-5-22 喝完德威治北太平桥开的药以后运动出汗后有皮肤大片瘙痒的情况！此刻想起wzx，在当今的中国的大环境下只能努力提升自己的实力，才会             有机会抵抗，才有更多的可选择的机会。⛽️！
 * 2016-9-20 很久没有更新，计划10.1把最近半年的知识点做个总结，写blog。
+* 2016-9-25 因写此blog采用html编写，各方面不太便利,比如写blog，扩展性，等不便利。所以最近又重新搭建了一个jekyll ［blog](http://michaelygzhang.github.io)，写blog的旨在总结，顺便分享及交流。
 
 ####[博客地址](http://michaelygzhang.github.io/home/)
 
