@@ -1,0 +1,151 @@
+<div class="blog">
+    <h3>Sort-Bubble Sort,Selection Sort,Insertion Sort,Merge Sort,Quick Sort</h3>
+    <h5>通用工具模板</h5>
+    <pre>
+	public static boolean less(Comparable v, Comparable w){
+		return v.compareTo(w) < 0;
+	}
+	public static void exch(Comparable[] a, int i, int j){
+		Comparable temp = a[i];
+		a[i] = a[j];
+		a[j] = temp;
+	}
+	public static void show(Comparable[] a){
+		for(int i = 0; i < a.length; i++)
+			System.out.print(a[i]+" ");
+		System.out.println();
+	}
+    	/**
+     	* 判断数组是否正常排序(升序)
+     	*/
+	public static boolean isSorted(Comparable[] a){
+		for(int i = 1; i < a.length; i++)
+			if(less(a[i], a[i-1])) return false;
+		return true;
+	}
+    </pre>
+    <h5>Bubble Sort</h5>
+    <pre>
+   	/**
+    	* 以下两种实现方式,可以选择其中一种即可！
+    	*/
+	public static void bubbleSort(Comparable[] a){
+		int N = a.length;
+		//大的往后走
+		for(int i = 0; i < N -1; i++){
+            		//注意j的取值范围,外层每一遍的循环,数组将会得到一个这次遍历最大值放到最后
+			for(int j = 0; j < N -i-1; j++){
+				if(less(a[j+1],a[j]))       	 //j > j+1 则进行交换
+					exch(a, j, j+1);
+			}
+		}
+		//大的往上走
+		for(int i = 0; i < N; i++){
+			for(int j = i+1;j < N;j++){     	// 注意j的范围为i+1
+				if(less(a[i], a[j]))        	// j > i 则进行交换  大的往前走
+					exch(a, i, j);
+			}
+		}
+	}
+    </pre>
+    <h5>Selection Sort</h5>
+    <pre>
+	 /**
+	 * 首先找到数组中最小的元素,其次,将它和数组的第一个元素交换位置,再次,在剩下的元素中找到最小的元素
+	 * ,将它与数组的第二个元素交换位置,如此往复,不断地选择剩余元素之中最小者。
+	 */
+	public static void selectionSort(Comparable[] a){
+		int N = a.length;
+		for(int i = 0; i < N; i++){
+			int min = i;
+			for(int j = i+1; j < N; j++)
+				if(less(a[j], a[min])) min = j;
+			exch(a, i, min);
+		}
+	}
+    </pre>
+    <h5>Inertion Sort</h5>
+    <pre>
+	 /**
+	 * 插入排序,与整理桥牌类似,第一张牌不动,从第二张开始,依次与它之前的比较,找到合适的位置然后交换
+	 * 对于1到N-1之间的每个i,将a[i]与a[0]到a[i-1]中比它小的所有元素依次有序地交换,
+	 * 在索引i由左向右变化的过程中,它的左侧元素总是有序的,所以当i到达数组的右端时排序就完成了！
+	 * 对于处理部分有序的数组效率较高！
+	 */
+	public static void insertionSort(Comparable[] a){
+		int N = a.length;
+		for(int i = 1; i < N; i++){
+            		//第二个比较条件(less(a[j], a[j-1]))是说后面的是不是小于前面的其中一个,如果是则交换,如此反复向前
+			for(int j = i; j > 0 && less(a[j], a[j-1]); j--)
+				exch(a, j, j-1);
+		}
+	}
+    </pre>
+	<h5>归并排序 Merge</h5>
+	<pre>
+	/**
+	  * 将一个数组排序,可以先将它分成两半分别排序,然后将结果归并起来。你将会看到,归并排序
+	  * 能够保证任意长度为N的数组排序所需时间和NlogN成正比,主要缺点:
+	  * 它所需的额外空间和N成正比
+	  */
+	public class Merge {
+		private static Comparable[] aux;			//辅助数组
+		public static void sort(Comparable[] a){
+			aux = new Comparable[a.length];
+			sort(a, 0, a.length-1);
+		}
+		private static void sort(Comparable[] a, int lo, int hi){
+			if(hi <= lo)return;
+			int mid = lo + (hi-lo)/2;
+			sort(a, lo, mid);				//左半边排序
+			sort(a, mid+1, hi);				//右半边排序
+			merge(a, lo, mid, hi);
+		}
+		//将a[lo..mid]和a[mid+1..hi]归并
+		public static void merge(Comparable[] a, int lo, int mid, int hi){
+			int i = lo, j = mid +1;
+			for(int k = lo; k <= hi; k++)
+				aux[k] = a[k];				//将a[lo..hi]复制到aux[lo..hi]
+
+			for(int k = lo; k <= hi; k++){
+				if		(i > mid)		a[k] = aux[j++];
+				else if (j > hi )			a[k] = aux[i++];
+				else if (Utils.less(aux[j], aux[i])) 	a[k] = aux[j++];
+				else					a[k] = aux[i++];
+			}
+		}
+	}
+	</pre>
+	<h5>Quick Sort快速排序</h5>
+	<pre>
+	/**
+	  * 通过一趟排序将要排序的数据分割成独立的两部分，其中一部分的所有数据都比另外一部分的所有数据都要小，
+	  * 然后再按此方法对这两部分数据分别进行快速排序，整个排序过程可以递归进行，以此达到整个数据变成有序序列。
+	  * eg:设要排序的数组是A[0]……A[N-1]，首先任意选取一个数据（通常选用数组的第一个数）作为关键数据，
+	  * 然后将所有比它小的数都放到它前面，所有比它大的数都放到它后面，这个过程称为一趟快速排序。
+	  * 值得注意的是，快速排序不是一种稳定的排序算法，也就是说，多个相同的值的相对位置也许会在算法结束时产生变动.
+	  * 时间复杂度为O(nlogn)
+	  */
+	public class QuickSort&lt;T extends Comparable&lt;? super T&gt;&gt; {
+		public void quickSort(T[] a, int low, int hight){
+			if( low < hight){
+				int i = low, j = hight;
+				T key = a[i];//low位置元素作为一个关键数据
+				while(i < j){
+					while(i < j && Utils.less(key, a[j])){	//高位数据大于key
+						j--;				//向左继续
+					}
+					a[i] = a[j];				//把j位置的元素放到i处
+					while(i < j && Utils.less(a[i], key)){	//i位置元素小于key
+						i++;				//向右继续
+					}
+					a[j] = a[i];				//将i位置的值放后面j处
+				}
+				a[i] = key;					//最后将i处放key值
+				quickSort(a, low, i-1);				//前部分分治  值都小于当前的key
+				quickSort(a, i+1,hight);			//后部分分治  值都大于当前的key
+			}
+		}
+	}	
+	</pre>
+</div>

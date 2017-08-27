@@ -1,0 +1,344 @@
+<div class="blog">
+    <h3>Java容器源码阅读(JDK1.8.0_66)----接口部分</h3>
+    <hr>
+    <img class="java-container" src="https://raw.githubusercontent.com/MichaelYgZhang/home/gh-pages/images/java-container.png">
+    <h4>Collection&lt;E&gt;此接口是Set,List,Queue接口的父接口,集合了这些子接口的所有操作。</h4>
+    <h5>首先是Iterator&lt;E&gt;接口,它是遍历集合的迭代器,有以下方法:</h5>
+    <pre>
+    public interface Iterator&lt;E&gt; {
+        boolean hasNext();//是否还有E元素
+        E next();//获取迭代器中的下一个元素
+        default void remove() {//在迭代器中不允许移除当前迭代器中的元素,如果发生移除元素操作,将发生Exception
+            throw new UnsupportedOperationException("remove");
+        }
+        //jdk1.8 遍历迭代器,支持lambda表达式
+        default void forEachRemaining(Consumer&lt;? super E&gt; action) {
+            Objects.requireNonNull(action);//判断action是否为null,如果是,则抛出异常
+            while (hasNext())
+                action.accept(next());
+        }
+    }
+    </pre>
+    <h5>其次是Collection继承的Iterable接口:</h5>
+    <pre>
+    public interface Iterable&lt;T&gt; {
+        Iterator&lt;T&gt; iterator();//返回一个迭代器
+        //jdk1.8支持lambda表达式
+        default void forEach(Consumer&lt;? super T&gt; action) {
+            Objects.requireNonNull(action);
+            for (T t : this) {
+                action.accept(t);
+            }
+        }
+        //jdk1.8.0_66 Spliterator 另说
+        default Spliterator&lt;T&gt; spliterator() {
+            return Spliterators.spliteratorUnknownSize(iterator(), 0);
+        }
+    }
+    </pre>
+    <h5>最后是Collection接口</h5>
+    <pre>
+    public interface Collection&lt;E&gt; extends Iterable&lt;E&gt; {
+        int size();//返回容器中元素的数量
+	    boolean isEmpty();
+	    Iterator&lt;E&gt; iterator();//返回一个Iterator&lt;E&gt;,可以用来遍历容器中的元素
+        Object[] toArray();//注意:返回对象数组
+        &lt;T&gt; T[] toArray(T[] a);//注意:返回的是当前泛型对象的数组
+        boolean add(E e);
+        boolean remove(Object o);
+        boolean containsAll(Collection&lt;?&gt; c);//如果容器有参数c容器的所有元素，则返回true
+        boolean addAll(Collection&lt;? extends E&gt; c);//添加参数c容器的所有元素
+        boolean removeAll(Collection&lt;?&gt; c);//移除参数中的所有元素
+        default boolean removeIf(Predicate&lt;? super E&gt; filter) {//jdk1.8新特性,按照filter条件进行过滤集合元素
+            Objects.requireNonNull(filter);
+            boolean removed = false;
+            final Iterator&lt;E&gt; each = iterator();
+                while (each.hasNext()) {
+                 if (filter.test(each.next())) {
+                     each.remove();
+                     removed = true;
+                 }
+             }
+             return removed;
+        }
+
+        boolean retainAll(Collection&lt;?&gt; c);//只保存参数中的元素(交集的意思)
+        void clear();
+        boolean equals(Object o);
+        int hashCode();
+        //jdk 1.8 接口默认实现
+        default Spliterator&lt;E&gt; spliterator() {
+             return Spliterators.spliterator(this, 0);
+        }
+        //jdk1.8新特性,实现函数式编程风格,在多核处理器,并发方面更高效
+        default Stream&lt;E&gt; stream() {
+            return StreamSupport.stream(spliterator(), false);
+        }
+        //jdk1.8新特性,并发流,多核机器上极大提高处理集合的速率
+        default Stream&lt;E&gt; parallelStream() {
+             return StreamSupport.stream(spliterator(), true);
+        }
+    }
+    </pre>
+    <h4>List接口,其中有些方法在Collection中已经注释,此处将不在重复</h4>
+    <pre>
+    public interface List&lt;E&gt; extends Collection&lt;E&gt; {
+        int size();//容器存储元素的个数
+        boolean isEmpty();
+        boolean contains(Object o);
+        Iterator&lt;E&gt; iterator();
+        Object[] toArray();
+        &lt;T&gt; T[] toArray(T[] a);
+        boolean add(E e);
+        boolean remove(Object o);
+        boolean containsAll(Collection&lt;?&gt; c);
+        boolean addAll(Collection&lt;? extends E&gt; c);
+        boolean addAll(int index, Collection&lt;? extends E&gt; c);
+        boolean removeAll(Collection&lt;?&gt; c);
+        /*
+         *  jdk1.8.0_66新方法,过滤条件符合filter的元素,如果有符合条件的,则返回true
+         *  例如:strlist.removeIf(list -> list.contains("abc"));
+         *  结果:如果集合中有包含"abc"则返回true,并且strlist集合已经移除该元素。
+         */
+        default boolean removeIf(Predicate<? super E> filter) {
+            Objects.requireNonNull(filter);
+            boolean removed = false;
+            final Iterator&lt;E&gt; each = iterator();
+            while (each.hasNext()) {
+                if (filter.test(each.next())) {
+                    each.remove();
+                    removed = true;
+                }
+            }
+            return removed;
+        }
+        //获取当前集合与参数c集合的交集,当前集合变化,参数c集合不变,如果存在交集返回true
+        boolean retainAll(Collection&lt;?&gt; c);
+        //jdk1.8.0_66新特性,替换所有元素
+        default void replaceAll(UnaryOperator&lt;E&gt; operator) {
+            Objects.requireNonNull(operator);
+            final ListIterator&lt;E&gt; li = this.listIterator();
+                while (li.hasNext()) {
+                li.set(operator.apply(li.next()));
+            }
+        }
+        //jdk1.8.0_66新特性,此处调用的是默认的当前集合的有序迭代器
+        @SuppressWarnings({"unchecked", "rawtypes"})
+        default void sort(Comparator&lt;? extends E&gt; c) {
+            Object[] a = this.toArray();
+            Arrays.sort(a, (Comparator) c);
+            ListIterator&lt;E&gt; i = this.listIterator();
+            for (Object e : a) {
+                i.next();
+                i.set((E) e);
+            }
+        }
+        void clear();
+        boolean equals(Object o);
+        int hashCode();
+        E get(int index);
+        E set(int index, E element);
+        void add(int index, E element);
+        E remove(int index);
+        int indexOf(Object o);
+        int lastIndexOf(Object o);
+        ListIterator&lt;E&gt; listIterator();//获取当前集合的有序迭代器
+        ListIterator&lt;E&gt; listIterator(int index);//获取当前集合的有序迭代器,从index位置开始
+        //获取从fromIndex到toIndex的子集合,范围:[fromIndex,toIndex)或者[fromIndex,toIndex-1]
+        List&lt;E&gt; subList(int fromIndex, int toIndex);
+        @Override
+        default Spliterator&lt;E&gt; spliterator() {
+            return Spliterators.spliterator(this, Spliterator.ORDERED);
+        }
+    }
+    </pre>
+    <h5>有关LinkedList相关接口</h5>
+    <pre>
+    public class LinkedList&lt;E&gt;
+        extends AbstractSequentialList&lt;E&gt;
+        implements List&lt;E&gt;, Deque&lt;E&gt;, Cloneable, java.io.Serializable{//具体实现}
+    下面是除了List接口的其他接口！
+    </pre>
+    <h5>抽象有序类: AbstractSequentialList&lt;E&gt;</h5>
+    <pre>
+    public abstract class AbstractSequentialList&lt;E&gt; extends AbstractList&lt;E&gt; {
+        protected AbstractSequentialList() {
+        }
+        public E get(int index) {
+            try {
+                return listIterator(index).next();  //返回List中指定位置的元素
+            } catch (NoSuchElementException exc) {
+                throw new IndexOutOfBoundsException("Index: "+index);
+            }
+        }
+        //指定位置插入元素并返回index的之前的元素,集合长度不变,只是新元素 替换了老元素
+        public E set(int index, E element) {
+            try {
+                ListIterator&lt;E&gt; e = listIterator(index);
+                E oldVal = e.next();
+                e.set(element);
+                return oldVal;
+            } catch (NoSuchElementException exc) {
+                throw new IndexOutOfBoundsException("Index: "+index);
+            }
+        }
+        //指定位置添加元素,集合长度+1,oldE在element之后
+        public void add(int index, E element) {
+            try {
+                listIterator(index).add(element);
+            } catch (NoSuchElementException exc) {
+                throw new IndexOutOfBoundsException("Index: "+index);
+            }
+        }
+        //删除指定位置元素
+        public E remove(int index) {
+            try {
+                ListIterator&lt;E&gt; e = listIterator(index);
+                E outCast = e.next();
+                e.remove();
+                return outCast;
+            } catch (NoSuchElementException exc) {
+                throw new IndexOutOfBoundsException("Index: "+index);
+            }
+        }
+        //添加参数集合所有元素,从指定位置index开始
+        public boolean addAll(int index, Collection&lt;? extends E&gt; c) {
+            try {
+                boolean modified = false;
+                ListIterator&lt;E&gt; e1 = listIterator(index);
+                Iterator&lt;? extends E&gt; e2 = c.iterator();
+                while (e2.hasNext()) {
+                    e1.add(e2.next());
+                    modified = true;
+                }
+                return modified;
+            } catch (NoSuchElementException exc) {
+                throw new IndexOutOfBoundsException("Index: "+index);
+            }
+        }
+        //返回当前集合的迭代器
+        public Iterator&lt;E&gt; iterator() {
+            return listIterator();
+        }
+        //子类实现的listIterator
+        public abstract ListIterator&lt;E&gt; listIterator(int index);
+    }
+    </pre>
+    <h5>双端队列接口</h5>
+    <pre>
+    public interface Deque&lt;E&gt; extends Queue&lt;E&gt; {
+        // ** Deque methods **
+        void addFirst(E e);
+        void addLast(E e);
+        boolean offerFirst(E e);    //与addFirst几乎相同,只要调用该方法不抛出异常则为true
+        boolean offerLast(E e);     //与offerFirst一样
+        E removeFirst();            //删除并返回first元素,若不存在则throw new NoSuchElementException();
+        E removeLast();
+        E pollFirst();              //返回first元素,并从集合中移除,若空则返回null
+        E pollLast();
+        E getFirst();               //返回first元素,若不存在则throw new NoSuchElementException();
+        E getLast();
+        E peekFirst();              //返回first元素,若空则返回null
+        E peekLast();
+        boolean removeFirstOccurrence(Object o);       //移除第一个出现是o的元素
+        boolean removeLastOccurrence(Object o);        //移除最后一个是o的元素
+        // *** Queue methods ***
+        boolean add(E e);
+        boolean offer(E e);
+        E remove();
+        E poll();
+        E element();
+        E peek();
+        // *** Stack methods ***
+        void push(E e);
+        E pop();
+        // *** Collection methods ***
+        boolean remove(Object o);
+        boolean contains(Object o);
+        public int size();
+        Iterator&lt;E&gt; iterator();                   //正常迭代器
+        Iterator&lt;E&gt; descendingIterator();         //递减的迭代器
+    }
+    </pre>
+    <h5>Set 接口</h5>
+    <pre>
+    public interface Set< E> extends Collection< E> {
+        // Query Operations
+        int size();
+        boolean isEmpty();
+        boolean contains(Object o);
+        Iterator< E> iterator();
+        Object[] toArray();
+        < T> T[] toArray(T[] a);
+        // Modification Operations
+        boolean add(E e);
+        boolean remove(Object o);
+        // Bulk Operations
+        boolean containsAll(Collection< ?> c);
+        boolean addAll(Collection< ? extends E> c);
+        boolean retainAll(Collection< ?> c);
+        boolean removeAll(Collection< ?> c);
+        void clear();
+        // Comparison and hashing
+        boolean equals(Object o);
+        int hashCode();
+        @since 1.8
+        @Override
+        default Spliterator< E> spliterator() {
+            return Spliterators.spliterator(this, Spliterator.DISTINCT);
+        }
+    }
+    </pre>
+    <h5>AbstractSet 抽象类</h5>
+    <pre>
+    public abstract class AbstractSet< E> extends AbstractCollection< E> implements Set< E> {
+        protected AbstractSet() {
+        }
+        // Comparison and hashing
+        public boolean equals(Object o) {
+            if (o == this)
+                return true;
+
+            if (!(o instanceof Set))
+                return false;
+            Collection< ?> c = (Collection< ?>) o;
+            if (c.size() != size())
+                return false;
+            try {
+                return containsAll(c);
+            } catch (ClassCastException unused)   {
+                return false;
+            } catch (NullPointerException unused) {
+                return false;
+            }
+        }
+        public int hashCode() {
+            int h = 0;
+            Iterator< E> i = iterator();
+            while (i.hasNext()) {
+                E obj = i.next();
+                if (obj != null)
+                    h += obj.hashCode();
+            }
+            return h;
+        }
+        public boolean removeAll(Collection< ?> c) {
+            Objects.requireNonNull(c);
+            boolean modified = false;
+
+            if (size() > c.size()) {
+                for (Iterator< ?> i = c.iterator(); i.hasNext(); )
+                    modified |= remove(i.next());
+            } else {
+                for (Iterator< ?> i = iterator(); i.hasNext(); ) {
+                    if (c.contains(i.next())) {
+                        i.remove();
+                        modified = true;
+                    }
+                }
+            }
+            return modified;
+        }
+    }
+    </pre>
+</div>

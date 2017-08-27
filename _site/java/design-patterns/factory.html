@@ -1,0 +1,144 @@
+<div class="blog">
+    <h3>设计模式之 创建型模式 Factory 工厂模式 </h3>
+    <img src="http://img.blog.csdn.net/20130712101002890?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvTG92ZUxpb24=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"/>
+    <pre>
+    案例:依然是按钮案例.与简单工厂模式一样,对其进行进一步的完善。
+    思路:由于简单工厂的工厂类中包含了较多的逻辑，在扩展时造成不便，这违背了面向对象的"开闭原则"，所以需要对工厂类做出抽象接口。
+        每个工厂只生产一个实例对象。
+    public interface IButtonFactory {   //生产按钮的工厂抽象接口
+        public Button createButton();
+    }
+    public class TriangleFactory implements IButtonFactory{ //生产三角按钮实例的工厂
+        @Override
+        public Button createButton() {
+            Button b = new Triangle();
+            //other initialization
+            return b;
+        }
+    }
+    public class CircleFactory implements IButtonFactory{   //生产圆形按钮实例的工厂
+        @Override
+        public Button createButton() {
+            Button b = new Circle();
+            //other initialize
+            return b;
+        }
+    }
+    public abstract class Button {  //按钮抽象类，此处与简单工厂一样不需要修改
+        abstract void show();
+    }
+    public class CircleButton extends Button{   //圆形按钮实例
+        @Override
+        void show() {
+            System.out.println("我是圆形按钮！");
+        }
+    }
+    public class TriangleButton extends Button{ //三角按钮实例
+        @Override
+        void show() {
+            System.out.println("我是三角按钮！");
+        }
+    }
+    @Test
+	public void test1() throws Exception{
+		IButtonFactory ic = new CircleFactory();
+		Button b = ic.createButton();
+		b.show();
+	}
+    注:在实际开发过程中一般不用new的方式进行工厂类的实例，而采用配置文件的方式进行，
+       先读取XML文件对应工厂类实例的字符串，然后使用JAVA反射机制生成对应的对象。如下所示。
+
+    < ?xml version="1.0" encoding="UTF-8"?>
+    < config>
+            < className>CircleFactory< /className>
+    < /config>
+
+    public class XMLUtil {
+    //该方法用于从XML配置文件中提取具体类类名，并返回一个实例对象
+        public static Object getBean() {
+            try {
+                //创建DOM文档对象
+                DocumentBuilderFactory dFactory = DocumentBuilderFactory.newInstance();
+                DocumentBuilder builder = dFactory.newDocumentBuilder();
+                Document doc;
+                doc = builder.parse(new File("config.xml"));
+
+                //获取包含类名的文本节点
+                NodeList nl = doc.getElementsByTagName("className");
+                Node classNode=nl.item(0).getFirstChild();
+                String cName=classNode.getNodeValue();
+
+                //通过类名生成实例对象并将其返回
+                @SuppressWarnings("rawtypes")
+                Class c=Class.forName(cName);
+                Object obj=c.newInstance();
+                return obj;
+            }catch(Exception e) {
+                e.printStackTrace();
+                return null;
+           }
+    }
+
+    @Test
+	public void test2() throws Exception{
+		IButtonFactory ic = (IButtonFactory) XMLUtil.getBean();//采用XML配置方式,获取工厂实例类
+		Button b = ic.createButton();//生产该工厂对应的实例
+		b.show();
+	}
+    </pre>
+    <h5>总结:工厂模式的优缺点。</h5>
+    <pre>
+    工厂模式优点:1 在工厂模式中，工厂方法创建用户所需要的产品，同时隐藏了哪了产品对象实例化的过程细节。
+                  用户只需要关心所需产品对应的工厂即可，不需要知道细节，甚至不需要知道具体产品对象的类名。
+                2 基于工厂角色和产品角色的多态性设计是工厂方法模式的关键。它能够使工厂可以在自主确定创建
+                  何种产品对象，而如何创建这个对象的细节则完全封装在具体工厂内部。工厂方法模式之所以又被
+                  称为多态工厂模式是因为所有的具体工厂类都具有同一抽象父类。
+                3 使用工厂方法模式的另一个优点是在系统中加入新产品时，无须修改抽象工厂和抽象产品提供的接口
+                  ，无须修改客户端代码，也无需修改其他的具体工厂和具体产品，而只要添加一个具体工厂和具体
+                  产品就可以了，这样，系统的可扩展性也就变得非常好，完全符合"开闭原则"。
+
+    工厂模式缺点:1 在添加新产品时，需要编写新的具体产品类，而且还要提供与之对应的具体工厂类，系统中类的个数
+                  将成对增加，在一定程度上增加了系统的复杂度，有更多的类需要编译和运行，会给系统带来额外的开销。
+                2 由于考虑到系统的可扩展性，需要引入抽象层，在客户端代码中均使用抽象层进行定义，增加了系统
+                  的抽象性和理解难度，且在实现时可能需要用到DOM，Java反射等技术，增加了系统实现难度。
+
+    适用场景:1 一个类不知道它所需要的对象类:客户端不需要知道具体产品类的类名，只需要知道所对应的工厂即可，具体的
+              产品对象由具体工厂类所创建，客户端需要知道所创建具体产品的工厂类。
+            2 一个类通过其子类来制定创建那个对象，在工厂方法模式中，对于抽象工厂类只需要提供一个创建产品的接口
+              而其子类来确定具体要创建的对象，利用面向对象的多态性和里氏代换原则，在程序运行时，子类对象将覆盖父类对象
+              从而使得系统更容易阔转。
+            3 将创建对象的任务委托给多个工厂子类中的某一个，(xml方式)客户端在使用时可以无须关系是哪个工厂子类创建子类
+              需要时再动态指定，可以将具体工厂类的类名存储在配置文件或数据库中。
+
+    工厂模式应用:1 JDK中java.util.Collection接口的iterator()方法。
+                2 Java消息服务JMS(Java Messaging Service)
+                3 JDBC的工厂方法。
+                ....
+    </pre>
+
+    <a href="http://blog.csdn.net/lovelion/article/details/17517213">参考</a>
+
+    <script id="dsq-count-scr" src="//michaelzhangblog.disqus.com/count.js" async></script>
+    <div id="disqus_thread"></div>
+    <script>
+        /**
+         * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+         */
+        var disqus_config = function () {
+            this.page.url = 'http://michaelygzhang.github.io/home/'; // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = 'factory'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+
+            s.src = '//michaelzhangblog.disqus.com/embed.js';
+
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+</div>

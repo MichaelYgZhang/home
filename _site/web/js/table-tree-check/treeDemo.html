@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+    <TITLE>Tree table checkbox</TITLE>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="keywords" content="jquery,ui,easy,easyui,web">
+    <meta name="description" content="easyui help you build your web page easily!">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/themes/icon.css">
+</head>
+
+<body onload="init();"  ng-app="app" ng-controller="ctrl">
+<h1>TreeGrid</h1>
+<div>
+    <a id="consle" href="#">ExpandAll</a>
+    <a ng-click="addSelected();" href="#">GO!</a>
+</div>
+<table id="test" title="Folder Browser" style="width:100%;height:250px" >
+</table>
+
+<!-- .widget-box -->
+<div class="widget-box">
+
+    <div class="widget-content nopadding">
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>NAME</th>
+                <th>DATE</th>
+                <th>SIZE</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="data in datas">
+                <td>{{data.id}}</td>
+                <td>{{data.name}}</td>
+                <td>{{data.date}}</td>
+                <td>{{data.size}}</td>
+            </tr>
+            <tr>
+                <td colspan="3">合计</td>
+                <td>{{sizeSum}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div><!-- /.widget-box -->
+
+</body>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.1.min.js"></script>
+<script type="text/javascript" src="http://www.jeasyui.com/easyui/jquery.easyui.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.16/angular.js"></script>
+<script src="tree.js"></script>
+</HTML>

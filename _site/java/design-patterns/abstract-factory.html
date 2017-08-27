@@ -1,0 +1,150 @@
+<div class="blog">
+    <h3>设计模式之抽象工厂 Abstract Facotry</h3>
+    <pre>
+    模式动机:在工厂方法模式中具体工厂负责生产具体的产品，每一个具体工厂对应一种具体产品，工厂方法也具有唯一性，一般情况下，
+        一个具体工厂中只有一个工厂方法或者一组重载的工厂方法。但是有时候我们需要一个工厂可以提供多个产品对象，而不是单一的产品对象.
+    为了更清晰地理解工厂方法模式，需要先引入两个概念：
+        产品等级结构：产品等级结构即产品的继承结构，如一个抽象类是电视机，其子类有海尔电视机、海信电视机、TCL电视机，
+                    则抽象电视机与具体品牌的电视机之间构成了一个产品等级结构，抽象电视机是父类，而具体品牌的电视机是其子类。
+        产品族: 在抽象工厂模式中，产品族是指由同一个工厂生产的，位于不同产品等级结构中的一组产品，如海尔电器工厂生产的海尔电视机、海尔电冰箱，
+               海尔电视机位于电视机产品等级结构中，海尔电冰箱位于电冰箱产品等级结构中。
+    模式动机:当系统所提供的工厂所需生产的具体产品并不是一个简单的对象，而是位于不同产品等级结构中属于不同类型
+            的具体产品时需要使用抽象工厂模式。
+            抽象工厂模式是所有形式的工厂模式中最为抽象和最具一般性的一种形态。
+            抽象工厂模式与工厂方法模式最大的区别是工厂模式针对的是一个产品登记结构而抽象工厂模式则需要面对多个
+            产品等级结构，一个工厂等级结构可以负责多个不同产品等级结构中的产品的创建。当一个工厂等级结构可以
+            创建出分属不同产品等级结构的一个产品族中的所有对象时，抽象工厂比工厂模式更简单，有效。
+    抽象工厂定义:提供一个创建一系列相关或相互依赖的接口，而无需指定它们具体的类。抽象工厂模式又称Kit模式，属于对象创建模式。
+    </pre>
+    <img class="imgh" src="http://img.blog.csdn.net/20130713163800203?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvTG92ZUxpb24=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"/>
+    <h5>举例:换肤功能</h5>
+    <pre>
+    public abstract class Button {  //抽象按钮类
+        abstract void show();
+    }
+    public class GreenButton extends Button{    //绿色按钮实例
+        @Override
+        void show() {
+            System.out.println("GreenButton!");
+        }
+    }
+    public class BlueButton extends Button{ //蓝色按钮实例
+        @Override
+        void show() {
+            System.out.println("BlueButton!");
+        }
+    }
+
+    public abstract class TextField {   //抽象文本框类
+        abstract void show();
+    }
+    public class GreenTextField extends TextField{  //绿色文本框实例
+        @Override
+        void show() {
+            System.out.println("GreenTextField!");
+        }
+    }
+    public class BlueTextField extends TextField{   //蓝色文本框实例
+        @Override
+        void show() {
+            System.out.println("BlueTextField!");
+        }
+    }
+
+    public interface SkinFactory {  //抽象皮肤工厂
+        public Button createButton();   //创建按钮
+        public TextField createTextField(); //创建文本框
+    }
+    public class GreenFactory implements SkinFactory{   //绿色皮肤工厂
+        @Override
+        public Button createButton() {
+            Button b = new GreenButton();
+            //other initialize
+            return b;
+        }
+
+        @Override
+        public TextField createTextField() {
+            TextField tf = new GreenTextField();
+            //other initialize
+            return tf;
+        }
+    }
+    public class BlueFactory implements SkinFactory{    //蓝色皮肤工厂
+        @Override
+        public Button createButton() {
+            Button b = new BlueButton();
+            //other initialize
+            return b;
+        }
+
+        @Override
+        public TextField createTextField() {
+            TextField tf = new BlueTextField();
+            //other initialize
+            return tf;
+        }
+    }
+
+    @Test
+	public void test1(){
+		SkinFactory blue = new BlueFactory();   //实例化蓝色皮肤工厂
+//		SkinFactory green = new GreenFactory();
+		Button b = blue.createButton();
+		TextField tf = blue.createTextField();
+		b.show();
+		tf.show();
+	}
+
+    注:如果需要采用配置文件的方式参考工厂模式，里面有相应的处理。
+    </pre>
+    <h5>总结:</h5>
+    <pre>
+    优点:1 抽象工厂模式隔离了具体类的生成，使得客户并不需要知道什么被创建。由于这种隔离，更换一个具体工厂就变得相对容易。
+          所有的具体工厂都实现了抽象工厂中定义的那些公共接口，因此只需改变具体工厂的实例，就可以在某种程度上改变整个软件系统的行为。
+          另外，应用抽象工厂模式可以实现高内聚低耦合的设计目的，因此抽象工厂模式得到了广泛的应用。
+        2 当一个产品族中的多个对象被设计成一起工作时，它能够保证客户端始终只使用同一个产品族中的对象。
+          这对一些需要根据当前环境来决定其行为的软件系统来说，是一种非常实用的设计模式。
+        3 增加新的具体工厂和产品族很方便，无须修改已有系统，符合“开闭原则”。
+    缺点:1 在添加新的产品对象时，难以扩展抽象工厂来生产新种类的产品，这是因为在抽象工厂角色中规定了所有可能被创建的产品集合，
+           要支持新种类的产品就意味着要对该接口进行扩展，而这将涉及到对抽象工厂角色及其所有子类的修改，显然会带来较大的不便。
+        2 开闭原则的倾斜性（增加新的工厂和产品族容易，增加新的产品等级结构麻烦）
+
+    适用场景:一个系统不应当依赖于产品类实例如何被创建、组合和表达的细节，这对于所有类型的工厂模式都是重要的。
+            系统中有多于一个的产品族，而每次只使用其中某一产品族。
+            属于同一个产品族的产品将在一起使用，这一约束必须在系统的设计中体现出来。
+            系统提供一个产品类的库，所有的产品以同样的接口出现，从而使客户端不依赖于具体实现。
+
+    扩展:“开闭原则”的倾斜性.
+        “开闭原则”要求系统对扩展开放，对修改封闭，通过扩展达到增强其功能的目的。对于涉及到多个产品族与多个产品等级结构的系统，其功能增强包括两方面：
+        (1) 增加产品族：对于增加新的产品族，工厂方法模式很好的支持了“开闭原则”，对于新增加的产品族，只需要对应增加一个新的具体工厂即可，对已有代码无须做任何修改。
+        (2) 增加新的产品等级结构：对于增加新的产品等级结构，需要修改所有的工厂角色，包括抽象工厂类，在所有的工厂类中都需要增加生产新产品的方法，不能很好地支持“开闭原则”。
+        抽象工厂模式的这种性质称为“开闭原则”的倾斜性，抽象工厂模式以一种倾斜的方式支持增加新的产品，它为新产品族的增加提供方便，但不能为新的产品等级结构的增加提供这样的方便。
+    </pre>
+
+    <a href="http://blog.csdn.net/lovelion/article/details/17517213">参考</a>
+
+    <script id="dsq-count-scr" src="//michaelzhangblog.disqus.com/count.js" async></script>
+    <div id="disqus_thread"></div>
+    <script>
+        /**
+         * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+         */
+        var disqus_config = function () {
+            this.page.url = 'http://michaelygzhang.github.io/home/'; // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = 'abstract-factory'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+
+            s.src = '//michaelzhangblog.disqus.com/embed.js';
+
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+</div>

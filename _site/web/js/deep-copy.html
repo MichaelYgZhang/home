@@ -1,0 +1,80 @@
+<div class="blog">
+    <h3>JavaScript深层拷贝数组/对象</h3>
+    首先，数组的拷贝有以下几种方式：<br>
+    <pre>
+        1.用等号直接赋值(错误方法);
+        2.Array.prototype.slice();
+        3.Array.prototype.concat();
+        4.因为slice()和concat()拷贝数组有不足,比如二维,或者多维数据的拷贝,这两个方法无法实习。所以需要自定义一种拷贝方式。
+    </pre>
+    第一种: = 直接赋值。<br>
+    <pre>
+        var oldAry = new Array("1","2","3"),newAry = [];//创建两个数组
+        newAry = oldAry;//赋值
+        oldAry.length = 0;//清空oldAry
+        alert(newAry); //newAry为空
+    </pre>
+    <p>
+        因为javascript分原始类型与引用类型。Array是引用类型。newAry得到的是引用，所以对oldAry的修改会影响到newAry。
+    </p>
+    第二种: Array.prototype.slice();
+    <p>
+        <P>
+        slice()方法把数组中一部分的浅复制（shallow copy）存入一个新的数组对象中，并返回这个新的数组。
+        如果该元素是个对象引用 （不是实际的对象），slice 会拷贝这个对象引用到新的数组里。两个对象引用都引用了同一个对象。
+        如果被引用的对象发生改变，则改变将反应到新的和原来的数组中。
+        </P>
+        <P>
+        对于字符串和数字来说（不是 String 和 Number 对象），slice 会拷贝字符串和数字到新的数组里。
+        在一个数组里修改这些字符串或数字，不会影响另一个数组。
+        </P>
+        <P>如果向两个数组任一中添加了新元素，则另一个不会受到影响。
+        <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/slice">MDN用法详解</a>
+        </P>
+    </p>
+    第三种:Array.prototype.concat();
+    <p>
+
+        将传入的数组或非数组值与原数组合并,组成一个新的数组并返回。
+        <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/concat">MDN用法详解</a>
+    </p>
+    第四种:自定义js方法.
+    <p>
+        通过上面二种方式,是可以实现一维数组的拷贝,但多维数组或者对象中嵌入对象的拷贝还实现不了,下面就是为了弥补他们的缺点,而实现的方式。
+        核心代码。
+    </p>
+
+   <pre>
+            //test data
+           var oldObj ={id:'1',name:{first:'z',last:'yg'},age:'25'};
+           var newObj = {};
+           var oldAry = ['1','2','3',['a','b','c'],'4'];
+           var newAry = [];
+
+           //对象深层copy,复制后修改新的对象(数组)，不会对旧对象(数组)产生影响
+           var deepCopy = function(source){
+                var result;
+                return result = source instanceof Array?deepCopyArray(source):deepCopyObject(source);
+           };
+           //拷贝对象方法
+           var deepCopyObject= function(source) {
+                var resultObject={};
+                for (var prop in source) {
+                    resultObject[prop] = source[prop] instanceof Object?deepCopyObject(source[prop]) : source[prop];
+                }
+                return resultObject;
+           };
+           //拷贝数组方法
+           var deepCopyArray = function(source){
+                var len = source.length,
+                resultArray = [];
+                for( var i = 0; i&lt;len;i++){
+                    resultArray[i] = source[i] instanceof Array? deepCopyArray(source[i]):source[i];
+                }
+                return resultArray;
+           };
+   </pre>
+
+</div>
+</div>
+

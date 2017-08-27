@@ -1,0 +1,186 @@
+<div class="blog">
+    <h3>深入分析Angularjs指令directive的用法</h3>
+    <h4>指令是什么？</h4>
+    <p>官方说法:
+        At a high level, directives are markers on a DOM element
+        (such as an attribute, element name, comment or CSS class)
+        that tell AngularJS's HTML compiler ($compile) to attach a specified
+        behavior to that DOM element or even transform the DOM element and its children.<br>
+        Angular comes with a set of these directives built-in,
+        like ngBind, ngModel, and ngClass. Much like you create
+        controllers and services, you can create your own directives
+        for Angular to use. When Angular bootstraps your application,
+        the HTML compiler traverses the DOM matching directives against the DOM elements.
+    </p>
+    <p>
+        个人理解为：Angularjs为了制作一个可以重用的WEB组件，通过Angularjs的HTML编译器对angularjs的标签编译，
+        与DOM元素相结合，包括一些事件的结合,从而达到组件重用的目的。
+    </p>
+    <h4>
+        指令的四种用法:
+    </h4>
+    <p>
+<pre>
+    1 :As an attribute: &lt;span my-directive&gt;&lt;/span&gt;
+    2 :As a class: &lt;span class="my-directive"&gt;&lt;/span&gt;
+    3 :As an element: &lt;my-directive&gt;&lt;/my-directive&gt;
+    4 :As a comment:&lt;!-- directive: my-directive expression --&gt;//这里需要注意前后的空格
+</pre>
+
+    </p>
+    <h4>指令的基本写法:</h4>
+    <p>
+<pre>
+    angular.module('moduleName')
+        .directive('myDirective', function () {
+        return {
+            restrict: 'AEMC', //分别对应指令的四种用法 E = element, A = attribute, C = class, M = comment
+            scope: {
+                // @ reads the attribute value one-way binding(parent->chilren),指父变子变,子变父不变
+                // = provides two-way binding object(parent<->chilren),指父变子变,子变父变,
+                // & works with functions
+                title: '@'
+            },
+            require: '^ngModel',// ^ -- Look for the controller on parent elements, not just on the local scope
+                                // ? -- Don't raise an error if the controller isn't found
+            template: '&lt;div&gt;{{ ngModel }}&lt;/div&gt;',
+            templateUrl: 'mytemplate.html',
+            controller: controllerFunction, //Embed a custom controller in the directive
+            link: function ($scope, element, attrs) { } //DOM manipulation
+        }
+    });
+</pre>
+    </p>
+<h4>指令的基本属性介绍:</h4>
+<table class="table table-bordered">
+    <thead>
+        <th>Property</th>
+        <th>Description</th>
+    </thead>
+    <tr>
+        <td>restrict</td>
+        <td>Determines where a directive can be used (as an element, attribute, CSS class, or comment).</td>
+    </tr>
+    <tr>
+        <td>scope</td>
+        <td>Used to create a new child scope or an isolate scope.</td>
+    </tr>
+    <tr>
+        <td>template</td>
+        <td>
+            Defines the content that should be output from the directive.
+            Can include HTML, data binding expressions, and even other directives.
+        </td>
+    </tr>
+    <tr>
+        <td>templateUrl</td>
+        <td>
+            Provides the path to the template that should be used by the directive.
+            It can optionally contain a DOM element id when templates are defined
+            in &lt;script&gt; tags.
+        </td>
+    </tr>
+    <tr>
+        <td>controller</td>
+        <td>Used to define the controller that will be associated with the directive template.</td>
+    </tr>
+    <tr>
+        <td>link</td>
+        <td>Function used for DOM manipulation tasks.</td>
+    </tr>
+    <tr>
+        <td>terminal</td>
+        <td>last execute directive  if this Property true</td>
+    </tr>
+</table>
+
+    <h4>指令的生成</h4>
+    <p>
+        当DOM树加载完成和AngularJS启动后,HTML了将解析DOM 树,然后这个树再次被 AngularJS的 $compile()方法解析。
+        $compile()将遍历DOM树,查找DOM树中为指令的元素,并且进行分类(通过优先级),然后运行指令的$compile()方法调用link()函数,进行scope的绑定以及事件的绑定。
+    </p>
+    <h4>编译三阶段：</h4>
+<pre>
+    1. 标准浏览器API转化将html转化成dom，所以自定义的html标签必须符合html的格式
+    2. Angular compile搜索匹配directive，按照priority排序，并执行directive上的compile方法
+    3. Angular link执行directive上的link方法，进行scope绑定及事件绑定
+</pre>
+    <h4>为什么编译的过程要分成compile和link?</h4>
+    <p>
+        简单的说就是为了解决性能问题，特别是那种model变化会影响dom结构变化的，而变化的结构还会有新的scope绑定及事件绑定，比如ng-repeat
+        compile和link的形式。
+    </p>
+    compile
+    <p>
+        function compile(element, attrs, transclude) { ... }
+        在compile阶段要执行的函数，返回的function就是link时要执行的function
+        常用参数为element和attrs，分别是dom元素和元素上的属性们，其它的以后细说
+        较少使用，因为大部分directive是处理dom元素的行为绑定，而不是改变它们。
+    </p>
+    link
+    <p>
+        function link(scope, element, attrs, controller) { ... }
+        在link阶段要执行的函数，这个属性只有当compile属性没有设置时才生效
+        常用参数为scope，element和attrs，分别是当前元素所在的scope，dom元素和元素上的属性们,
+        directive基本上都会有此函数，可以注册事件，并与scope相绑。
+
+    </p>
+    compile和link的使用时机
+    <p>
+        compile<br>
+        想在dom渲染前对它进行变形，并且不需要scope参数
+        想在所有相同directive里共享某些方法，这时应该定义在compile里，性能会比较好
+        返回值就是link的function，这时就是共同使用的时候。<br>
+        link<br>
+        对特定的元素注册事件
+        需要用到scope参数来实现dom元素的一些行为。<br>
+        <span>注意</span>:指令的执行顺序 1 :compile,link都存在时:controller先运行，compile后运行，link不运行。
+        2 只有link,执行顺序 controller先运行，link后运行，link和compile不兼容。
+    </p>
+    <a href="https://github.com/angular/angular.js/wiki/Understanding-Directives">
+        compile和link的详解
+    </a>
+
+    <h4>controller和link的区别</h4>
+    <p>
+        编译前使用 - Controller。
+        编译后使用 - Link。
+    </p>
+    <iframe width="100%" height="300" src="//jsfiddle.net/MichaelYgZhang/z596vpwh/embedded/result,js,html" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+
+    <h4>参数transclude的用法:</h4>
+    <iframe width="100%" height="300" src="//jsfiddle.net/MichaelYgZhang/88e9b6qo/5/embedded/result,js,html" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+    <h4>相关阅读:</h4>
+    <ul>
+        <li>
+            <a href="https://docs.angularjs.org/guide/directive">Creating Custom Directives</a>
+        </li>
+        <li>
+            <a href="http://www.ng-newsletter.com/posts/directives.html">
+                Build custom directives with AngularJS
+            </a>
+        </li>
+        <li>
+            <a href="http://weblogs.asp.net/dwahlin/creating-custom-angularjs-directives-part-i-the-fundamentals">
+                Creating Custom AngularJS Directives Part I – The Fundamentals
+            </a>
+        </li>
+        <li>
+            <a href="https://github.com/angular/angular.js/wiki/Understanding-Directives">
+                Understanding Directives
+            </a>
+        </li>
+        <li>
+            <a href="https://egghead.io/articles/an-introduction-to-the-angularjs-directive-part-1">
+                An Introduction to the AngularJS Directive [Part 1]
+            </a>
+        </li>
+        <li>
+            <a href="http://jasonmore.net/angular-js-directives-difference-controller-link/">
+                Angular.js directives – Difference between controller and link
+            </a>
+        </li>
+    </ul>
+</div>

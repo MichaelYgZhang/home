@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Echo, lazy-loading images with HTML5 data-* attributes by @toddmotto | toddmotto.com</title>
+<style>
+
+    .main {
+        min-height:1500px;
+        max-width:550px;
+        margin:25px auto;
+        text-align:center;
+    }
+    .main img {
+        margin:25px 0;
+        height:350px;
+        width:350px;
+        background:#FFF url(https://raw.githubusercontent.com/MichaelYgZhang/home/gh-pages/images/ajax.gif) no-repeat center center;
+        border:1px solid #AAA;
+    }
+
+</style>
+</head>
+
+<!-- main -->
+<div class="main">
+    利用第三方 延迟加载js文件 Echo.js实现,Echo.js的用法非常简单，并且很小2kB。详情
+    <a href="https://github.com/toddmotto/echo">Echo</a>
+
+    <pre class="title__code">用法:&lt;img src="img/blank.gif" alt="" data-echo="img/album-1.jpg"&gt;</pre>
+
+    <img src="" alt="" data-echo="https://raw.githubusercontent.com/MichaelYgZhang/home/gh-pages/images/angularjs-logo.jpg">
+    <img src="" alt="" data-echo="https://raw.githubusercontent.com/MichaelYgZhang/home/gh-pages/images/css3-logo.jpg">
+    <img src="" alt="" data-echo="https://raw.githubusercontent.com/MichaelYgZhang/home/gh-pages/images/html5-logo.png">
+    <img src="" alt="" data-echo="https://raw.githubusercontent.com/MichaelYgZhang/home/gh-pages/images/java-logo.jpg">
+    <img src="" alt="" data-echo="https://raw.githubusercontent.com/MichaelYgZhang/home/gh-pages/images/jquery-logo.jpg">
+    <img src="" alt="" data-echo="https://raw.githubusercontent.com/MichaelYgZhang/home/gh-pages/images/js-logo.jpg">
+    <img src="" alt="" data-echo="https://raw.githubusercontent.com/MichaelYgZhang/home/gh-pages/images/tools-logo.jpg">
+   
+</div>
+</html>
+
+<script src="../../js/echo.js"></script>
+
+<script>
+    echo.init({
+    	offset: 100,
+    	throttle: 250,
+    	unload: false,
+    	callback: function (element, op) {
+    		//console.log(element, 'has been', op + 'ed')
+    	}
+    });
+</script>

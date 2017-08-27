@@ -1,0 +1,186 @@
+<div class="blog">
+    <h3>Queue(<a href="https://www.cs.cmu.edu/~adamchik/15-121/lectures/Stacks%20and%20Queues/Stacks%20and%20Queues.html">参考)</a></h3>
+    <h5>队列是一种先进先出的数据结构。有(数组/链表)的实现方式,因为普通的队列有(效率/浪费空间)的缺点,以下是环形链表的实现,并可进行扩容。</h5>
+    <pre>
+    /**
+     * 队列泛型接口
+     */
+    public interface IQueue&lt;T&gt; {
+        public boolean isEmpty();                       //判空
+        public void clear();                            //清空
+        public int size();                              //元素的大小
+        public T getFront();                            //获取队头元素
+        public T getBack();                             //获取队尾元素
+        public void enqueue(T t) throws Exception;      //入队
+        public T dequeue() throws Exception;            //出队
+    }
+
+    /**
+     * 数组实现环形队列
+     * 由于普通队列,存在存储空间浪费(头动,每出一个队,头指针向后移)
+     *            效率低(头指针不动,没出一个队列后面的向前移动)
+     * 所以介于此问题,环形队列弥补了他们的缺点
+     * 实现:就是对   下标%数组长度  (取余)
+     * @param &lt;T&gt;
+     */
+    public class LoopQueue&lt;T&gt; implements IQueue&lt;T&gt;,Iterable&lt;T&gt;{
+        private T[] item;                               //队列数组
+        private int size;                               //元素大小
+        private int CAPACITY_INIT = 2 << 1;             //初始容量
+        private int capacity;                           //容量
+        private int front;                              //头下标
+        private int tail;                               //尾下标
+        private int oldCapacity;                        //扩容前容量
+
+        public LoopQueue(){
+            item = (T[])new Object[CAPACITY_INIT];
+            capacity = CAPACITY_INIT;                   //初始化容量
+            front = 0;
+            tail = -1;
+        }
+        @Override
+        public boolean isEmpty() {
+            return size == 0;
+        }
+
+        @Override
+        public void clear() {
+            front = 0;
+            tail = -1;
+            if(size == 0) return;
+            for(int i=0;i < size ;i++){
+                item[i] = null;
+            }
+            size = 0;
+        }
+
+        @Override
+        public int size() {
+            return size;
+        }
+
+        @Override
+        public T getFront() {
+            return item[ front % capacity ];
+        }
+
+        @Override
+        public T getBack() {
+            return item[ tail % capacity ];
+        }
+        private void resize(){
+            oldCapacity = capacity;
+            int newCapacity = capacity + (capacity >> 1);
+            if(newCapacity < 0 || newCapacity > Integer.MAX_VALUE)
+                throw new RuntimeException("capacity error!");
+
+            item = Arrays.copyOf(item, newCapacity);    //扩容
+            capacity = newCapacity;                     //新数组容量
+            rightShift();                               //移位+重新计算(front+tail)
+        }
+        /**
+        * 扩容之后要进行移位以保证新扩容的容量是在front和tail之间
+        * 并且重新计算front和tail
+        * 实现:先移动老数组最后一个到新数组最后,然后再移动前一个,以此类推
+        */
+        private void rightShift(){
+            int first = oldCapacity -1;                 //先移动的第一个元素
+            int last = tail % oldCapacity;              //移动的最后一个元素的前一个,就是尾巴下标
+            int tempCapacity = capacity;
+            for(int i = first;i > last;i--){            //数组平移
+                tempCapacity--;
+                item[tempCapacity] = item[i];
+                item[i] = null;                         //移动完成后之前位置置为null
+            }
+            front = tempCapacity;                       //重置队列头
+            tail = capacity + last;                     //重置队列尾
+        }
+        @Override
+        public void enqueue(T t) throws Exception {     //入队
+            if(isOverflow()){                           //队列已满,进行扩容
+                resize();
+                enqueue(t);
+            }else{
+                tail++;
+                item [ tail % capacity ] = t;
+                size++;
+            }
+        }
+
+        @Override
+        public T dequeue() throws Exception {           //出队
+            if(isEmpty()){                              //若已空则重置队列头,队列尾
+                clear();
+                return null;
+            }
+            T t = item[ front % capacity];
+            item[ front % capacity] = null;
+            front++;
+            size--;
+            return t;
+        }
+
+        public boolean isOverflow(){
+            int tempSize = size;
+            return  ++tempSize > capacity;              //此处++保证容量至少还有一个空缺
+        }
+        /**
+         * 环形队列迭代器
+         */
+        @Override
+        public Iterator&lt;T&gt; iterator() {
+            return new LoopQueueIterator();
+        }
+
+        private class LoopQueueIterator implements Iterator&lt;T&gt;{//实现Iterator接口
+            private int frontIte;
+            public LoopQueueIterator(){
+                this.frontIte = front;
+            }
+            @Override
+            public boolean hasNext() {
+                return size > 0;
+            }
+
+            @Override
+            public T next() {
+                T t = item[frontIte % capacity];
+                frontIte++;
+                size--;
+                return t;
+            }
+
+            @Override
+            public void remove(){
+                throw new RuntimeException("unsupported method!");
+            }
+        }
+    }
+
+
+    </pre>
+
+    <script id="dsq-count-scr" src="//michaelzhangblog.disqus.com/count.js" async></script>
+    <div id="disqus_thread"></div>
+    <script>
+        /**
+         * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+         */
+        var disqus_config = function () {
+            this.page.url = 'http://michaelygzhang.github.io/home/'; // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = 'queue'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+
+            s.src = '//michaelzhangblog.disqus.com/embed.js';
+
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+</div>

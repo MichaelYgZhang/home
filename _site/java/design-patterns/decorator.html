@@ -1,0 +1,143 @@
+<div class="blog">
+    <h3>结构型模式(Structural Pattern)之装饰者模式(Decorator Pattern)</h3>
+    <p>
+        装饰模式顾名思义就是动态地给某个对象增加额外的功能。比如一间毛坯房需要装修这个装修的过程就是装饰者，再有
+        一个窗口添加滚动条或者添加边框颜色等，这个也是装饰者模式。等等
+    </p>
+    <pre>
+    定义:动态地给一个对象增加一些额外的职责，就增加对象功能来说，装饰模式比生成子类实现更为灵活。装饰模式是一种对象结构型模式。
+    </pre>
+    <img class="imgh" src="http://img.my.csdn.net/uploads/201204/04/1333528185_7832.gif">
+    <h5>举例:一个窗口/文字框/列表框添加滚动条/边框颜色等</h5>
+    <pre>
+    public abstract class Component {   //抽象的组件以及抽象的方法
+        abstract void display();
+    }
+    public class Window extends Component{  //具体实例的方法
+        @Override
+        void display() {
+            System.out.println("我是窗口！");
+        }
+    }
+    public class TextBox extends Component{
+        @Override
+        void display() {
+            System.out.println("我是文本框！");
+        }
+    }
+    public class ListBox extends Component{
+        @Override
+        void display() {
+            System.out.println("我是列表框！");
+        }
+    }
+
+    public class ComponentDecorator extends Component{  //组件的装饰者，继承Component
+        private Component comp; //这里亦是Component
+        public ComponentDecorator(Component comp){
+            this.comp = comp;
+        }
+        @Override
+        void display() {
+            comp.display(); //调用抽象的方法
+        }
+    }
+    public class BlackBorderDecorator extends ComponentDecorator{
+        public BlackBorderDecorator(Component comp) {
+            super(comp);
+        }
+        public void display(){
+            super.display();    //调用抽象方法
+            this.addBlackBorder();  //实例装饰者自己的方法
+        }
+        public void addBlackBorder(){
+            System.out.println("添加黑色边框！");
+        }
+    }
+    public class ScrollBarDecorator extends ComponentDecorator{
+        public ScrollBarDecorator(Component comp) {
+            super(comp);
+        }
+        public void display(){
+            super.display();
+            this.addScrollBar();
+        }
+        public void addScrollBar(){
+            System.out.println("添加滚动条！");
+        }
+    }
+
+    //test
+        Component c1,c2,c3;
+		c1 = new TextBox();
+		c2 = new ScrollBarDecorator(c1);
+		c3 = new BlackBorderDecorator(c2);//此处可以进行多次装饰
+		c3.display();
+    //out
+        我是文本框！
+        添加滚动条！
+        添加黑色边框！
+
+    由于在抽象装饰类Decorator中注入的是Component类型的对象，因此我们可以将一个具体构件对象注入其中，再通过具体装饰类来进行装饰；
+    此外，我们还可以将一个已经装饰过的Decorator子类的对象再注入其中进行多次装饰，从而对原有功能的多次扩展。
+    </pre>
+    <h5>总结:</h5>
+    <pre>
+    使用过程中注意的问题:
+    (1) 尽量保持装饰类的接口与被装饰类的接口相同，这样，对于客户端而言，无论是装饰之前的对象还是装饰之后的对象都可以一致对待。
+        这也就是说，在可能的情况下，我们应该尽量使用透明装饰模式。
+    (2) 尽量保持具体构件类ConcreteComponent是一个“轻”类，也就是说不要把太多的行为放在具体构件类中，我们可以通过装饰类对其进行扩展。
+    (3) 如果只有一个具体构件类，那么抽象装饰类可以作为该具体构件类的直接子类。
+
+    装饰模式降低了系统的耦合度，可以动态增加或删除对象的职责，并使得需要装饰的具体构件类和具体装饰类可以独立变化，
+        以便增加新的具体构件类和具体装饰类。在软件开发中，装饰模式应用较为广泛，例如在JavaIO中的输入流和输出流的设计、
+        javax.swing包中一些图形界面构件功能的增强等地方都运用了装饰模式。
+
+    1.主要优点
+      装饰模式的主要优点如下：
+    (1) 对于扩展一个对象的功能，装饰模式比继承更加灵活性，不会导致类的个数急剧增加。
+    (2) 可以通过一种动态的方式来扩展一个对象的功能，通过配置文件可以在运行时选择不同的具体装饰类，从而实现不同的行为。
+    (3) 可以对一个对象进行多次装饰，通过使用不同的具体装饰类以及这些装饰类的排列组合，可以创造出很多不同行为的组合，得到功能更为强大的对象。
+    (4) 具体构件类与具体装饰类可以独立变化，用户可以根据需要增加新的具体构件类和具体装饰类，原有类库代码无须改变，符合“开闭原则”。
+
+    2.主要缺点
+      装饰模式的主要缺点如下：
+    (1) 使用装饰模式进行系统设计时将产生很多小对象，这些对象的区别在于它们之间相互连接的方式有所不同，而不是它们的类或者属性值有所不同，
+        大量小对象的产生势必会占用更多的系统资源，在一定程序上影响程序的性能。
+    (2) 装饰模式提供了一种比继承更加灵活机动的解决方案，但同时也意味着比继承更加易于出错，排错也很困难，对于多次装饰的对象，
+        调试时寻找错误可能需要逐级排查，较为繁琐。
+
+    3.适用场景
+      在以下情况下可以考虑使用装饰模式：
+    (1) 在不影响其他对象的情况下，以动态、透明的方式给单个对象添加职责。
+    (2) 当不能采用继承的方式对系统进行扩展或者采用继承不利于系统扩展和维护时可以使用装饰模式。不能采用继承的情况主要有两类：
+        第一类是系统中存在大量独立的扩展，为支持每一种扩展或者扩展之间的组合将产生大量的子类，使得子类数目呈爆炸性增长；
+        第二类是因为类已定义为不能被继承（如Java语言中的final类）。
+    </pre>
+
+    <a href="http://blog.csdn.net/lovelion/article/details/17517213">参考</a>
+
+    <script id="dsq-count-scr" src="//michaelzhangblog.disqus.com/count.js" async></script>
+    <div id="disqus_thread"></div>
+    <script>
+        /**
+         * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+         */
+        var disqus_config = function () {
+            this.page.url = 'http://michaelygzhang.github.io/home/'; // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = 'decorator'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+
+            s.src = '//michaelzhangblog.disqus.com/embed.js';
+
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+</div>

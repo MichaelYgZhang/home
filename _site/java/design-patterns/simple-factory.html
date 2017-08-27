@@ -1,0 +1,123 @@
+<div class="blog">
+    <h3>创建型模式之 Simple Factory 简单工厂模式</h3>
+    <pre>
+    案例:设计做一个多种形状的按钮,比如圆形,长方形,正方形,三角形!
+    分析:按钮做为一个抽象类,而圆形按钮/长方形按钮/三角形按钮则应继承按钮抽象类,另外需要一个静态工厂创建按钮实例。
+    public abstract class Button {//此处亦可以为接口
+        //other property/method ..
+	    abstract void show();
+    }
+    public class Circle extends Button{
+        //other property/method ..
+        @Override
+        void show() {
+            System.out.println("我是圆形按钮！");
+        }
+    }
+    public class Triangle extends Button{
+        //other property/method ..
+        @Override
+        void show() {
+            System.out.println("我是三角按钮！");
+        }
+    }
+    public class ButtonFactory {
+        private final static String CICLE = "circle";
+        private final static String TRIANGEL = "triangle";
+        public static Button getButton(String buttonType){
+            if(buttonType == null || buttonType.length() == 0)
+                throw new RuntimeException("参数不能为空！");
+            Button b = null;
+            if(CICLE.equals(buttonType))
+                b = new Circle();
+            else if(TRIANGEL.equals(buttonType))
+                b = new Triangle();
+            return b;
+        }
+    }
+    //config.xml 配置
+    < ?xml version="1.0"?>
+        < config>
+            < buttonType>circle< /buttonType>
+        < /config>
+    < /xml>
+
+    public class XMLUtil {
+        //该方法用于从XML配置文件中提取按钮类型，并返回类型名
+        public static String getButtonType() {
+            try {
+                //创建文档对象
+                DocumentBuilderFactory dFactory = DocumentBuilderFactory.newInstance();
+                DocumentBuilder builder = dFactory.newDocumentBuilder();
+                Document doc;
+                doc = builder.parse(new File("config.xml"));
+
+                //获取包含按钮类型的文本节点
+                NodeList nl = doc.getElementsByTagName("buttonType");
+                Node classNode = nl.item(0).getFirstChild();
+                String buttonType = classNode.getNodeValue().trim();
+                return buttonType;
+            }catch(Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+    }
+    class Client {
+        public static void main(String args[]) {
+            Button b;
+            String type = XMLUtil.getButtonType(); //读取配置文件中的参数
+            b = ButtonFactory.getButton(type); //创建产品对象
+            b.show();
+        }
+    }
+
+    注:类似的案例还有很多,比如创建一个电视机工厂可以生产小米TV，乐视TV，联想TV等等。
+       再有创建一个手机工厂生产小米手机，华为手机，苹果手机等等。
+       不过在使用简单工厂模式时是有些适用场景的，在下面的总结中有具体讲解。
+    </pre>
+    <h5>总结:</h5>
+    <pre>
+    优点:SF中含有各种判断逻辑，根据参数的不同创建不同的实例对象。从而实现责任的分割。
+         客户端无需知道具体产品的类名，只需要知道所需要产品对应的参数即可。
+         通过引入配置参数XML文件，可以在不修改任何客户端代码的情况下更换和增加新的具体产品类，在一定程度上提高了系统的灵活性.
+
+    缺点:由于工厂类集中了所有产品创建逻辑，一旦不能正常工作，整个系统都要受到影响。
+         简单工厂模式增加了系统中类的个数,一定程度上增加了系统的复杂度。
+         系统扩展困难，一旦添加新产品不得不修改工厂类中的逻辑，在产品类型较多时，不宜使用此模式。
+         简单工厂模式由于使用了静态工厂方法，造成工厂角色无法形成基于继承的等级结构。
+
+    适用场景:工厂类负责创建的对象比较少：由于创建的对象较少，不会造成工厂方法中的业务逻辑太过复杂。
+            客户端只知道传入工厂类的参数，对于如何创建对象不关心：客户端既不需要关心创建细节，
+            甚至连类名都不需要记住，只需要知道类型所对应的参数。
+
+    当重构现有程序时注意按照以下步骤1.先抽象出现有代码的公共部分，区分变化的部分和不变的部分。
+                                2.对应的每个对象实例要从新继承抽象类。
+                                3.编写好工厂类，特别注意写好参数的注释。
+    </pre>
+    <a href="http://blog.csdn.net/lovelion/article/details/17517213">参考</a>
+
+    <script id="dsq-count-scr" src="//michaelzhangblog.disqus.com/count.js" async></script>
+    <div id="disqus_thread"></div>
+    <script>
+        /**
+         * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+         */
+        var disqus_config = function () {
+            this.page.url = 'http://michaelygzhang.github.io/home/'; // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = 'simple-factory'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+
+            s.src = '//michaelzhangblog.disqus.com/embed.js';
+
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+</div>

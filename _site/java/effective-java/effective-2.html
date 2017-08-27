@@ -1,0 +1,76 @@
+<div class="blog">
+    <h3>第二章:创建和销毁对象</h3>
+    <h5>第1条:考虑用静态工厂方法代替 构造器</h5>
+    <pre>
+优点:
+    静态工厂方法与构造器不同的第一大优势在于,它们有名称。
+    静态工厂方法与构造器不同的第二大优势在于,不必在每次调用它们的时候都创建一个新对象。
+    静态工厂方法与构造器不同的第三大优势在于,它们可以返回原返回类型的任何子类型的对象。
+    静态工厂方法与构造器不同的第四大优势在于,在创建参数化类型实例的时候,它们使代码变得更简洁。
+例子:
+    Map&lt;String,List&lt;String&gt;&gt; map = new HashMap&lt;String,List&lt;String&gt;&gt;();//bad
+    Map&lt;String,List&lt;String&gt;&gt; map = HashMap.newInstance();//good
+    public static &lt;K,V&gt; HashMap&lt;K,V&gt; newInstacnce(){
+        return new HashMap&lt;K,V&gt;();
+    }
+缺点:
+    静态工厂方法的主要缺点在于,类如果不含公有的或者受保护的构造器,就不能被子类化。
+    静态工厂方法的第二个缺点在于,它们与其他的静态方法实际上没有任何区别。
+    </pre>
+    <h5>第2条:遇到多个构造器参数时要考虑构建器</h5>
+    <pre>
+    方案一:重叠构造器
+    第一个只有必要参数的构造器,第二个有一个可选参数的构造器,第三个有两个可选参数的构造器,以此类推。
+    缺点:采用重叠构造器模式可行,但是当有许多参数时,客户端代码会很难编写,并且仍然较难以阅读,
+         并且参数顺序必须保持一致,也看不出来时什么意思。
+    方案二:JavaBeans模式
+    这种模式下,调用无参构造器创建对象,然后调用setter方法设置每个必要或可选参数。
+    缺点:因为构造的过程中使用多个setter方法,所以构造过程被分到几个调用中,在构造的过程中JavaBean可能处于不一致的状态。
+         并且需要程序员付出额外的努力确保setter期间的线程安全。
+    方案三:Builder模式(在多个构造器参数时的最佳解决方案)
+    </pre>
+    <h5>第3条:用私有构造器或者枚举类型强化Singleton属性</h5>
+    <pre>
+    JAVA1.5之前,有两种方式实现Singleton.这两种方法都是要把构造器保持为私有,并导出公有静态成员,以便
+    允许客户端能够访问该类的唯一实例。
+    单例实现一:
+    //Singleton with public final field
+    public class Singleton{
+        public static final Singleton INSTANCE = new Singleton();
+        private Singleton(){//...}
+        //...
+    }
+    注意:享有特权的客户端可以借助AccessibleObject.setAccessible方法,通过反射机制,调用私有构造器,
+         如果需要抵御这种攻击,可以修改构造器,让它在被要求创建第二个实例的时候抛出异常。
+    单例实现二:
+    //Singlteon with static factory
+    public class Singleton{
+        private static final Singleton INSTANCE = new Singleton();
+        private Singleton(){ //...}
+        public static Singleton getInstance(){return INSTANCE;}
+        //....
+    }
+    注意:单例一和二在序列化时,仅仅在声明中加上"implements Serializable"是不够的.为了维护并保证
+         Singleton,必须声明所有实例域都是瞬时(transient)的,并提供一个readResolve方法,否则每次(反射创建对象)
+         反序列化一个序列化实例时,都会创建一个新的实例。为了防止这种情况,要在Sinleton类中加入这个
+         readResolve方法,这样JVM每次反序列化实例时先调用这个方法,返回指定的对象。
+         //readResolve method to preserve singleton property
+         private Object readResolve(){
+            //Return the one true Singleton and let the garbage collector
+            //take care of the Singleton impersonator
+            return INSTANCE;
+         }
+    单例实现三:最佳实现！！
+    //Enum singleton - the preferred approach
+    public enum Singleton{
+        INSTANCE;
+        //....
+    }
+    注:这种方式更简洁,无偿提供序列化机制,绝对防止多次实例化,即使是在面对复杂的序列化或者反射攻击时。
+       单元素的枚举类型是为实现单例的最佳方法。
+    </pre>
+    <h5>第4条:通过私有构造器强化不可实例化的能力！(一般指的是工具类等。)</h5>
+    <h5>第5条:避免创建不必要的对象。(注意编码规范)</h5>
+    <h5>第6条:消除过期的对象引用。(java中部使用的对象置为null,垃圾回收器会自动回收内存！)</h5>
+    <h5>第7条:避免使用终结方法。(finalizer通常不可预测,也很危险,一般情况下是不必要的。可以使用try-finally完成类似工作。)</h5>
+</div>

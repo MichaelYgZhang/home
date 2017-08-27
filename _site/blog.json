@@ -1,0 +1,333 @@
+[
+  {
+    "ahref":"web/html5/read-html5-cookbook.html",
+    "imgsrc":"images/html5-logo.png",
+    "titletext":"HTML5Cookbook笔记",
+    "spantext": "Reading html5 Cookbook Note."
+  },
+  {
+    "ahref":"web/css/css3_note.html",
+    "imgsrc":"images/css3-logo.jpg",
+    "titletext":"CSS3工作笔记",
+    "spantext":"简介:CSS3 工作笔记,内容比较杂。"
+  },
+  {
+    "ahref":"java/jdk-source-code/container_hashmap-1.7.html",
+    "imgsrc":"images/java-logo.jpg",
+    "titletext":"JavaJDK1.7-HashMap",
+    "spantext":"简介:JavaJDK1.7学习,通过分析JDK源代码研究 Hash （HashMap）存储机制。"
+  },
+  {
+    "ahref":"tools/tools_index.html",
+    "imgsrc":"images/tools-logo.jpg",
+    "titletext":"Tools使用",
+    "spantext":"Tools blogs"
+  },
+  {
+    "ahref":"web/js/table-tree-check/index.html",
+    "imgsrc":"images/js-logo.jpg",
+    "titletext":"Table-tree-check",
+    "spantext":"简介:使用js:easyui,angularjs,jquery;css:bootstrap.来进行实现。"
+  },
+  {
+    "ahref":"web/angularjs/angularjs_controller_communication.html",
+    "imgsrc":"images/angularjs-logo.jpg",
+    "titletext":"AngularJS-Controller通信",
+    "spantext":"简介:AngularJS-Controller之间的通信机制。"
+  },
+  {
+    "ahref":"web/js/lazyload-images.html",
+    "imgsrc":"images/js-logo.jpg",
+    "titletext":"Images lazyload （Echo.js）",
+    "spantext":"简介:图片延迟加载案例，使用Echo.js第三方js库实现。"
+  },
+  {
+    "ahref":"web/js/deep-copy.html",
+    "imgsrc":"images/js-logo.jpg",
+    "titletext":"JavaScript深层拷贝",
+    "spantext":"简介:JS中的深层拷贝对象或数组，以及Array.prototype.slice();Array.prototype.concat();的使用。"
+  },
+  {
+    "ahref":"web/js/read-book-note/js_patterns002.html",
+    "imgsrc":"images/js-logo.jpg",
+    "titletext":"JavaScript笔记-代码基本要素",
+    "spantext":"简介:根据《JavaScript Patterns》编写此读书笔记.第二章:高质量JavaScript基本要点。"
+  },
+  {
+    "ahref":"web/js/read-book-note/javaScript_basics.html",
+    "imgsrc":"images/js-logo.jpg",
+    "titletext":"MDN之JavaScript-Basics ",
+    "spantext":"简介:根据阅读 MDN 的 JavaScript 内容，写下该读书笔记。"
+  },
+  {
+    "ahref":"web/angularjs/angularjs_directive.html",
+    "imgsrc":"images/angularjs-logo.jpg",
+    "titletext":"AngularJS-directive",
+    "spantext":"简介:分析了解AngularJS-directive指令的用法。"
+  },
+  {
+    "ahref":"web/js/stack_heap.html",
+    "imgsrc":"images/js-logo.jpg",
+    "titletext":"JavaScript堆栈",
+    "spantext":"简介:JS中的内存分析,了解堆与栈在js语言中的分配原理"
+  },
+  {
+    "ahref":"web/js/read-book-note/js_patterns003.html",
+    "imgsrc":"images/js-logo.jpg",
+    "titletext":"JavaScript-直接量&构造函数",
+    "spantext":"简介:根据《JavaScript Patterns》编写此读书笔记.读书笔记 第三章 直接量和构造函数。"
+  },
+  {
+    "ahref":"java/spring-study/spring-note.html",
+    "imgsrc":"images/spring-logo.jpg",
+    "titletext":"Java-Spring学习笔记",
+    "spantext":"简介:日常工作学习中有关 Spring 笔记。"
+  },
+  {
+    "ahref":"java/java-api/java_parseExcel.html",
+    "imgsrc":"images/java-logo.jpg",
+    "titletext":"Java_parseExcel_.xlsx",
+    "spantext":"简介:使用 poi.jar 解析后缀为.xlsx的Excel文件时,会出现异常,提供解决方案"
+  },
+  {
+    "ahref":"web/angularjs/angularjs_exception.html",
+    "imgsrc":"images/angularjs-logo.jpg",
+    "titletext":"AngularJS-Exception",
+    "spantext":"简介:AngularJS-使用过程中的问题。"
+  },
+  {
+    "ahref":"java/java-utils/ExcelUtils.html",
+    "imgsrc":"images/java-logo.jpg",
+    "titletext":"Java_ExcelUtils",
+    "spantext":"简介:使用 poi.jar 解析.xls,.xlsx文件并且入库。使用jxl.jar导出数据到excel文件中。"
+  },
+  {
+    "ahref":"java/java-se/class_life.html",
+    "imgsrc":"images/java-logo.jpg",
+    "titletext":"Java类生命周期",
+    "spantext":"简介:介绍类加载过程，以及类加载器的工作原理。"
+  },
+  {
+    "ahref":"java/spring-study/springmvc.html",
+    "imgsrc":"images/spring-logo.jpg",
+    "titletext":"SpirngMVC知识点的积累",
+    "spantext":"简介:SpringMVC的原理以及相关xml文件的配置，还有相关注解的详解。"
+  },
+  {
+    "ahref":"web/angularjs/angularjs_validate.html",
+    "imgsrc":"images/angularjs-logo.jpg",
+    "titletext":"AngularJS-validate",
+    "spantext":"简介:AngularJS中表单校验的用法。"
+  },
+  {
+    "ahref":"java/jdk-source-code/container_interface.html",
+    "imgsrc":"images/java-logo.jpg",
+    "titletext":"JDK1.8.0_66--接口部分",
+    "spantext":"简介:阅读最新JDK容器部分源码,各个容器接口"
+  },
+  {
+    "ahref":"java/jdk-source-code/container_arraylist.html",
+    "imgsrc":"images/java-logo.jpg",
+    "titletext":"JDK1.8.0_66--ArrayList",
+    "spantext":"简介:阅读最新JDK容器部分源码,ArrayList源码部分。"
+  },
+  {
+    "ahref":"java/jdk-source-code/container_hashmap.html",
+    "imgsrc":"images/java-logo.jpg",
+    "titletext":"JDK1.8.0_66--HashMap",
+    "spantext":"简介:阅读最新JDK容器部分源码,HashMap源码部分。"
+  },
+  {
+    "ahref":"java/whatIsHash.html",
+    "imgsrc":"images/java-logo.jpg",
+    "titletext":"Hash是什么？",
+    "spantext":"简介:理解什么Hash,用它做什么,为什么选它作为HashMap/HashTable/HashSet的存储算法?。"
+  },
+  {
+    "ahref":"java/whatIsArray.html",
+    "imgsrc":"images/java-logo.jpg",
+    "titletext":"JAVA深入理解Array",
+    "spantext":"简介:了解Array的底层实现,以及基本的使用方法。"
+  },
+  {
+    "ahref":"java/effective-java/effective-2.html",
+    "imgsrc":"images/effective-java.jpg",
+    "titletext":"Effective Java-第二章",
+    "spantext":"简介:Effective Java 第二版,读书笔记--创建和销毁对象"
+  },
+  {
+    "ahref":"java/data-structure/stack.html",
+    "imgsrc":"images/java-logo.jpg",
+    "titletext":"Stack Java Implements",
+    "spantext":"简介:Stack Java实现方式,数组实现+链表实现"
+  },
+  {
+    "ahref":"java/data-structure/queue.html",
+    "imgsrc":"images/java-logo.jpg",
+    "titletext":"Queue Java Implements",
+    "spantext":"简介:Queue Java实现方式,环形队列+扩容"
+  },
+  {
+    "ahref":"java/data-structure/linkedlist.html",
+    "imgsrc":"images/java-logo.jpg",
+    "titletext":"LinkedList Java Implements",
+    "spantext":"简介:LinkedList Java 实现简单的链表数据结构"
+  },
+  {
+    "ahref":"java/effective-java/effective-3.html",
+    "imgsrc":"images/effective-java.jpg",
+    "titletext":"Effective Java-第三章",
+    "spantext":"简介:Effective Java 第二版,读书笔记--对于所有对象都通用的方法"
+  },
+  {
+    "ahref":"java/algorithms4/algorithms-1.html",
+    "imgsrc":"images/algorithms4.png",
+    "titletext":"Algorithms4--基础",
+    "spantext":"简介:Algorithms4---第一章:基础部分"
+  },
+  {
+    "ahref":"java/algorithms4/heap.html",
+    "imgsrc":"images/algorithms4.png",
+    "titletext":"Algorithms4--优先队列",
+    "spantext":"简介:Algorithms4---第二章:优先队列---堆排序"
+  },
+  {
+    "ahref":"java/algorithms4/sort.html",
+    "imgsrc":"images/algorithms4.png",
+    "titletext":"Algorithms4--Sort",
+    "spantext":"简介:Algorithms4---排序部分-Bubble Sort,Selection sort,Insertion sort,Merge sort,Quick Sort"
+  },
+  {
+    "ahref":"java/jdk-source-code/container_linkedlist.html",
+    "imgsrc":"images/java-logo.jpg",
+    "titletext":"JDK1.8.0_66--LinkedList",
+    "spantext":"简介:阅读最新JDK容器部分源码,LinkedList源码部分。"
+  },
+  {
+    "ahref":"java/effective-java/effective-3.html",
+    "imgsrc":"images/effective-java.jpg",
+    "titletext":"Effective Java-第4章",
+    "spantext":"简介:Effective Java 第二版,读书笔记--第4章:类和接口"
+  },
+  {
+    "ahref":"java/jdk-source-code/container_hashtable.html",
+    "imgsrc":"images/java-logo.jpg",
+    "titletext":"JDK1.8.0_66--HashTable",
+    "spantext":"简介:阅读最新JDK容器部分源码,HashTable源码部分。"
+  },
+  {
+    "ahref":"java/jdk-source-code/container_hashset.html",
+    "imgsrc":"images/java-logo.jpg",
+    "titletext":"JDK1.8.0_66--HashSet",
+    "spantext":"简介:阅读最新JDK容器部分源码,HashSet源码部分。"
+  },
+  {
+    "ahref":"java/jdk-source-code/container_linkedhashset.html",
+    "imgsrc":"images/java-logo.jpg",
+    "titletext":"JDK1.8.0_66--LinkedHashSet",
+    "spantext":"简介:阅读最新JDK容器部分源码,LinkedHashSet源码部分。"
+  },
+  {
+    "ahref":"java/jdk-source-code/container_linkedhashmap.html",
+    "imgsrc":"images/java-logo.jpg",
+    "titletext":"JDK1.8.0_66--LinkedHashMap",
+    "spantext":"简介:阅读最新JDK容器部分源码,LinkedHashMap源码部分。"
+  },
+  {
+    "ahref":"java/algorithms4/4th-graphs.html",
+    "imgsrc":"images/algorithms4.png",
+    "titletext":"Algorithms4--图",
+    "spantext":"简介:Algorithms4---第4章:图"
+  },
+  {
+    "ahref":"java/design-patterns/singleton.html",
+    "imgsrc":"images/dp.jpg",
+    "titletext":"Singleton DP(CreateDP)",
+    "spantext":"简介:设计模式之单例模式"
+  },
+  {
+    "ahref":"java/design-patterns/simple-factory.html",
+    "imgsrc":"images/dp.jpg",
+    "titletext":"Simple Factory DP(CreateDP)",
+    "spantext":"简介:设计模式之简单工厂模式"
+  },
+  {
+    "ahref":"java/design-patterns/factory.html",
+    "imgsrc":"images/dp.jpg",
+    "titletext":"Factory DP(CreateDP)",
+    "spantext":"简介:设计模式之工厂模式"
+  },
+  {
+    "ahref":"java/design-patterns/oodpp.html",
+    "imgsrc":"images/dp.jpg",
+    "titletext":"OODP 面向对象设计原则",
+    "spantext":"简介:面向对象设计的7条原则。"
+  },
+  {
+    "ahref":"java/design-patterns/abstract-factory.html",
+    "imgsrc":"images/dp.jpg",
+    "titletext":"abstract-factory DP(CreateDP)",
+    "spantext":"简介:面向对象设计之抽象工厂模式。"
+  },
+  {
+    "ahref":"java/design-patterns/builder.html",
+    "imgsrc":"images/dp.jpg",
+    "titletext":"Builder DP(CreateDP)",
+    "spantext":"简介:面向对象设计之建造者模式。"
+  },
+  {
+    "ahref":"java/design-patterns/prototype.html",
+    "imgsrc":"images/dp.jpg",
+    "titletext":"Prototype DP(CreateDP)",
+    "spantext":"简介:面向对象设计之原型链模式。"
+  },
+  {
+    "ahref":"java/design-patterns/adapter.html",
+    "imgsrc":"images/dp.jpg",
+    "titletext":"Adapter DP(StructureDP)",
+    "spantext":"简介:面向对象设计之适配器模式。"
+  },
+  {
+    "ahref":"java/design-patterns/bridge.html",
+    "imgsrc":"images/dp.jpg",
+    "titletext":"Bridge DP(StructureDP)",
+    "spantext":"简介:面向对象设计之桥接模式。"
+  },
+  {
+    "ahref":"java/design-patterns/composite.html",
+    "imgsrc":"images/dp.jpg",
+    "titletext":"Composite DP(StructureDP)",
+    "spantext":"简介:面向对象设计之组合模式。"
+  },
+  {
+    "ahref":"java/design-patterns/decorator.html",
+    "imgsrc":"images/dp.jpg",
+    "titletext":"Decorator DP(StructureDP)",
+    "spantext":"简介:面向对象设计之装饰模式。"
+  },
+  {
+    "ahref":"java/design-patterns/facade.html",
+    "imgsrc":"images/dp.jpg",
+    "titletext":"Facade DP(StructureDP)",
+    "spantext":"简介:面向对象设计之外观模式。"
+  },
+  {
+    "ahref":"java/design-patterns/flyweight.html",
+    "imgsrc":"images/dp.jpg",
+    "titletext":"Flyweight DP(StructureDP)",
+    "spantext":"简介:面向对象设计之享元模式。"
+  },
+  {
+    "ahref":"java/design-patterns/proxy.html",
+    "imgsrc":"images/dp.jpg",
+    "titletext":"Proxy DP(StructureDP)",
+    "spantext":"简介:面向对象设计之代理模式。"
+  },
+  {
+    "ahref":"https://github.com/MichaelYgZhang/home/blob/gh-pages/java/clojure/defmacro.md",
+    "imgsrc":"https://upload.wikimedia.org/wikipedia/en/1/1d/Clojure_logo.gif",
+    "titletext":"Clojure macro",
+    "spantext":"简介:clojure 宏学习笔记。"
+  }
+
+]

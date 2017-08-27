@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<templates>
+	   <template id="1" title="Student-title">
+	   		<!-- 读取第几个sheet页 -->
+			<sheet>0</sheet>
+			<!-- 从第几行开始读 -->
+			<row>1</row> 
+			<!-- 入库的表明 -->
+			<tablename>Student</tablename>
+			<columns>
+			   <column fieldname="no" filedtype="String" excelcol="0"></column>
+			   <!-- fieldname:vo类的属性;filedtype:对应数据库中的数据类型;excelcol:对应excel的第几列,从0开始; -->
+			   <!-- transcoding:指是否需要转码,如果需要则将对应的码值写上 -->
+			   <column fieldname="name" filedtype="String" excelcol="1" transcoding=""></column>
+			   <column fieldname="age" filedtype="String" excelcol="2"></column>
+			   <column fieldname="score" filedtype="String" excelcol="3"></column>
+			</columns>
+		</template>
+	</templates>
+</root>

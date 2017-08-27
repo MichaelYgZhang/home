@@ -1,0 +1,197 @@
+<div class="blog">
+    <h3>读《JavaScript 模式》笔记---第二章 高质量JavaScript基本要点</h3>
+    <h4>书写可维护的代码(Writing Maintainable Code )</h4>
+    <p>
+        可维护的代码意味着：1.可读的 2.一致的 3.可预测的,可扩展的
+    </p>
+   <h4>最小全局变量(Minimizing Globals)</h4>
+    <p>
+        JavaScript通过函数管理作用域。在函数内部声明的变量只在这个函数内部，函数外面不可用。每个JavaScript
+        环境都有一个全局对象，当你在任意的函数外面使用this的时候就可以访问到。
+        例如:
+<pre>
+    myglobal = "hello"; // 不推荐写法
+    console.log(myglobal); // "hello"
+    console.log(window.myglobal); // "hello"
+    console.log(window["myglobal"]); // "hello"
+    console.log(this.myglobal); // "hello"
+</pre>
+    </p>
+    <h4>全局变量的问题:命名冲突。</h4>
+    <p>
+        常见问题如下:1.第三方的JavaScript库 2.广告方的脚本代码 3.第三方用户跟踪和分析脚本代码 等。
+        因此，要想和其他脚本成为好邻居的话，尽可能少的使用全局变量是很重要的。在书中后面提到的一些减少全局变量的策略，
+        例如命名空间模式或是函数立即自动执行，但是要想让全局变量少最重要的还是始终使用var来声明变量。
+
+        由于JavaScript的两个特征，不自觉地创建出全局变量是出乎意料的容易。首先，你可以甚至不需要声明就可以使用变量；
+        第二，JavaScript有隐含的全局概念，意味着你不声明的任何变量都会成为一个全局对象属性
+    </p>
+    <p>
+        所以基于以上问题，代码编写时最好使用var 来进行变量的声明。注:2015-08-16更新
+<pre>
+    function foo() {
+        var a = b = 0;//此时a为本地变量，b为全局变量。原因:赋值表达式运算顺序是从右到左，首先是b=0,而此时b没有进行声明。
+        var a = (b = 0);//同上作用
+        var a,b;//正确做法
+        a = b = 0;//正确做法
+        // ...
+    }
+</pre>
+    </p>
+    隐式全局变量和明确定义的全局变量间有些小的差异，就是通过 delete 操作符来判断是隐式全局变量还是明确定义全局变量。<br>
+    1，通过var创建的全局变量（任何函数之外的程序中创建）是不能被删除的。<br>
+    2,无var创建的隐式全局变量（无视是否在函数中创建）是能被删除的。原因:，隐式全局变量并不是真正的全局变量，但它们是全局对象的属性。
+    属性是可以通过 delete 操作符删除的，而变量是不能的。
+    <p>
+<pre>
+    var global_var = 1;//delete global_var;结果false。 typeof global_var; 类型为number
+    global_novar = 2;//delete global_novar;结果true。typeof global_novar; 类型为undefined
+    (function(){
+        global_novar_fun = 3;//delete global_novar_fun;结果true。typeof global_novar_fun; 类型为undefined
+    });
+</pre>
+        在ES5严格模式("use strict")下，未声明的变量工作时会抛出一个错误。
+    </p>
+    <p>
+        编码时使用单var形式:var a,b,myobject = {},sum = a+b,....;
+    </p>
+    预解析：var散布的问题(Hoisting: A Problem with Scattered vars)
+    <p>
+        javascript中，可以在函数任何位置声明多个var变量，它们就好像是在函数顶部一样发挥作用，这种行为称之为:hoisting（悬置/置顶解析/预解析）。
+
+  <pre>
+    myname = 'zhangyg';
+    function foo(){
+        alert(myname);
+        //undefined 原因:hoisting行为,myname 是局部变量，在函数顶部声明，但是还未赋值，
+        //相当于在函数顶部执行了这样的代码:var myname; 等同于 -> var myname = undefined;
+        var myname = 'local';//此处相当于:myname = 'local';
+        alert(myname);//local
+    }
+    foo();
+</pre>
+    总结:代码处理分两个阶段：第一阶段是变量，函数声明，以及正常格式的参数创建，这是一个解析和进入上下文的阶段。
+    第二个阶段是代码执行，函数表达式和不合格的标识符（为声明的变量）被创建。但是，出于实用的目的，我们就采用
+    了”hoisting”这个概念， 这种ECMAScript标准中并未定义，通常用来描述行为。
+    </p>
+
+    <h4>
+        for循环(for Loops)
+    </h4>
+    <p>
+        代码编写建议:推荐遍历对象为数组。
+<pre>
+    function looper(){
+        //方法一
+        var i, max, myarray = [];
+        //.....
+        for(i = 0,max = myarray.length; i+=1){
+            //myarray[i]
+        }
+
+        //方法二
+        var i,myarray = [];
+        for(i = myarray.length;i-=1;){//注意此处最后有个分号
+            //myarray[i]
+        }
+
+        //方法三
+        var myarray = [],i = myarray.length;
+        while(i--){
+           //myarray[i]
+        }
+    }
+
+</pre>
+    </p>
+
+    <h4>for-in循环(for-in Loops)</h4>
+    <p>
+        for-in 循环应该用在非数组对象的遍历上，使用 for-in 进行循环也被称为“枚举”。
+        你可以使用 for-in 循环数组（因为JavaScript中数组也是对象），但这是不推荐的。因为如果
+        数组对象已被自定义的功能增强，就可能发生逻辑错误。另外，在for-in中，属性列表的顺序（序列）是不
+        能保证的。所以最好数组使用正常的for循环，对象使用for-in循环。
+        注意:有个很重要的 hasOwnProperty() 方法，当遍历对象属性的时候可以过滤掉从原型链上下来的属性。
+<pre>
+    // 一个方法添加给了所有对象
+    if (typeof Object.prototype.clone === "undefined") {
+        Object.prototype.clone = function () {};
+    }
+    var man = {hands:2,legs:2};
+    for (var i in man) {
+        //1 过滤
+        if (man.hasOwnProperty(i)) { // 过滤
+            console.log(i, ":", man[i]);
+            //hands:2
+            //legs:2
+        }
+        //2 直接输出
+        console.log(i, ":", man[i]);
+        //hands:2
+        //legs:2
+        //clone : function () {}
+    }
+
+</pre>
+    </p>
+
+    <h4>（不）扩充内置原型(2015-8-19)</h4>
+    <p>
+        原因:严重降低代码的可维护性。所以最好是基于原生的方法进行开发，原生的会更可靠，自己开发扩展的可能会有bug。
+        另外，如果将某些属性添加至原型中，很可能导致在那些不使用hasOwnProperty()做检测的循环中将原型上的属性遍历出来，这会造成混乱。
+        因此，不扩充内置对象的原型是最好的。
+        如果确实是有扩充内置对象原型的需求，最好做好注释。
+        给内置原型添加自定义方法，写法如下：
+<pre>
+    if (typeof Object.protoype.myMethod !== "function") {
+        Object.protoype.myMethod = function () {
+            // implementation...
+        };
+    };
+</pre>
+    </p>
+
+
+    <h4>以下是对编码习惯的规范</h4>
+<pre>
+    1:  false == 0或""==0之类的比较都返回true。为了避免隐式类型转换,
+        推荐使用 === 和 !=== 运算符，它们较除了比较值还会比较类型。
+    2:  避免使用eval(string);string一个字符串表示了一个JavaScript表达式，声明， 或声明的序列。
+        表达式可以包括变量和已存在对象的属性。
+    3:  使用parseInt()进行数字转换;函数的第二个参数是转换基数（译注：“基数”指的是数字进制的方式）,最好写上基数,
+        因为如果被转换的是'05',以0开头的会被默认转为八进制数,可能会出错。字符串转换为数字还有两种方法：
+        +"08" // result is 8
+        Number("08") // 8
+        这两种方式会比parseInt()快,因为顾名思义parseInt()是一种“解析”而不是简单的“转换”。
+        但当你期望将“08 hello”这类字符串转换为数字，则必须使用parseInt()，其他方法都会返回NaN。
+    4:  左花括号的位置;在代码编写的过程中最好这样编写花括号：
+        function func() {
+            //error
+            return //此处js会自动补全分号,相当于 return undefined;
+            {
+                name: "Batman"  //此处代码就不执行了
+            };
+            //good
+            return{
+                name:"Batman"
+            };
+        }
+        因为JavaScript会“自动插入分号”。JavaScript对行结束时的分号并无要求，它会自动将分号补全。
+        结论，总是使用花括号，而且总是将左花括号与上一条语句放在同一行：
+</pre>
+    <h4>总结</h4>
+<pre>
+    1: 减少全局对象，最好每个应用只有一个全局对象
+    2: 函数都使用单var模式来定义，这样可以将所有的变量放在同一个地方声明，同时可以避免“声明提前”给程序逻辑带来的影响。
+    3: for循环、for-in循环、switch语句、“禁止使用eval()”、不要扩充内置原型
+    4: 遵守统一的编码规范（在任何必要的时候保持空格、缩进、花括号和分号）和命名约定（构造函数、普通函数和变量）。
+</pre>
+
+    <h4>相关阅读</h4>
+    <a href="https://github.com/jayli/javascript-patterns">
+        javascript-patterns(中文译本)
+    </a>
+    <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference">
+        MDN
+    </a>
+</div>

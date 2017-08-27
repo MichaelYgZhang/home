@@ -1,0 +1,192 @@
+<div class="blog">
+    <h3>结构型模式(Structural Pattern)之组合模式(Composite Pattern)</h3>
+    <p>
+        组合模式描述了如何将容器对象和叶子对象进行递归组合，使得用户在使用时无须对它们进行区分，
+        可以一致地对待容器对象和叶子对象，这就是组合模式的模式动机。
+    </p>
+    <pre>
+    定义:组合多个对象形成树形结构以表示具有“整体—部分”关系的层次结构。组合模式对单个对象（即叶子对象）和
+        组合对象（即容器对象）的使用具有一致性，组合模式又可以称为“整体—部分”(Part-Whole)模式，它是一种对象结构型模式。
+    在组合模式中引入了抽象构件类Component，它是所有容器类和叶子类的公共父类，客户端针对Component进行编程。组合模式结构如图所示：
+    </pre>
+    <img class="imgh" src="http://img.my.csdn.net/uploads/201209/07/1347029718_6268.jpg">
+    <h5>举例:要对系统中的文件夹，文件，图片，视频等进行扫描工作</h5>
+    <pre>
+    public abstract class AbstractFile {
+        abstract void add(AbstractFile abf);
+        abstract void remove(AbstractFile abf);
+        abstract AbstractFile getFile(int i);
+        abstract void scan();
+    }
+    public class Folder extends AbstractFile{
+	private String name;
+	public Folder(String name){
+		this.name = name;
+	}
+	private List< AbstractFile> list = new ArrayList< AbstractFile>();
+        @Override
+        void add(AbstractFile abf) {
+            list.add(abf);
+        }
+
+        @Override
+        void remove(AbstractFile abf) {
+            list.remove(abf);
+        }
+
+        @Override
+        AbstractFile getFile(int i) {
+            return list.get(i);
+        }
+
+        @Override
+        void scan() {
+            System.out.println("我是"+name+",正在扫描！");
+            for (AbstractFile abf : list) {
+                abf.scan();
+            }
+        }
+    }
+    public class TextFile extends AbstractFile{
+        private String name;
+        public TextFile(String name){
+            this.name = name;
+        }
+        @Override
+        void add(AbstractFile abf) {
+            throw new RuntimeException("不支持！");
+        }
+
+        @Override
+        void remove(AbstractFile abf) {
+            throw new RuntimeException("不支持！");
+        }
+
+        @Override
+        AbstractFile getFile(int i) {
+            throw new RuntimeException("不支持！");
+        }
+
+        @Override
+        void scan() {
+            System.out.println("我是"+name+",正在扫描！");
+        }
+
+    }
+    public class ImgFile extends AbstractFile{
+        private String name;
+        public ImgFile(String name){
+            this.name = name;
+        }
+        @Override
+        void add(AbstractFile abf) {
+            throw new RuntimeException("不支持！");
+        }
+        @Override
+        void remove(AbstractFile abf) {
+            throw new RuntimeException("不支持！");
+        }
+        @Override
+        AbstractFile getFile(int i) {
+            throw new RuntimeException("不支持！");
+        }
+        @Override
+        void scan() {
+            System.out.println("我是"+name+",正在扫描！");
+        }
+
+    }
+    // test
+        ImgFile if1 = new ImgFile("a.jpg");
+		ImgFile if2 = new ImgFile("b.jpg");
+
+		TextFile tf1 = new TextFile("tf1.txt");
+		TextFile tf2 = new TextFile("tf2.txt");
+
+		Folder f1 = new Folder("总文件夹");
+		Folder f2 = new Folder("文件夹-Img");
+		Folder f3 = new Folder("文件夹-Tf");
+
+		f2.add(if1);
+		f2.add(if2);
+
+		f3.add(tf1);
+		f3.add(tf2);
+
+		f1.add(f2);
+		f1.add(f3);
+
+		f1.scan();
+    //out
+        我是总文件夹,正在扫描！
+        我是文件夹-Img,正在扫描！
+        我是a.jpg,正在扫描！
+        我是b.jpg,正在扫描！
+        我是文件夹-Tf,正在扫描！
+        我是tf1.txt,正在扫描！
+        我是tf2.txt,正在扫描！
+    如果只需要对图片扫描则修改f1.sacn();->f2.scan();即可
+
+    以上的子类 ImgFile，TextFile中产生了大量的无用的方法，此为透明组合模式。
+    透明组合模式的缺点是不够安全，因为叶子对象和容器对象在本质上是有区别的。叶子对象不可能有下一个层次的对象，即不可能包含成员对象，
+    因此为其提供add()、remove()以及getChild()等方法是没有意义的，这在编译阶段不会出错，
+    但在运行阶段如果调用这些方法可能会出错（如果没有提供相应的错误处理代码）。
+
+    安全组合模式:做法就是将抽象类AbstractFile中只保留sanc()方法，而只有在Folder类中才有add(),remove()...等方法，这样做就是安全组合模式
+    但是，安全组合模式的缺点是不够透明，因为叶子构件和容器构件具有不同的方法，且容器构件中那些用于管理成员对象的方法没有在抽象构件类中定义，
+    因此客户端不能完全针对抽象编程，必须有区别地对待叶子构件和容器构件。在实际应用中，
+    安全组合模式的使用频率也非常高，在Java AWT中使用的组合模式就是安全组合模式。
+    </pre>
+
+    <h5>总结:</h5>
+    <pre>
+    组合模式总结
+      组合模式使用面向对象的思想来实现树形结构的构建与处理，描述了如何将容器对象和叶子对象进行递归组合，实现简单，灵活性好。
+      由于在软件开发中存在大量的树形结构，因此组合模式是一种使用频率较高的结构型设计模式，
+      除此以外，在XML解析、组织结构树处理、文件系统设计等领域，组合模式都得到了广泛应用。
+
+      1. 主要优点
+      组合模式的主要优点如下：
+      (1) 组合模式可以清楚地定义分层次的复杂对象，表示对象的全部或部分层次，它让客户端忽略了层次的差异，方便对整个层次结构进行控制。
+      (2) 客户端可以一致地使用一个组合结构或其中单个对象，不必关心处理的是单个对象还是整个组合结构，简化了客户端代码。
+      (3) 在组合模式中增加新的容器构件和叶子构件都很方便，无须对现有类库进行任何修改，符合“开闭原则”。
+      (4) 组合模式为树形结构的面向对象实现提供了一种灵活的解决方案，通过叶子对象和容器对象的递归组合，可以形成复杂的树形结构，
+          但对树形结构的控制却非常简单。
+      2. 主要缺点
+      组合模式的主要缺点如下：
+      在增加新构件时很难对容器中的构件类型进行限制。有时候我们希望一个容器中只能有某些特定类型的对象，例如在某个文件夹中只能包含文本文件，
+        使用组合模式时，不能依赖类型系统来施加这些约束，因为它们都来自于相同的抽象层，在这种情况下，必须通过在运行时进行类型检查来实现，
+        这个实现过程较为复杂。
+      3. 适用场景
+      在以下情况下可以考虑使用组合模式：
+      (1) 在具有整体和部分的层次结构中，希望通过一种方式忽略整体与部分的差异，客户端可以一致地对待它们。
+      (2) 在一个使用面向对象语言开发的系统中需要处理一个树形结构。
+      (3) 在一个系统中能够分离出叶子对象和容器对象，而且它们的类型不固定，需要增加一些新的类型。
+    </pre>
+
+    <a href="http://blog.csdn.net/lovelion/article/details/17517213">参考</a>
+
+    <script id="dsq-count-scr" src="//michaelzhangblog.disqus.com/count.js" async></script>
+    <div id="disqus_thread"></div>
+    <script>
+        /**
+         * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+         */
+        var disqus_config = function () {
+            this.page.url = 'http://michaelygzhang.github.io/home/'; // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = 'composite'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+
+            s.src = '//michaelzhangblog.disqus.com/embed.js';
+
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+</div>

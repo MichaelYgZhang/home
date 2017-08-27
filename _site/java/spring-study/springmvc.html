@@ -1,0 +1,169 @@
+<div class="blog">
+    <h3>SpringMVC工作笔记</h3>
+    <h4>(2015-8-25)当项目中出现多个*.properties文件时,applicationContext-*.xml文件应该这样写：</h4>
+<pre>
+    &lt;bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"&gt;
+        &lt;property name="locations"&gt;
+           &lt;list&gt;
+                &lt;value&gt;classpath*:*.properties&lt;/value&gt;
+            &lt;/list&gt;
+        &lt;/property&gt;
+        &lt;property name="ignoreUnresolvablePlaceholders" value="true" /&gt;
+    &lt;/bean&gt;
+</pre>
+
+    <h4>(2015-10-11)SpringMVC学习笔记</h4>
+<pre>
+    Spring：
+    IOC(Inversion of control):
+        DI依赖注入实现了IOC的动态注入机制，Spring容器来管理java bean对象，让一个对象创建不用自己
+        new创建，而是利用反射，动态创建，调用对象。
+    AOP(Aspect-Oriented Programming):面向切面编程，
+
+    Spring的目的:让对象之间的关系没有通过代码来关联，都是通过配置类说明管理的(Spring根据这些配置
+            内部通过反射机制去动态组装对象)
+    Spring是一个容器，凡是在容器里的对象才会用Spring所提供的服务和功能。
+
+如何使用注解:
+applicationContext.xml中进行配置
+&lt;context:component-scan base-package="cn.gacl.dao.impl,cn.gacl.service.impl,cn.gacl.action"/&gt; //此处多个包，用逗号分隔
+=============================常用注解
+@Controller对应表现层的Bean，也就是Action，如下所示
+@Controller
+@Scope("prototype")
+public class UserController{
+
+}
+使用@Controller后Spring就会管理此bean对象，Spring容器中将会出现一个userController的action
+注:@Controller如果不指定value值Spring则使用类名首字母小写的方式，指定的话就用指定的value值。
+	此处的@Scope("prototype")表示每次请求都有一个不同的对象来进行处理。
+	Spring默认@Scope为单例模式(scope="singleton")，这样只会创建一个action对象。
+
+
+@RequestMapping
+RequestMapping是一个用来处理请求地址映射的注解，可用于类或方法上。用于类上，
+表示类中的所有响应请求的方法都是以该地址作为父路径。
+
+@responsebody表示该方法的返回结果直接写入HTTP response body中一般在异步获取数据时使用，
+在使用@RequestMapping后，返回值通常解析为跳转路径，加上@responsebody后返回结果不会被解析为跳转路径，
+而是直接写入HTTP response body中。比如异步获取json数据，加上@responsebody后，会直接返回json数据。
+
+@RequestBody将HTTP请求正文插入方法中,使用适合的HttpMessageConverter将请求体写入某个对象。
+
+
+@Service对应的是业务层Bean,Spring容器对它的管理与@Controller一样，不指定value则以首字母小写表示，指定则以指定值。例如:
+@Service("userService")
+public class UserServiceImpl implements UserService {
+………
+}
+注入userService
+方法一:
+@Resource(name = "userService")
+private UserService userService;
+方法二:
+@Autowired
+private UserService userService;
+
+
+@Repository对应数据访问层Bean
+@Repository(value="userDao")
+public class UserDaoImpl extends BaseDaoImpl&lt;User&gt; {
+    ………
+    }
+    注入userDao时方法与service类似。
+
+    在java代码中可以使用@Autowire或者@Resource注解方式进行装配，这两个注解的区别是：
+    @Autowire需导入Package:org.springframework.beans.factory.annotation.Autowired;
+    @Autowire 默认按照类型装配，默认情况下它要求依赖对象必须存在如果允许为null，
+    可以设置它required属性为false，如果我们想使用按照名称装配，可以结合@Qualifier注解一起使用;
+    按照byType注入：
+    @Autowired
+    private UserDao  userDao;//用于字段上
+    @Autowired
+    public void setUserDao(UserDao userDao) {//用于属性的setter方法上
+    this.userDao= userDao;
+    }
+    @Autowired注解是按类型装配依赖对象，默认情况下它要求依赖对象必须存在，如果允许null值，
+    可以设置它required属性为false。如果我们想使用按名称装配，可以结合@Qualifier注解一起使用。
+    如下：
+    @Autowired  @Qualifier("userDao")
+    private PersonDao  personDao;
+
+    @Resource默认按 byName 自动注入,由J2EE提供。
+    需导入Package:  javax.annotation.Resource
+    @Resource默认按照名称装配，当找不到与名称匹配的bean才会按照类型装配，可以通过name属性指定，
+    如果没有指定name属 性，当注解标注在字段上，即默认取字段的名称作为bean名称寻找依赖对象，
+    当注解标注在属性的setter方法上，即默认取属性名作为bean名称寻找 依赖对象.
+    @Resource并不是Spring的注解，他的包是javax.annotation.Resource 需要导入。但是Spring支持该注解的注入。
+    @Resource有两个中重要的属性：name和type ，而Spring将@Resource注解的name属性解析为bean的
+    名字，而type属性则解析为bean的类型。所以如果使用name属性，则使用byName的自动注入策略，而使用
+    type属性时则使用 byType自动注入策略。如果既不指定name也不指定type属性，这时将通过反射机制使用byName自动注入策略。
+
+    @Resource(name=“userDao”)
+    private UserDao  userDao;//用于字段上
+    @Resource(name=“userDao”)
+    public void setUserDao(UserDao userDao) {//用于属性的setter方法上
+    this.userDao= userDao;
+    }
+    注：最好是将@Resource放在setter方法上。
+    @Resource装配顺序
+    (1). 如果同时指定了name和type，则从Spring上下文中找到唯一匹配的bean进行装配，找不到则抛出异常;
+    (2). 如果指定了name，则从上下文中查找名称（id）匹配的bean进行装配，找不到则抛出异常;
+    (3). 如果指定了type，则从上下文中找到类型匹配的唯一bean进行装配，找不到或者找到多个，都会抛出异常;
+    @Resource的作用相当于@Autowired，只不过@Autowired按byType自动注入。
+
+    注意：如果没有指定name属性，并且按照默认的名称仍然找不到依赖的对象时候，
+    会回退到按照类型装配，但一旦指定了name属性，就只能按照名称 装配了.
+    最后推荐使用@Resource进行注入
+
+    Spring使用常见问题及解决方法:
+    一：配置web.xml
+    1)问题：spring项目中有多个配置文件mvc.xml   dao.xml
+    2）解决：在web.xml中
+    &lt;init-param>
+    &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+    &lt;param-value&gt;/WEB-INF/xxx/*.xml&lt;/param-value&gt;
+        xxx表示xml文件路径    *.xml表示后缀名为xml的任意文件
+    &lt;/init-param&gt;
+    3）可以使用  逗号分隔
+    二：Spring MVC中配置视图解析器
+    &lt;bean class="org.s...f....web.servlet.view.InternalResourceViewResolver"&gt;
+        &lt;property  name="prefix" value="/WEB-INF/views"/&gt;                    //前缀
+        &lt;property  name="suffix"   value=".jsp"/&gt;                              //后缀
+    &lt;/bean>
+
+    &lt;annotaion-driven/&gt;标签：
+    这个标签对应的实现类是org.springframework.web.servlet.config.AnnotationDrivenBeanDefinitionParser
+    仔细阅读它的注释文档可以很明显的看到这个类的作用。解析这个文档：
+    这个类主要注册8个类的实例：
+    1.RequestMappingHandlerMapping
+    2.BeanNameUrlHandlerMapping
+    3.RequestMappingHandlerAdapter
+    4.HttpRequestHandlerAdapter
+    5.SimpleControllerHandlerAdapter
+    6.ExceptionHandlerExceptionResolver
+    7.ResponseStatusExceptionResolver
+    8.DefaultHandlerExceptionResolver
+    1是处理@RequestMapping注解的，2.将controller类的名字映射为请求url。1和2都实现了HandlerMapping接口，用来处理请求映射。
+    3是处理@Controller注解的控制器类，4是处理继承HttpRequestHandlerAdapter类的控制器类，
+    5.处理继承SimpleControllerHandlerAdapter类的控制器。所以这三个是用来处理请求的。
+    具体点说就是确定调用哪个controller的哪个方法来处理当前请求。
+    6,7,8全部继承AbstractHandlerExceptionResolver，这个类实现HandlerExceptionResolver，
+    该接口定义：接口实现的对象可以解决处理器映射、执行期间抛出的异常，还有错误的视图。
+    所以&lt;annotaion-driven/&gt;标签主要是用来帮助我们处理请求映射，决定是哪个controller的哪个方法来处理当前请求，异常处理。
+
+
+    其中静态文件可以使用&lt;mvc:default-servlet-handler/&gt; 使用默认的Servlet来响应静态文件。
+
+    &lt;context:component-scan/&gt;标签：
+    它的实现类是org.springframework.context.annotation.ComponentScanBeanDefinitionParser.
+    把鼠标放在context:component-scan上就可以知道有什么作用的，用来扫描该包内被@Repository @Service @Controller的注解类，
+    然后注册到工厂中。并且context:component-scan激活@ required。@ resource,@ autowired、@PostConstruct @PreDestroy
+    @PersistenceContext @PersistenceUnit。使得在适用该bean的时候用@Autowired就行了
+
+</pre>
+
+<h5>web项目启动过程中出现java-lang-classnotfoundexception-org-springframework-web-context-contextloaderlistener
+	<a href="http://howtodoinjava.com/random-exceptions/solved-java-lang-classnotfoundexception-org-springframework-web-context-contextloaderlistener/">资料</a>
+</h5>
+</div>
